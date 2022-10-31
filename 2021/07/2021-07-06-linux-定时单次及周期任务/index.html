@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        Linux 定时单次及周期任务 - Stan&#39;s blog - Explore the world
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="👌 2021-07-06 Linux 定时单次及周期任务 FileInfo Filename - Linux 定时单次及周期任务 Version - v1.0.2107（2021/07/06 ~ 2021/07/08） Author - nuo standuke Email - shadowdoker@gmail.com DescriptionKey - Linux single" />
+    <meta name="generator" content="Hugo 0.82.1 with theme pure" />
+    <title>Linux 定时单次及周期任务 - Stan&#39;s blog - Explore the world</title>
+    
+    
+    <link rel="stylesheet" href="https://blog.standuke.top/css/style.min.6f90022f237877ae2514ec95f3c9cca9f2314394f20800ca037a497e20053122.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="Linux 定时单次及周期任务" />
+<meta property="og:description" content="👌 2021-07-06 Linux 定时单次及周期任务 FileInfo Filename - Linux 定时单次及周期任务 Version - v1.0.2107（2021/07/06 ~ 2021/07/08） Author - nuo standuke Email - shadowdoker@gmail.com DescriptionKey - Linux single" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.standuke.top/2021/07/2021-07-06-linux-%E5%AE%9A%E6%97%B6%E5%8D%95%E6%AC%A1%E5%8F%8A%E5%91%A8%E6%9C%9F%E4%BB%BB%E5%8A%A1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-07-06T17:20:34&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-06T17:20:34&#43;08:00" />
+
+<meta itemprop="name" content="Linux 定时单次及周期任务">
+<meta itemprop="description" content="👌 2021-07-06 Linux 定时单次及周期任务 FileInfo Filename - Linux 定时单次及周期任务 Version - v1.0.2107（2021/07/06 ~ 2021/07/08） Author - nuo standuke Email - shadowdoker@gmail.com DescriptionKey - Linux single"><meta itemprop="datePublished" content="2021-07-06T17:20:34&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-06T17:20:34&#43;08:00" />
+<meta itemprop="wordCount" content="5443">
+<meta itemprop="keywords" content="CentOS,Linux," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux 定时单次及周期任务"/>
+<meta name="twitter:description" content="👌 2021-07-06 Linux 定时单次及周期任务 FileInfo Filename - Linux 定时单次及周期任务 Version - v1.0.2107（2021/07/06 ~ 2021/07/08） Author - nuo standuke Email - shadowdoker@gmail.com DescriptionKey - Linux single"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://www.standuke.top" target="_blank">
+            <img class="img-circle img-rotate" src="https://blog.standuke.top/avatar.png" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">Standuke</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">Yunshen Technology Co., Ltd. - SRE Engineer</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Hangzhou, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-linkedin">
+                <a href="https://linkedin.com/in/doc-s-44435ab2">
+                    <i class="icon icon-linkedin"></i>
+                  <span class="menu-title">Linkedin</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content"><p>站点迁移初期，配置参数调整，同时涉及到的文章较多，页面浏览可能会出现闪断。因为是业余时间迁移博客，从 5 月开始估计要到年底才能把前期的文章整体迁移过来。博客评论采用 Disqus 需要科学才能看到，如果有任何意见建议也可直接联系我 Telegram。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://blog.standuke.top/tags/aliyun/" class="tag-list-link" rel="1">aliyun<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/bigdata/" class="tag-list-link" rel="1">bigdata<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/cdh/" class="tag-list-link" rel="1">cdh<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/centos/" class="tag-list-link" rel="8">centos<span
+               class="tag-list-count">8</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/cloudera/" class="tag-list-link" rel="1">cloudera<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/docker/" class="tag-list-link" rel="1">docker<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/eip/" class="tag-list-link" rel="1">eip<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/esxi/" class="tag-list-link" rel="1">esxi<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/frp/" class="tag-list-link" rel="1">frp<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/kvm/" class="tag-list-link" rel="1">kvm<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/linux/" class="tag-list-link" rel="5">linux<span
+               class="tag-list-count">5</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/linux-bridge/" class="tag-list-link" rel="1">linux-bridge<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/macos/" class="tag-list-link" rel="2">macos<span
+               class="tag-list-count">2</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/markdown/" class="tag-list-link" rel="1">markdown<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/network/" class="tag-list-link" rel="1">network<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/openstack/" class="tag-list-link" rel="6">openstack<span
+               class="tag-list-count">6</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/pxe/" class="tag-list-link" rel="1">pxe<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/qcow2/" class="tag-list-link" rel="1">qcow2<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/system/" class="tag-list-link" rel="1">system<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/time-machine/" class="tag-list-link" rel="1">time-machine<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/tools/" class="tag-list-link" rel="1">tools<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/vcenter/" class="tag-list-link" rel="1">vcenter<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/virtualization/" class="tag-list-link" rel="9">virtualization<span
+               class="tag-list-count">9</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/vsphere/" class="tag-list-link" rel="1">vsphere<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/windows/" class="tag-list-link" rel="4">windows<span
+               class="tag-list-count">4</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="category-list-link">使用教程</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E5%86%85%E9%83%A8%E5%88%86%E4%BA%AB/" class="category-list-link">内部分享</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/" class="category-list-link">技术分析</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-list-link">操作系统</a><span class="category-list-count">7</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/" class="category-list-link">部署教程</a><span class="category-list-count">10</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E9%9B%B6%E7%A2%8E%E5%B0%8F%E9%97%AE%E9%A2%98/" class="category-list-link">零碎小问题</a><span class="category-list-count">4</span></li>
+        </ul>
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/07/2021-07-06-linux-%E5%AE%9A%E6%97%B6%E5%8D%95%E6%AC%A1%E5%8F%8A%E5%91%A8%E6%9C%9F%E4%BB%BB%E5%8A%A1/" class="title">Linux 定时单次及周期任务</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-07-06 17:20:34 &#43;0800 CST" itemprop="datePublished">2021-07-06</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/06/2021-06-26-linux-%E6%97%B6%E9%97%B4%E5%85%A8%E8%A7%A3/" class="title">Linux 时间全解</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-06-26 11:11:31 &#43;0800 CST" itemprop="datePublished">2021-06-26</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-19-%E9%98%BF%E9%87%8C%E4%BA%91%E4%B8%BB%E6%9C%BA-eip-%E8%87%B4%E4%BD%BF-ftp-%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5/" class="title">阿里云主机 EIP 致使 FTP 无法连接</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-19 21:08:48 &#43;0800 CST" itemprop="datePublished">2021-05-19</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B24-%E5%AE%89%E7%BD%AE%E6%9C%8D%E5%8A%A1-placement/" class="title">OpenStack Wallaby 部署4 安置服务 Placement</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-08 17:01:11 &#43;0800 CST" itemprop="datePublished">2021-05-08</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B23-%E9%95%9C%E5%83%8F%E6%9C%8D%E5%8A%A1-glance/" class="title">OpenStack Wallaby 部署3 镜像服务 Glance</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-08 16:54:55 &#43;0800 CST" itemprop="datePublished">2021-05-08</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2021/07/2021-07-06-linux-%E5%AE%9A%E6%97%B6%E5%8D%95%E6%AC%A1%E5%8F%8A%E5%91%A8%E6%9C%9F%E4%BB%BB%E5%8A%A1/"
+    >Linux 定时单次及周期任务</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://blog.standuke.top/2021/07/2021-07-06-linux-%E5%AE%9A%E6%97%B6%E5%8D%95%E6%AC%A1%E5%8F%8A%E5%91%A8%E6%9C%9F%E4%BB%BB%E5%8A%A1/" class="article-date">
+  <time datetime="2021-07-06 17:20:34 &#43;0800 CST" itemprop="datePublished">2021-07-06</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"> 操作系统 </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/centos/"> CentOS </a>
+    <a class="article-tag-link" href="/tags/linux/"> Linux </a>
+  </span>
+
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2021/07/2021-07-06-linux-%E5%AE%9A%E6%97%B6%E5%8D%95%E6%AC%A1%E5%8F%8A%E5%91%A8%E6%9C%9F%E4%BB%BB%E5%8A%A1/#comments"
+            class="article-comment-link">评论</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 5443字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 11分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <h1 id="-2021-07-06-linux-定时单次及周期任务">👌 2021-07-06 Linux 定时单次及周期任务</h1>
+<blockquote>
+<p><strong>FileInfo</strong>
+Filename - Linux 定时单次及周期任务
+Version - v1.0.2107（2021/07/06 ~ 2021/07/08）
+Author - nuo standuke
+Email - <a href="mailto:shadowdoker@gmail.com">shadowdoker@gmail.com</a>
+DescriptionKey - Linux single scheduled and periodic tasks / at batch cron anacron</p>
+</blockquote>
+<p><strong>版本修订记录：</strong></p>
+<p>v1.0.2107：2021-07-06：建立 Linux 定时单次及周期任务 文档，修订人：nuo</p>
+<p>[TOC]</p>
+<h2 id="适用场景">适用场景</h2>
+<h3 id="单次任务">单次任务</h3>
+<ol>
+<li>单一系统更新任务，例如公司产品需要指定时间更新，并且有更新脚本等保障措施，那么可以使用单次任务完成更新操作，同时结合 at 的邮件反馈机制，可以讲更新结果通过邮件告知</li>
+<li>文件有效期，例如某文件在当日某一时刻前可供下载，过后则不允许下载。那么可以通过单次的定时操作，完成文件权限或者删除文件的操作，减少人工介入</li>
+</ol>
+<h3 id="周期任务">周期任务</h3>
+<ol>
+<li>定期的日志文件归档、上报「系统运行状态等」</li>
+<li>定期更新本地缓存、例如 <code>locate</code> 数据库信息等</li>
+<li>定期的系统更新或者应用产品更新</li>
+<li>「毒」某些病毒会使用 crond 来检测后台是否在运行，这也是我遇到的一个案例</li>
+</ol>
+<h2 id="注意事项">注意事项</h2>
+<p>⚠️ 所有的定期任务都是用系统时间，也就是如下输出的 <code>Local time</code> 作为时间标准的。请在使用定期任务时明确当前系统时间。</p>
+<pre><code>  &gt;root ~
+[vpc]# timedatectl
+    Local time: 二 2021-06-29 13:45:54 CST
+    Universal time: 二 2021-06-29 05:45:54 UTC
+    RTC time: 二 2021-06-29 05:45:54
+    Time zone: Asia/Shanghai (CST, +0800)
+    NTP enabled: yes
+    NTP synchronized: yes
+    RTC in local TZ: no
+    DST active: n/a
+</code></pre>
+<p>⚠️ 对于 crond 来说</p>
+<p>不到三小时的本地时间变化，如夏令时变化引起的时间变化，将会以如下特殊方式处理。这种处理方式只适用于在特定时间「变动的时间区间内」运行的作业，并且时间调整超过一小时，正常调度的任务会被更积极的调度。</p>
+<ul>
+<li>如果时间向前调整一小时，那些本应在已跳过的时间间隔内运行的作业将立即运行。相反，如果时间向后调整，则相同任务只会运行一次，将避免运行两次。</li>
+<li>超过 3 小时的时间变化被认为是对时钟或时区的更正，会立即使用新的时间。</li>
+</ul>
+<h2 id="差异总结">差异总结</h2>
+<h3 id="功能差异">功能差异</h3>
+<ul>
+<li>at：仅执行一次，指定时间节点执行一次，错过后不会再执行</li>
+<li>batch：仅执行一次，前提是系统负载需要够低，一般是到点且负载低于 0.8 时执行</li>
+<li>cron：周期性执行，关机时过了时间点的任务不会再执行</li>
+<li>anacron：执行停机期间错过的工作任务</li>
+</ul>
+<h3 id="其他差异">其他差异</h3>
+<ul>
+<li>检查频率：at 和 batch 都是计划运行一次，cron 是按 crontab 反复运行，三者在默认情况下都是每分钟检查一次要运行的任务</li>
+<li>其他要求：at 和 cron 是到点就触发，batch 是到点且负载值足够低（默认小于0.8）时触发</li>
+<li>注：at 和 batch 均由 atd 负责调度（老一些的系统上是 crond 调度 atrun 再处理），cron 由 crond 调度</li>
+</ul>
+<hr>
+<h2 id="单次任务-at--batch">单次任务 at / batch</h2>
+<blockquote>
+<p>应用名：at
+服务名：atd
+命令行工具：at batch</p>
+</blockquote>
+<p>在 <code>CentOS 7.9</code> 操作系统中 <code>at</code> 与 <code>batch</code> 的 <code>man</code> 手册相同</p>
+<p><code>at</code> 和 <code>batch</code> 从标准输入或指定文件中读取命令，这些命令将在指定时间使用 <code>/bin/sh</code> 执行，在 <code>at</code> 程序下共有如下几个命令</p>
+<ul>
+<li>at：在指定时间执行命令</li>
+<li>atq：列出当前用户的待处理作业，超级用户 <code>root</code> 会列出每个人的工作。输出行的格式（每个作业一行）：作业号、日期、小时、队列和用户名。</li>
+<li>atrm：删除由作业编号标识的作业。</li>
+<li>batch：在系统负载水平允许时批量执行命令；换句话说，当平均负载低于 0.8 或调用 atd 时指定的值时。</li>
+</ul>
+<h3 id="介绍">介绍</h3>
+<blockquote>
+<p>系统 man 手册翻译</p>
+</blockquote>
+<p><code>at</code> 允许相当复杂的时间规范，扩展了 <code>POSIX.2</code> 标准。它接受 <code>HH:MM</code> 形式的时间以在一天中的特定时间运行作业。「如果时间已经过去，则会使用下一天的那一刻执行。」还可以指定午夜、中午或下午茶时间「下午 4 点」，并且可以设置一个以 AM 或 PM 为后缀的一天中的时间，以便在早上或晚上运行。也可以明确哪一天作业将运行，通过以月份名称日的形式给出一个带有可选年份的日期，或者给出一个形式为 <code>MMDD[CC]YY, MM/DD/[CC]YY, DD.MM.[CC]YY or [CC]YY-MM-DD</code>。规格日期必须遵循一天中的时间规范。还可以给出像 <code>now + count time-units</code> 这样的时间，其中时间单位可以是分钟、小时、天或周，也可以告诉 at 通过在时间后缀今天来运行今天的作业，并通过在时间后缀以明天来运行明天的作业。</p>
+<p>例如，要在三天后的下午 4 点运行作业，可以使用 <code>at 4pm + 3 days</code>，在 7 月 31 日上午 10:00 运行作业，可以使用 <code>at 10am Jul 31</code>，然后在明天凌晨 1 点运行，可以使用 <code>at 1am tomorrow</code>。</p>
+<p>时间规范的定义可以在 <code>/usr/share/doc/at-3.1.13/timespec</code> 中找到。</p>
+<p>对于 at 和批处理，从标准输入或使用 -f 选项指定的文件中读取命令并执行。工作目录、环境（变量除外）
+BASH_VERSINFO、DISPLAY、EUID、GROUPS、SHELLOPTS、TERM、UID 和 _) 和 umask 从调用时起保留。</p>
+<p>由于 at 当前作为 setuid 程序实现，因此也不会导出其他环境变量（例如 LD_LIBRARY_PATH 或 LD_PRELOAD）。这在未来可能会改变。作为解决方法，设置这些变量在您的工作中明确显示。</p>
+<p>从 su(1) shell 调用的 at - 或批处理 - 命令将保留当前用户 ID。用户将收到来自他的命令的标准错误和标准输出（如果有）。邮件将被发送使用命令 <code>/usr/sbin/sendmail</code>。如果从 su(1) shell 执行 at，登录 shell 的所有者将收到邮件。</p>
+<p>超级用户在任何情况下都可以使用这些命令。对于其他用户，使用 <code>at</code> 的权限由文件 <code>/etc/at.allow</code> 和 <code>/etc/at.deny</code> 决定。有关详细信息，请参阅 <code>at.allow(5)</code>。两个文件都存在有 ，则黑名单失效，只有白名单的配置生效。</p>
+<p><code>at</code> 队列存放在 <code>/var/spool/at</code> 目录中，可手动进取看任务、删任务。</p>
+<h3 id="安装">安装</h3>
+<pre><code>yum -y install at
+systemctl start atd.service
+systemctl enable atd.service
+</code></pre>
+<h3 id="参数">参数</h3>
+<pre><code>-V 将版本号打印到标准错误并退出。
+-q 队列：使用指定的队列。队列名称由单个字母组成，有效的队列指定范围从 a 到 z 和 A 到 Z。a 队列是 at 的默认值，b 队列是 batch 的默认值。具有更高字母的队列有更高的运行优先级。特殊队列 `=` 是为当前正在运行的作业保留的。如果将作业提交到以大写字母指定的队列，则该作业将被视为在作业时提交到 batch 处理。一旦到达时间，batch 程序匹配平均负载的处理规则。如果给 atq 一个特定的队列，它只会显示该队列中待处理的作业。
+-m 在作业完成时向用户发送邮件，即使没有输出。
+-M 从不向用户发送邮件。
+-f file 从文件而不是标准输入读取作业。
+-t time 指定作业运行时间，格式为 [[CC]YY]MMDDhhmm[.ss]
+-l 是 atq 的别名。
+-r 是 atrm 的别名。
+-d 是 atrm 的别名。
+-b 是 batch 的别名。
+-v 显示在读取作业之前将执行作业的时间。显示的时间格式为“Thu Feb 20 14:50:00 1997”。
+-c + 作业 id 将命令行上列出的作业转换为标准输出「也就是看这个任务具体的内容」。
+</code></pre>
+<h3 id="示例">示例</h3>
+<ul>
+<li>定期删除一个文件</li>
+</ul>
+<pre><code>[root@localhost.local ~]# at 22:00
+at&gt; rm -rf /var/www/html/demo.txt
+at&gt; &lt;EOT&gt;
+job 2 at Sat Jul  1 22:00:00 201
+-----------------------
+# 在22:10点
+at 22:00
+
+# 删除 /var/www/html/demo.txt 文件
+at&gt; rm -rf /var/www/html/demo.txt
+
+# Ctrl+d 结束输入
+at&gt; &lt;EOT&gt;
+
+# 提示 第二个任务在 22:00进行
+job 2 at Sat Jul  1 22:00:00 201
+</code></pre>
+<h4 id="时间写法与使用案例">时间写法与使用案例</h4>
+<pre><code># HH:MM
+02:00 =&gt; 在今日的 02:00 进行，若该时刻已过，则明天此时执行任务
+
+# HH:MM YYYY-MM-DD
+02:00 2021-09-20 =&gt; 指定 2021 年 9 月 20 日执行任务
+
+# HH:MM[am|pm] [Month] [Date]
+04:00 pm March 17 =&gt; 指定下一个 3 月 17 日下午 4:00 执行任务
+17:20 tomorrow =&gt; 明天的 17:20 执行任务
+
+# HH:MM[am|pm] + number [minutes|hours|days|weeks] 在某个时间点再加几个时间后才进行该项任务
+now + 5 minutes =&gt; 当前时间 5 分钟后执行任务
+02 pm + 3 days =&gt; 3 天后的下午 2:00 执行任务
+</code></pre>
+<h3 id="batch">batch</h3>
+<p>batch 用法与 at 一致，两者差异也只有 batch 会考虑系统负载，用的时候把 at 换成 batch 就行了。</p>
+<h2 id="周期任务-cron--anacron">周期任务 cron / anacron</h2>
+<h3 id="cron">cron</h3>
+<blockquote>
+<p>应用名：cron
+系统服务：crond
+命令行工具：crontab crond</p>
+</blockquote>
+<h4 id="介绍-1">介绍</h4>
+<blockquote>
+<p>系统 man 手册翻译</p>
+</blockquote>
+<p>Cron 在 /var/spool/cron 中搜索以 /etc/passwd 中的帐户命名的 crontab 文件；找到的 crontab 被加载到内存中。Cron 还搜索 /etc/anacrontab 和任何文件，<strong>所以 <code>crontab -e</code> 修改完后需要重启下 crond 服务。但是是否需要重启是看操作系统的，请往下看。</strong></p>
+<p>有两种方法可以检查 crontables 中的更改。第一种方法是检查文件的修改时间。第二种方法是使用 inotify 支持。 inotify 的使用记录在守护进程启动后的 /var/log/cron 日志。 inotify 支持检查所有 crontables 中的更改并仅在检测到更改时访问硬盘。使用 modtime 选项时，Cron 每分钟检查其 crontables 的 modtime 以检查任何更改并重新加载已更改的 crontables。之后不需要重启Cron 一些 crontables 被修改。当 inotify 无法初始化时，也会使用 modtime 选项。</p>
+<p>Cron 检查这些文件和目录：</p>
+<ul>
+<li>/etc/crontab</li>
+</ul>
+<p>系统 crontab。现在该文件默认为空。最初它通常用于运行每日、每周、每月的工作。默认情况下，这些作业现在通过 anacron 运行，它读取</p>
+<ul>
+<li>/etc/anacrontab</li>
+</ul>
+<p>后面会提到</p>
+<ul>
+<li>/etc/cron.d/</li>
+</ul>
+<p>包含为不同用户存储的系统 cronjobs 的目录。</p>
+<ul>
+<li>/var/spool/cron</li>
+</ul>
+<p>包含由 crontab 命令创建的用户 crontable 的目录。</p>
+<p>注意，在 CentOS 7.0+ 系统中只要更改 crontab，crontab 命令就会更新 spool 目录的 modtime。所以就不用重启 crond 服务。</p>
+<h4 id="使用">使用</h4>
+<p>如下为 系统任务 的编写格式，同样适用于所有的 crontab 任务编写。</p>
+<pre><code>  &gt;root ~
+[node1]# cat /etc/crontab
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+
+# For details see man 4 crontabs
+
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name  command to be executed
+</code></pre>
+<ul>
+<li><code>*</code>(星号)</li>
+</ul>
+<p>代表任何时刻都接受的意思！举例来说，范例一内那个日、月、周都是 * ， 就代表著『不论何月、何日的礼拜几的 12:00 都运行后续命令』的意思！</p>
+<ul>
+<li><code>,</code>(逗号)
+代表分隔时段的意思。举例来说，如果要下达的工作是 3:00 与 6:00 时，就会是：
+0 3,6 * * * command
+时间参数还是有五栏，不过第二栏是 3,6 ，代表 3 与 6 都适用！</li>
+<li><code>-</code>(减号)
+代表一段时间范围内，举例来说， 8 点到 12 点之间的每小时的 20 分都进行一项工作：
+20 8-12 * * * command
+仔细看到第二栏变成 8-12 喔！代表 8,9,10,11,12 都适用的意思！</li>
+<li><code>/n</code>(斜线)
+那个 n 代表数字，亦即是『每隔 n 单位间隔』的意思，例如每五分钟进行一次，则：
+*/5 * * * * command
+很简单吧！用 * 与 /5 来搭配，也可以写成 0-59/5 ，相同意思！</li>
+</ul>
+<h5 id="普通用户">普通用户</h5>
+<p>定时任务文档存放在 <code>/var/spool/cron/demo</code></p>
+<p>crontab -e ： 修改定时任务
+crontab -l ： 查看自己的定时任务
+crontab -r ： 删除所有定时任务</p>
+<p>crontab -u ：只有 root 才能进行这个任务，亦即帮其他使用者创建/移除 crontab 工作排程；</p>
+<h5 id="系统任务">系统任务</h5>
+<p>定时任务文档存放在 <code>/etc/crontab</code></p>
+<p>所有的修改删除等操作，直接编辑任务文档 <code>/etc/crontab</code> 即可，cron 会每分钟去读取一次 <code>/etc/crontab</code> 与 <code>/var/spool/cron</code> 里面的数据内容</p>
+<h3 id="anacron">anacron</h3>
+<p><strong>anacron 并不需要额外的配置，使用默认值即可</strong></p>
+<h4 id="简介">简介</h4>
+<blockquote>
+<p>系统 man 手册翻译 + 互联网资料</p>
+</blockquote>
+<p>Anacron 用于定期执行命令，频率以天为单位。与 cron(8) 不同，它不假设机器连续运行。因此，它可以用于不是一天 24 小时运行的机器来控制日常工作、每周工作和每月工作。</p>
+<p>对于每个作业，Anacron 会检查该作业是否在过去 n 天内执行过，其中 n 是为该作业指定的时间段。如果作业在 n 天或更长时间内未执行，则 Anacron 在等待指定为延迟参数的分钟数后运行作业的 shell 命令。命令退出后，Anacron 将日期（不包括小时）记录在该作业的特殊时间戳文件中，因此它知道何时再次执行该作业。</p>
+<p>anacron 并不是用来取代 crontab 的，anacron 存在的目的就在於我们上头提到的，在处理非 24 小时一直启动的 Linux 系统的 crontab 的运行！所以 anacron 并不能指定何时运行某项任务， 而是以天为单位或者是在启动后立刻进行 anacron 的动作，他会去侦测停机期间应该进行但是并没有进行的 crontab 任务，并将该任务运行一遍后，anacron 就会自动停止了。</p>
+<p>那么 anacron 又是怎么知道我们的系统啥时关机的呢？这就得要使用 anacron 读取的时间记录档 (timestamps) 了！ anacron 会去分析现在的时间与时间记录档所记载的上次运行 anacron 的时间，两者比较后若发现有差异，此时 anacron 就会开始运行未进行的 crontab 任务了！ 所以 anacron 其实也是透过 crontab 来运行的！因此 anacron 运行的时间通常有两个，一个是系统启动期间运行，一个是写入 crontab 的排程中。</p>
+<h4 id="运行原理">运行原理</h4>
+<p>anacron 可以理解为一个时间戳工具，判断时间是否连续，如果不连续，那么就执行下中间不连续时间的 cron 工作任务。也就是说 anacron 其实是通过 cron 来运行的，可以在 <code>/etc/cron*/*ana*</code> 内看到，是由 cron 来调用 anacron 来实现的</p>
+<pre><code>  &gt;root /etc/cron.d
+[node1]# cat /etc/anacrontab
+# /etc/anacrontab: configuration file for anacron
+# See anacron(8) and anacrontab(5) for details.
+SHELL=/bin/sh
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+# the maximal random delay added to the base delay of the jobs
+RANDOM_DELAY=45
+# the jobs will be started during the following hours only
+START_HOURS_RANGE=3-22
+
+#period in days   delay in minutes   job-identifier   command
+1	5	cron.daily		nice run-parts /etc/cron.daily
+7	25	cron.weekly		nice run-parts /etc/cron.weekly
+@monthly 45	cron.monthly		nice run-parts /etc/cron.monthly
+</code></pre>
+<ol>
+<li>由 /etc/anacrontab 分析到 cron.daily 这项工作名称的天数为 1 天；</li>
+<li>由 /var/spool/anacron/cron.daily 取出最近一次运行 anacron 的时间戳记；</li>
+<li>由上个步骤与目前的时间比较，若差异天数为 1 天以上 (含 1 天)，就准备进行命令；</li>
+<li>若准备进行命令，根据 /etc/anacrontab 的配置，将延迟 5 分钟</li>
+<li>延迟时间过后，开始运行后续命令，亦即『 run-parts /etc/cron.daily 』这串命令；</li>
+<li>运行完毕后， anacron 程序结束。</li>
+</ol>
+<h4 id="使用-1">使用</h4>
+<pre><code>-f 强制执行所有作业，忽略任何时间戳。
+-u 将所有作业的时间戳更新为当前日期，但不运行任何作业。
+-s 序列化作业的执行。 Anacron 不会在前一个工作完成之前开始新工作。
+-n 立即运行作业并忽略 /etc/anacrontab 文件中的指定延迟。此选项意味着 -s。
+-d 不会将 Anacron 分叉到后台。在这种模式下，Anacron 将向标准错误以及系统日志输出信息性消息。任何作业的输出都由 Anacron 邮寄。
+-q 将任何消息抑制为标准错误。仅适用于 -d。
+-t some_anacrontab 使用指定的 anacrontab，而不是 /etc/anacrontab 默认的。
+-T Anacrontab 测试。测试 /etc/anacrontab 配置文件的有效性。如果文件中有错误，它会显示在标准输出中并且 Anacron 返回值 1。有效的 anacrontabs 返回值 0。
+-S spooldir 使用指定的 spooldir 来存储时间戳。希望自己运行 anacron 的用户需要此选项。
+-V 打印版本信息，然后退出。
+-h 打印简短的使用信息，然后退出。
+</code></pre>
+<hr>
+<h2 id="at-与-cron-权限设置">at 与 cron 权限设置</h2>
+<p>由于两者的权限配置方案极其相似，所以将两者的配置剥离出来放在一起，便于对比。</p>
+<h3 id="at">at</h3>
+<p>在 CentOS 7.9 系统中，安装完操作系统后默认会有 <code>/etc/at.deny</code> 配置文件，</p>
+<ul>
+<li>at.deny</li>
+</ul>
+<p>在这个 at.deny 文件内的用户则不能使用 at，没有在这个 at.deny 文件中的用户，就可使用 at，</p>
+<ul>
+<li>at.allow</li>
+</ul>
+<p>同样的还有 <code>/etc/at.allow</code> 这个文件，写在这个文件中的使用者才能使用 at ，没有在这个文件中的使用者则不能使用 at (即使没有写在 at.deny 当中)。</p>
+<p>如果两个文件都存在，那么依照最小权限，仅 <code>/etc/at.allow</code> 用户可使用 at。
+如果两个文件都不存在，那么只有 root 可使用 at。</p>
+<p>修改配置的话，里面一行一个用户名即可。</p>
+<h3 id="cron-1">cron</h3>
+<p>与 at 类似，</p>
+<p>在 CentOS 7.9 系统中，安装完操作系统后默认会有 <code>/etc/cron.deny</code> 配置文件，</p>
+<ul>
+<li>/etc/cron.deny：</li>
+</ul>
+<p>在这个 cron.deny 文件内的用户则不能使用 cron，没有在这个 cron.deny 文件中的用户，就可使用 cron，</p>
+<ul>
+<li>/etc/cron.allow：</li>
+</ul>
+<p>同样的还有 <code>/etc/cron.allow</code> 这个文件，写在这个文件中的使用者才能使用 cron ，没有在这个文件中的使用者则不能使用 cron (即使没有写在 cron.deny 当中)。</p>
+<p>修改配置的话，里面一行一个用户名即可。</p>
+<p>如果两个文件都存在，那么依照最小权限，仅 <code>/etc/cron.allow</code> 用户可使用 cron。
+如果两个文件都不存在，那么只有 root 可使用 cron。</p>
+<p>demo 用户创建了周期任务，那么 demo 的任务会记录到 /var/spool/cron/demo
+cron 运行的每一项工作都会被纪录到 /var/log/cron 日志中</p>
+<h2 id="写在最后">写在最后</h2>
+<p>说实话，这文档写的糟心，一个是网上资料太多，又太乱，没有一个是条理清楚、干干净净的；另一个是没想到有那么多要涉及到的，里面的细节还是非常多的。man 手册帮助挺大的，也总算把这几个定时任务给理了一遍。</p>
+<h2 id="参考资料">参考资料</h2>
+<p><a href="http://cn.linux.vbird.org/linux_basic/0430cron.php">http://cn.linux.vbird.org/linux_basic/0430cron.php</a></p>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://blog.standuke.top/2021/07/2021-07-06-linux-%E5%AE%9A%E6%97%B6%E5%8D%95%E6%AC%A1%E5%8F%8A%E5%91%A8%E6%9C%9F%E4%BB%BB%E5%8A%A1/" title="Linux 定时单次及周期任务" target="_blank" rel="external">https://blog.standuke.top/2021/07/2021-07-06-linux-%E5%AE%9A%E6%97%B6%E5%8D%95%E6%AC%A1%E5%8F%8A%E5%91%A8%E6%9C%9F%E4%BB%BB%E5%8A%A1/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://www.standuke.top" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://blog.standuke.top/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://www.standuke.top" target="_blank"><span class="text-dark">Standuke</span><small class="ml-1x">Yunshen Technology Co., Ltd. - SRE Engineer</small></a></h3>
+        <div>Focus on Linux Openstack Kubernetes vSphere Photograph Coding</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+<section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://blog.standuke.top/2021/06/2021-06-26-linux-%E6%97%B6%E9%97%B4%E5%85%A8%E8%A7%A3/" title="Linux 时间全解"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter,google,linkedin"
+                data-mobile-sites="wechat,qq,facebook,twitter"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/idoker" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://blog.standuke.top/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2016  -
+    2022
+    <div class="publishby">
+        Theme by <a href="https://github.com/xiaoheiAh" target="_blank"> xiaoheiAh </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/shell.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://blog.standuke.top/js/application.min.a94ab19cb63a95c8d7fbd7b85cab3ddeea8c369bdf75b9cab6708787ead123af.js"></script>
+<script src="https://blog.standuke.top/js/plugin.min.19c5bcb2fb0789ab4f2b7834e5ceb5e92635645605bab902c1024b25f1502364.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/blog.standuke.top\/',
+            CONTENT_URL: 'https:\/\/blog.standuke.top\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://blog.standuke.top/js/insight.min.4a2d52de4bfff73e0c688404fe3d17c9a3ae12d9888e1e1ac9c690e4890de2ded50fe55f2b819c2ba55435a76f396f3ea6805765f0b0af5635cdf74ea459eab0.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https:\/\/blog.standuke.top\/2021\/07\/2021-07-06-linux-%E5%AE%9A%E6%97%B6%E5%8D%95%E6%AC%A1%E5%8F%8A%E5%91%A8%E6%9C%9F%E4%BB%BB%E5%8A%A1\/';
+        <!-- this.page.identifier = 'nuo'; -->
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'nuo' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-180157250-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  </body>
+</html>

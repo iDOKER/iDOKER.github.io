@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        Linux 文件权限及文件夹权限说明 - Stan&#39;s blog - Explore the world
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="👌 2021-04-22 Linux 文件权限及文件夹说明 在工作中，利用特殊权限，往往可以事半功倍达到很多对于文件以及文件夹权限要求的设置，所以打算总结一下接触过的操作系统" />
+    <meta name="generator" content="Hugo 0.82.1 with theme pure" />
+    <title>Linux 文件权限及文件夹权限说明 - Stan&#39;s blog - Explore the world</title>
+    
+    
+    <link rel="stylesheet" href="https://blog.standuke.top/css/style.min.6f90022f237877ae2514ec95f3c9cca9f2314394f20800ca037a497e20053122.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="Linux 文件权限及文件夹权限说明" />
+<meta property="og:description" content="👌 2021-04-22 Linux 文件权限及文件夹说明 在工作中，利用特殊权限，往往可以事半功倍达到很多对于文件以及文件夹权限要求的设置，所以打算总结一下接触过的操作系统" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.standuke.top/2021/04/2021-04-22-linux-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E6%9D%83%E9%99%90%E8%AF%B4%E6%98%8E/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-04-22T16:24:50&#43;08:00" />
+<meta property="article:modified_time" content="2021-04-22T16:24:50&#43;08:00" />
+
+<meta itemprop="name" content="Linux 文件权限及文件夹权限说明">
+<meta itemprop="description" content="👌 2021-04-22 Linux 文件权限及文件夹说明 在工作中，利用特殊权限，往往可以事半功倍达到很多对于文件以及文件夹权限要求的设置，所以打算总结一下接触过的操作系统"><meta itemprop="datePublished" content="2021-04-22T16:24:50&#43;08:00" />
+<meta itemprop="dateModified" content="2021-04-22T16:24:50&#43;08:00" />
+<meta itemprop="wordCount" content="2778">
+<meta itemprop="keywords" content="Linux,CentOS," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux 文件权限及文件夹权限说明"/>
+<meta name="twitter:description" content="👌 2021-04-22 Linux 文件权限及文件夹说明 在工作中，利用特殊权限，往往可以事半功倍达到很多对于文件以及文件夹权限要求的设置，所以打算总结一下接触过的操作系统"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://www.standuke.top" target="_blank">
+            <img class="img-circle img-rotate" src="https://blog.standuke.top/avatar.png" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">Standuke</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">Yunshen Technology Co., Ltd. - SRE Engineer</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Hangzhou, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-linkedin">
+                <a href="https://linkedin.com/in/doc-s-44435ab2">
+                    <i class="icon icon-linkedin"></i>
+                  <span class="menu-title">Linkedin</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content"><p>站点迁移初期，配置参数调整，同时涉及到的文章较多，页面浏览可能会出现闪断。因为是业余时间迁移博客，从 5 月开始估计要到年底才能把前期的文章整体迁移过来。博客评论采用 Disqus 需要科学才能看到，如果有任何意见建议也可直接联系我 Telegram。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://blog.standuke.top/tags/aliyun/" class="tag-list-link" rel="1">aliyun<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/bigdata/" class="tag-list-link" rel="1">bigdata<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/cdh/" class="tag-list-link" rel="1">cdh<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/centos/" class="tag-list-link" rel="8">centos<span
+               class="tag-list-count">8</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/cloudera/" class="tag-list-link" rel="1">cloudera<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/docker/" class="tag-list-link" rel="1">docker<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/eip/" class="tag-list-link" rel="1">eip<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/esxi/" class="tag-list-link" rel="1">esxi<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/frp/" class="tag-list-link" rel="1">frp<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/kvm/" class="tag-list-link" rel="1">kvm<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/linux/" class="tag-list-link" rel="5">linux<span
+               class="tag-list-count">5</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/linux-bridge/" class="tag-list-link" rel="1">linux-bridge<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/macos/" class="tag-list-link" rel="2">macos<span
+               class="tag-list-count">2</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/markdown/" class="tag-list-link" rel="1">markdown<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/network/" class="tag-list-link" rel="1">network<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/openstack/" class="tag-list-link" rel="6">openstack<span
+               class="tag-list-count">6</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/pxe/" class="tag-list-link" rel="1">pxe<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/qcow2/" class="tag-list-link" rel="1">qcow2<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/system/" class="tag-list-link" rel="1">system<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/time-machine/" class="tag-list-link" rel="1">time-machine<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/tools/" class="tag-list-link" rel="1">tools<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/vcenter/" class="tag-list-link" rel="1">vcenter<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/virtualization/" class="tag-list-link" rel="9">virtualization<span
+               class="tag-list-count">9</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/vsphere/" class="tag-list-link" rel="1">vsphere<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/windows/" class="tag-list-link" rel="4">windows<span
+               class="tag-list-count">4</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="category-list-link">使用教程</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E5%86%85%E9%83%A8%E5%88%86%E4%BA%AB/" class="category-list-link">内部分享</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/" class="category-list-link">技术分析</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-list-link">操作系统</a><span class="category-list-count">7</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/" class="category-list-link">部署教程</a><span class="category-list-count">10</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E9%9B%B6%E7%A2%8E%E5%B0%8F%E9%97%AE%E9%A2%98/" class="category-list-link">零碎小问题</a><span class="category-list-count">4</span></li>
+        </ul>
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/07/2021-07-06-linux-%E5%AE%9A%E6%97%B6%E5%8D%95%E6%AC%A1%E5%8F%8A%E5%91%A8%E6%9C%9F%E4%BB%BB%E5%8A%A1/" class="title">Linux 定时单次及周期任务</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-07-06 17:20:34 &#43;0800 CST" itemprop="datePublished">2021-07-06</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/06/2021-06-26-linux-%E6%97%B6%E9%97%B4%E5%85%A8%E8%A7%A3/" class="title">Linux 时间全解</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-06-26 11:11:31 &#43;0800 CST" itemprop="datePublished">2021-06-26</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-19-%E9%98%BF%E9%87%8C%E4%BA%91%E4%B8%BB%E6%9C%BA-eip-%E8%87%B4%E4%BD%BF-ftp-%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5/" class="title">阿里云主机 EIP 致使 FTP 无法连接</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-19 21:08:48 &#43;0800 CST" itemprop="datePublished">2021-05-19</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B24-%E5%AE%89%E7%BD%AE%E6%9C%8D%E5%8A%A1-placement/" class="title">OpenStack Wallaby 部署4 安置服务 Placement</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-08 17:01:11 &#43;0800 CST" itemprop="datePublished">2021-05-08</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B23-%E9%95%9C%E5%83%8F%E6%9C%8D%E5%8A%A1-glance/" class="title">OpenStack Wallaby 部署3 镜像服务 Glance</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-08 16:54:55 &#43;0800 CST" itemprop="datePublished">2021-05-08</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2021/04/2021-04-22-linux-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E6%9D%83%E9%99%90%E8%AF%B4%E6%98%8E/"
+    >Linux 文件权限及文件夹权限说明</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://blog.standuke.top/2021/04/2021-04-22-linux-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E6%9D%83%E9%99%90%E8%AF%B4%E6%98%8E/" class="article-date">
+  <time datetime="2021-04-22 16:24:50 &#43;0800 CST" itemprop="datePublished">2021-04-22</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"> 操作系统 </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/linux/"> Linux </a>
+    <a class="article-tag-link" href="/tags/centos/"> CentOS </a>
+  </span>
+
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2021/04/2021-04-22-linux-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E6%9D%83%E9%99%90%E8%AF%B4%E6%98%8E/#comments"
+            class="article-comment-link">评论</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2778字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 6分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <h1 id="-2021-04-22-linux-文件权限及文件夹说明">👌 2021-04-22 Linux 文件权限及文件夹说明</h1>
+<p>在工作中，利用特殊权限，往往可以事半功倍达到很多对于文件以及文件夹权限要求的设置，所以打算总结一下接触过的操作系统所涉及到的特殊文件权限，方便后期查看。本内容大致面向于 Linux 相关的操作系统。</p>
+<p>对于 <code>类 Unix</code> 操作系统，这里只涉及到了 <code>CentOS</code> ，其他的操作系统暂未涵盖进来。</p>
+<p>[TOC]</p>
+<h2 id="类型说明">类型说明</h2>
+<h3 id="常规权限l-d-r-w-x">常规权限「l d r w x」</h3>
+<ul>
+<li>l: 链接文件或链接目录标识</li>
+<li>d: 目录标识</li>
+<li>r: 可读标识</li>
+<li>w: 可写标识</li>
+<li>x: 可执行标识</li>
+</ul>
+<p>操作系统默认 <code>/</code> 目录的文件夹列表</p>
+<pre><code>total 16
+lrwxrwxrwx.   1 root root    7 Jan  8  2020 bin -&gt; usr/bin
+dr-xr-xr-x.   5 root root 4096 Jan  8  2020 boot
+drwxr-xr-x.  20 root root 3240 Apr 22 23:19 dev
+drwxr-xr-x.  75 root root 8192 Apr 22 23:21 etc
+drwxr-xr-x.   2 root root    6 Apr 11  2018 home
+lrwxrwxrwx.   1 root root    7 Jan  8  2020 lib -&gt; usr/lib
+lrwxrwxrwx.   1 root root    9 Jan  8  2020 lib64 -&gt; usr/lib64
+drwxr-xr-x.   2 root root    6 Apr 11  2018 media
+drwxr-xr-x.   2 root root    6 Apr 11  2018 mnt
+drwxr-xr-x.   3 root root   23 Nov 28 23:32 opt
+dr-xr-xr-x. 140 root root    0 Apr 22 23:18 proc
+dr-xr-x---.   2 root root  171 Nov 28 23:30 root
+drwxr-xr-x.  24 root root  720 Apr 22 23:20 run
+lrwxrwxrwx.   1 root root    8 Jan  8  2020 sbin -&gt; usr/sbin
+drwxr-xr-x.   2 root root    6 Apr 11  2018 srv
+dr-xr-xr-x.  13 root root    0 Apr 22 23:19 sys
+drwxrwxrwt.   9 root root  161 Apr 22 23:19 tmp
+drwxr-xr-x.  13 root root  155 Jan  8  2020 usr
+drwxr-xr-x.  19 root root  267 Jan  8  2020 var
+</code></pre>
+<h4 id="可读权限">可读权限</h4>
+<ul>
+<li>对于文件，可读权限：可以对读取文件里的内容</li>
+</ul>
+<p>用字符表示：r
+用八进制表示：4</p>
+<ul>
+<li>对于目录，可读权限：可以列出目录下的内容</li>
+</ul>
+<p>用字符表示：r
+用八进制表示：4</p>
+<h4 id="可写权限">可写权限</h4>
+<ul>
+<li>
+<p>对于文件，可写权限：可以对文件进行更改
+用字符表示：w
+用八进制表示：2</p>
+</li>
+<li>
+<p>对于目录，可写权限：可以在目录下创建文件或目录</p>
+</li>
+</ul>
+<p>用字符表示：w
+用八进制表示：2</p>
+<h4 id="可执行权限">可执行权限</h4>
+<ul>
+<li>对于文件，可写权限：可以执行该文件（脚本或命令）</li>
+</ul>
+<p>用字符表示：x
+用八进制表示：1</p>
+<ul>
+<li>对于目录，可写权限：可以cd进入该目录</li>
+</ul>
+<p>用字符表示：x
+用八进制表示：1</p>
+<h3 id="特殊权限suid-sgid-sbit">特殊权限「SUID SGID SBIT」</h3>
+<blockquote>
+<p>关于 Ss Tt 区别，可见示例部分</p>
+</blockquote>
+<pre><code>SUID 示例
+-rwsr-xr-x. 1 root root 27856 Aug  9  2019 /usr/bin/passwd
+
+SGID 示例
+-rwxr-sr-x. 1 root root 13 Aug  8  2019 /opt/test/file1
+
+SBIT 示例
+drwxrwxrwt.   9 root root  161 Apr 22 23:19 /tmp
+</code></pre>
+<h4 id="suidsetuid">SUID「Setuid」</h4>
+<ul>
+<li>对于文件，Setuid：</li>
+</ul>
+<p>用字符表示：s
+用八进制表示：4000</p>
+<blockquote>
+<p>Setuid最常用的是配合执行权限 x 使用，例如，系统中内置命令 passwd ，它默认是带有 s 权限位， passwd 命令的主要功能是修改用户的密码，而修改密码的流程是：</p>
+</blockquote>
+<pre><code>将加密后的哈希值写入到 /etc/passwd 文件对应的用户条目中。
+使用pwconv工具转换到 /etc/shadow 文件中。
+而普通用户是没有权限修改 /etc/passwd 和 /etc/shadow 文件
+在普通用户尝试执行 passwd，该 passwd 的所有者是root并且设置了 Suid ，因此 passwd 以 root 身份执行。
+</code></pre>
+<p>PS: 当你查看进程时，你会发现，进程不是普通用户，而是passwd工具的所有者（root）</p>
+<h4 id="sgidsetgid">SGID「Setgid」</h4>
+<ul>
+<li>对于目录，Setgid：</li>
+</ul>
+<p>用字符表示：s
+用八进制表示：2000</p>
+<blockquote>
+<p>当一个目录拥有sgid权限时，其他用户在该目录下创建文件或目录后，它会继承目录的id，即创建的文件或目录的属组为父目录的属组。</p>
+</blockquote>
+<pre><code>[root@localhost data]# mkdir project
+[root@localhost data]# chmod 2777 project/
+[root@localhost data]# ls -lh
+total 0
+drwxrwsrwx 2 root root 6 Apr 20 23:42 project
+[root@localhost data]# su bob
+[bob@localhost data]$ mkdir project/test_for_bob
+[bob@localhost data]$ ls -lh project/
+total 0
+drwxrwsr-x 2 bob root 6 Apr 20 23:42 test_for_bob
+</code></pre>
+<h4 id="sbitsticky-粘滞位">SBIT「Sticky 粘滞位」</h4>
+<ul>
+<li>对于目录：</li>
+</ul>
+<p>用字符表示：t
+用八进制表示：1000</p>
+<blockquote>
+<p>/tmp目录就是使用了粘滞位 t，其作用是，在该目录下创建文件或目录后，仅允许其作者（所有者）进行删除操作。其他用户无法删除。</p>
+</blockquote>
+<h3 id="selinux-权限">SELinux 权限「.」</h3>
+<p>开启 SELinux 后创建的文件和目录都会在权限列显示这个点的，关闭 SELinux 后创建的文件和目录在权限列是不会显示这个点的，之前创建的文件或目录保持不变，权限列的点依然显示。</p>
+<pre><code>[root@DCGH ~]# touch DCGH-later
+[root@DCGH ~]# mkdir DCGH-later-dir
+[root@DCGH ~]# ls -lZ
+-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 DCGH
+drwxr-xr-x. root root unconfined_u:object_r:admin_home_t:s0 DCGH-DIR
+-rw-r--r-- root root ? DCGH-later
+drwxr-xr-x root root ? DCGH-later-dir
+</code></pre>
+<h3 id="acl-权限">ACL 权限「+」</h3>
+<p>加了ACL权限控制之后，之前具有SELinux属性的文件和目录的权限列最后一个位置全部变成了加号（+）。移除原来的ACL权限之后，恢复原样。如果加号存在，则已经有点的目录或文件，点的显示会被覆盖，但原来的SELinux属性保持不变。</p>
+<pre><code>[root@DCGH ~]# setfacl -m u:dcgh:rwx *
+[root@DCGH ~]# ls -lZ
+-rw-rwxr--+ root root unconfined_u:object_r:admin_home_t:s0 DCGH
+drwxrwxr-x+ root root unconfined_u:object_r:admin_home_t:s0 DCGH-DIR
+drwxrwxr-x+ root root ? DCGH-DIR-later -rw-rwxr--+ root root ? DCGH-later
+[root@DCGH ~]# setfacl -b *
+[root@DCGH ~]# ls -lZ
+-rw-r--r--. root root unconfined_u:object_r:admin_home_t:s0 DCGH
+drwxr-xr-x. root root unconfined_u:object_r:admin_home_t:s0 DCGH-DIR
+drwxr-xr-x root root ? DCGH-DIR-later -rw-r--r-- root root ? DCGH-later
+</code></pre>
+<h2 id="权限控制举例">权限控制举例</h2>
+<h3 id="文件权限">文件权限</h3>
+<p>用户对于文件的访问权限，取决于文件的用户权限部分，以及 特殊权限 和 ACL</p>
+<h3 id="文件夹权限">文件夹权限</h3>
+<p>示例，建立如下 目录结构</p>
+<pre><code>.
+├── level1
+│   ├── file1
+│   └── level11
+│       └── file11
+└── level2
+
+3 directories, 2 files
+</code></pre>
+<p>用户能否在 <code>level1</code> 目录下创建或者访问由 <code>level1</code> 的目录权限决定，每个目录权限至管理目录自己的那一层级，例如 <code>level11</code> 目录下等创建文件夹或者访问操作，不受 <code>level1</code> 目录的权限限制。</p>
+<h2 id="umask">umask</h2>
+<p>默认 <code>0022</code></p>
+<blockquote>
+<p>即使 umask 设置为 0000，后续创建文件的权限依然是 666。出于安全着想，执行权限必须手动添加。所以你会看到，目录权限为 777，而文件权限为 666</p>
+</blockquote>
+<h2 id="示例">示例</h2>
+<pre><code>lrwxrwxrwx. 1 root root 7 Oct 3 02:33 bin -&gt; usr/bin
+</code></pre>
+<ul>
+<li>第一个字符的含义：</li>
+</ul>
+<p><code>-</code> 常规文件
+<code>b</code> 块特殊文件
+<code>c</code> 字符特殊文件
+<code>C</code> 高性能（&ldquo;连续数据&rdquo;）文件
+<code>d</code> 目录
+<code>D</code> 门(Solaris 2.5及以上版本)
+<code>l</code> 符号链接
+<code>M</code> 离线（&ldquo;前已&rdquo;）文件（Cray DMF）
+<code>n</code> 网络专用文件（HP-UX）
+<code>p</code> FIFO（命名管道）
+<code>P</code> 断开（Solaros 10及以上）
+<code>s</code> 套接字
+<code>?</code> 其他文件</p>
+<ul>
+<li>第二个字符的含义：</li>
+</ul>
+<p><code>r</code> 属主的读权限</p>
+<ul>
+<li>第三个字符的含义：</li>
+</ul>
+<p><code>w</code> 属主的写权限</p>
+<ul>
+<li>第四个字符的含义：</li>
+</ul>
+<p><code>x</code> 属主的执行权限
+<code>S</code> 设置了SUID，没有执行权限(权限无效)
+<code>s</code> 设置了SUID，具有执行权限</p>
+<ul>
+<li>第五个字符的含义：</li>
+</ul>
+<p><code>r</code> 属组的读权限</p>
+<ul>
+<li>第六个字符的含义：</li>
+</ul>
+<p><code>w</code> 属组的写权限</p>
+<ul>
+<li>第七个字符的含义：</li>
+</ul>
+<p><code>x</code> 属组执行权限
+<code>S</code> 设置了SGID，没有执行权限(权限无效)
+<code>s</code> 设置了SGID，具有执行权限</p>
+<ul>
+<li>第八个字符的含义：</li>
+</ul>
+<p><code>r</code> 其他人的读权限</p>
+<ul>
+<li>第九个字符的含义：</li>
+</ul>
+<p><code>w</code> 其他人的写权限</p>
+<ul>
+<li>第十个字符的含义：</li>
+</ul>
+<p><code>x</code> 其他人的执行权限
+<code>T</code> 设置了粘滞位，没有执行权限(权限无效)
+<code>t</code> 设置了粘滞位，具有执行权限</p>
+<ul>
+<li>第十一个字符的含义：</li>
+</ul>
+<p><code>.</code> 没有任何其他替代访问方法的SELinux安全上下文（没有设置ACL）
+<code>+</code> 具有任何其他组合访问方法的SELinux安全上下文（设置了ACL）</p>
+<ul>
+<li>第十二个字符的含义：该文件的硬链接数量</li>
+<li>第十三个字符的含义：该文件的属主</li>
+<li>第十四个字符的含义：该文件的属组</li>
+<li>第十五个字符的含义：该文件的大小</li>
+<li>第十六到第十八个字符的含义：最后一次修改的时间</li>
+<li>第十九个字符的含义：文件或目录的名称</li>
+<li>第二十个字符的含义：链接符号</li>
+<li>第二十一个字符的含义：链接文件的源文件</li>
+</ul>
+<h2 id="其他系统的特殊权限标识">其他系统的特殊权限标识</h2>
+<h3 id="macos">macOS</h3>
+<p>可使用如下命令查看 macOS 系统内相关的特殊权限标识</p>
+<blockquote>
+<p>If the file or directory has extended attributes, the permissions field printed by the -l option is followed by a &lsquo;@&rsquo; character. Otherwise, if the file or directory has extended security information, the permissions field printed by the -l option is followed by a &lsquo;+&rsquo; character.</p>
+</blockquote>
+<p>如果文件或目录有扩展属性,则使用-l选项执行ls命令时，会在权限许可字段后面附加一个字符@。如果文件或目录有扩展安全信息，则使用-l选项执行ls命令时，会在权限许可字段后面附件一个字符+。</p>
+<pre><code>ls -l@  或者  ls -l+
+</code></pre>
+<p>文件「<code>unkonw.txt</code>」、目录「<code>Archive</code>」、替身「<code>Investment</code>」相关特殊权限标识如下所示</p>
+<pre><code>total 24
+drwxr-xr-x   44 idoker  staff  1408  4  8 16:10 Archive
+-rw-r--r--@   1 idoker  staff   888  2 22 17:26 Investment
+	com.apple.FinderInfo	  32
+	com.apple.lastuseddate#PS	  16
+drwxr-xr-x   21 idoker  staff   672  3 15 00:33 TODO
+drwxr-xr-x  197 idoker  staff  6304  3 22 11:21 Temp
+-rw-r--r--@   1 idoker  staff   952  2 22 17:03 Workspace
+	com.apple.FinderInfo	  32
+	com.apple.lastuseddate#PS	  16
+drwxr-xr-x   11 idoker  staff   352  3 22 11:21 log
+-rw-r--r--    1 idoker  staff  2544  4 12 10:52 unkonw.txt
+</code></pre>
+<p>可使用 <code>xattr</code> 相关命令进行修改</p>
+<h3 id="windows">Windows</h3>
+<p>Windows 开启 SMB 共享或者开启 ftp 共享，在 Linux 系统环境下相关权限如下所示</p>
+<pre><code>待补充
+</code></pre>
+<h2 id="参考资料">参考资料</h2>
+<p>特殊权限 SUID、SGID、Sticky
+<a href="https://www.cnblogs.com/Q--T/p/7864795.html">https://www.cnblogs.com/Q--T/p/7864795.html</a>
+刘合栋-Linux 权限位详解
+<a href="https://www.cnblogs.com/liuhedong/p/10739718.html">https://www.cnblogs.com/liuhedong/p/10739718.html</a>
+Linux中权限列中的加号及点的深度解读
+<a href="https://www.linuxprobe.com/linux-authority-ask.html">https://www.linuxprobe.com/linux-authority-ask.html</a></p>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://blog.standuke.top/2021/04/2021-04-22-linux-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E6%9D%83%E9%99%90%E8%AF%B4%E6%98%8E/" title="Linux 文件权限及文件夹权限说明" target="_blank" rel="external">https://blog.standuke.top/2021/04/2021-04-22-linux-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E6%9D%83%E9%99%90%E8%AF%B4%E6%98%8E/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://www.standuke.top" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://blog.standuke.top/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://www.standuke.top" target="_blank"><span class="text-dark">Standuke</span><small class="ml-1x">Yunshen Technology Co., Ltd. - SRE Engineer</small></a></h3>
+        <div>Focus on Linux Openstack Kubernetes vSphere Photograph Coding</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+<section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://blog.standuke.top/2021/04/2021-04-11-frp-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" title="frp 内网穿透"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            <li class="next">
+                <a href="https://blog.standuke.top/about/"
+                    title="About"><span>上一篇&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter,google,linkedin"
+                data-mobile-sites="wechat,qq,facebook,twitter"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/idoker" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://blog.standuke.top/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2016  -
+    2022
+    <div class="publishby">
+        Theme by <a href="https://github.com/xiaoheiAh" target="_blank"> xiaoheiAh </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/shell.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://blog.standuke.top/js/application.min.a94ab19cb63a95c8d7fbd7b85cab3ddeea8c369bdf75b9cab6708787ead123af.js"></script>
+<script src="https://blog.standuke.top/js/plugin.min.19c5bcb2fb0789ab4f2b7834e5ceb5e92635645605bab902c1024b25f1502364.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/blog.standuke.top\/',
+            CONTENT_URL: 'https:\/\/blog.standuke.top\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://blog.standuke.top/js/insight.min.4a2d52de4bfff73e0c688404fe3d17c9a3ae12d9888e1e1ac9c690e4890de2ded50fe55f2b819c2ba55435a76f396f3ea6805765f0b0af5635cdf74ea459eab0.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https:\/\/blog.standuke.top\/2021\/04\/2021-04-22-linux-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E6%9D%83%E9%99%90%E8%AF%B4%E6%98%8E\/';
+        <!-- this.page.identifier = 'nuo'; -->
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'nuo' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-180157250-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  </body>
+</html>

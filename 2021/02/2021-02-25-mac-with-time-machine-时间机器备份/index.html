@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        Mac With Time Machine 时间机器备份 - Stan&#39;s blog - Explore the world
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="👌 2021-02-25 Mac with Time Machine FileInfo Filename - Mac with Time Machine Version - v1.1.2102（2021/02/25 ~ 2021/02/26） Author - nuo standuke Email - shadowdoker@gmail.com DescriptionKey - Mac Time Machine 版本修订记录： v1.0" />
+    <meta name="generator" content="Hugo 0.82.1 with theme pure" />
+    <title>Mac With Time Machine 时间机器备份 - Stan&#39;s blog - Explore the world</title>
+    
+    
+    <link rel="stylesheet" href="https://blog.standuke.top/css/style.min.6f90022f237877ae2514ec95f3c9cca9f2314394f20800ca037a497e20053122.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="Mac With Time Machine 时间机器备份" />
+<meta property="og:description" content="👌 2021-02-25 Mac with Time Machine FileInfo Filename - Mac with Time Machine Version - v1.1.2102（2021/02/25 ~ 2021/02/26） Author - nuo standuke Email - shadowdoker@gmail.com DescriptionKey - Mac Time Machine 版本修订记录： v1.0" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.standuke.top/2021/02/2021-02-25-mac-with-time-machine-%E6%97%B6%E9%97%B4%E6%9C%BA%E5%99%A8%E5%A4%87%E4%BB%BD/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-02-25T21:31:46&#43;08:00" />
+<meta property="article:modified_time" content="2021-02-25T21:31:46&#43;08:00" />
+
+<meta itemprop="name" content="Mac With Time Machine 时间机器备份">
+<meta itemprop="description" content="👌 2021-02-25 Mac with Time Machine FileInfo Filename - Mac with Time Machine Version - v1.1.2102（2021/02/25 ~ 2021/02/26） Author - nuo standuke Email - shadowdoker@gmail.com DescriptionKey - Mac Time Machine 版本修订记录： v1.0"><meta itemprop="datePublished" content="2021-02-25T21:31:46&#43;08:00" />
+<meta itemprop="dateModified" content="2021-02-25T21:31:46&#43;08:00" />
+<meta itemprop="wordCount" content="2424">
+<meta itemprop="keywords" content="macOS,Time Machine," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mac With Time Machine 时间机器备份"/>
+<meta name="twitter:description" content="👌 2021-02-25 Mac with Time Machine FileInfo Filename - Mac with Time Machine Version - v1.1.2102（2021/02/25 ~ 2021/02/26） Author - nuo standuke Email - shadowdoker@gmail.com DescriptionKey - Mac Time Machine 版本修订记录： v1.0"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://www.standuke.top" target="_blank">
+            <img class="img-circle img-rotate" src="https://blog.standuke.top/avatar.png" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">Standuke</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">Yunshen Technology Co., Ltd. - SRE Engineer</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Hangzhou, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-linkedin">
+                <a href="https://linkedin.com/in/doc-s-44435ab2">
+                    <i class="icon icon-linkedin"></i>
+                  <span class="menu-title">Linkedin</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content"><p>站点迁移初期，配置参数调整，同时涉及到的文章较多，页面浏览可能会出现闪断。因为是业余时间迁移博客，从 5 月开始估计要到年底才能把前期的文章整体迁移过来。博客评论采用 Disqus 需要科学才能看到，如果有任何意见建议也可直接联系我 Telegram。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://blog.standuke.top/tags/aliyun/" class="tag-list-link" rel="1">aliyun<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/bigdata/" class="tag-list-link" rel="1">bigdata<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/cdh/" class="tag-list-link" rel="1">cdh<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/centos/" class="tag-list-link" rel="8">centos<span
+               class="tag-list-count">8</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/cloudera/" class="tag-list-link" rel="1">cloudera<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/docker/" class="tag-list-link" rel="1">docker<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/eip/" class="tag-list-link" rel="1">eip<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/esxi/" class="tag-list-link" rel="1">esxi<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/frp/" class="tag-list-link" rel="1">frp<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/kvm/" class="tag-list-link" rel="1">kvm<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/linux/" class="tag-list-link" rel="5">linux<span
+               class="tag-list-count">5</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/linux-bridge/" class="tag-list-link" rel="1">linux-bridge<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/macos/" class="tag-list-link" rel="2">macos<span
+               class="tag-list-count">2</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/markdown/" class="tag-list-link" rel="1">markdown<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/network/" class="tag-list-link" rel="1">network<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/openstack/" class="tag-list-link" rel="6">openstack<span
+               class="tag-list-count">6</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/pxe/" class="tag-list-link" rel="1">pxe<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/qcow2/" class="tag-list-link" rel="1">qcow2<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/system/" class="tag-list-link" rel="1">system<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/time-machine/" class="tag-list-link" rel="1">time-machine<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/tools/" class="tag-list-link" rel="1">tools<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/vcenter/" class="tag-list-link" rel="1">vcenter<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/virtualization/" class="tag-list-link" rel="9">virtualization<span
+               class="tag-list-count">9</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/vsphere/" class="tag-list-link" rel="1">vsphere<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/windows/" class="tag-list-link" rel="4">windows<span
+               class="tag-list-count">4</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="category-list-link">使用教程</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E5%86%85%E9%83%A8%E5%88%86%E4%BA%AB/" class="category-list-link">内部分享</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/" class="category-list-link">技术分析</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-list-link">操作系统</a><span class="category-list-count">7</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/" class="category-list-link">部署教程</a><span class="category-list-count">10</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E9%9B%B6%E7%A2%8E%E5%B0%8F%E9%97%AE%E9%A2%98/" class="category-list-link">零碎小问题</a><span class="category-list-count">4</span></li>
+        </ul>
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/07/2021-07-06-linux-%E5%AE%9A%E6%97%B6%E5%8D%95%E6%AC%A1%E5%8F%8A%E5%91%A8%E6%9C%9F%E4%BB%BB%E5%8A%A1/" class="title">Linux 定时单次及周期任务</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-07-06 17:20:34 &#43;0800 CST" itemprop="datePublished">2021-07-06</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/06/2021-06-26-linux-%E6%97%B6%E9%97%B4%E5%85%A8%E8%A7%A3/" class="title">Linux 时间全解</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-06-26 11:11:31 &#43;0800 CST" itemprop="datePublished">2021-06-26</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-19-%E9%98%BF%E9%87%8C%E4%BA%91%E4%B8%BB%E6%9C%BA-eip-%E8%87%B4%E4%BD%BF-ftp-%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5/" class="title">阿里云主机 EIP 致使 FTP 无法连接</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-19 21:08:48 &#43;0800 CST" itemprop="datePublished">2021-05-19</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B24-%E5%AE%89%E7%BD%AE%E6%9C%8D%E5%8A%A1-placement/" class="title">OpenStack Wallaby 部署4 安置服务 Placement</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-08 17:01:11 &#43;0800 CST" itemprop="datePublished">2021-05-08</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B23-%E9%95%9C%E5%83%8F%E6%9C%8D%E5%8A%A1-glance/" class="title">OpenStack Wallaby 部署3 镜像服务 Glance</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-08 16:54:55 &#43;0800 CST" itemprop="datePublished">2021-05-08</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2021/02/2021-02-25-mac-with-time-machine-%E6%97%B6%E9%97%B4%E6%9C%BA%E5%99%A8%E5%A4%87%E4%BB%BD/"
+    >Mac With Time Machine 时间机器备份</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://blog.standuke.top/2021/02/2021-02-25-mac-with-time-machine-%E6%97%B6%E9%97%B4%E6%9C%BA%E5%99%A8%E5%A4%87%E4%BB%BD/" class="article-date">
+  <time datetime="2021-02-25 21:31:46 &#43;0800 CST" itemprop="datePublished">2021-02-25</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"> 使用教程 </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/macos/"> macOS </a>
+    <a class="article-tag-link" href="/tags/time-machine/"> Time Machine </a>
+  </span>
+
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2021/02/2021-02-25-mac-with-time-machine-%E6%97%B6%E9%97%B4%E6%9C%BA%E5%99%A8%E5%A4%87%E4%BB%BD/#comments"
+            class="article-comment-link">评论</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2424字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 5分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <h1 id="-2021-02-25-mac-with-time-machine">👌 2021-02-25 Mac with Time Machine</h1>
+<blockquote>
+<p><strong>FileInfo</strong>
+Filename - Mac with Time Machine
+Version - v1.1.2102（2021/02/25 ~ 2021/02/26）
+Author - nuo standuke
+Email - <a href="mailto:shadowdoker@gmail.com">shadowdoker@gmail.com</a>
+DescriptionKey - Mac Time Machine</p>
+</blockquote>
+<p><strong>版本修订记录：</strong></p>
+<p>v1.0.2102：2021-02-25：建立 Mac with Time Machine 手册
+v1.1.2102：2021-02-26：添加本地快照信息、时间线颜色说明和磁盘加密说明</p>
+<h2 id="time-machine-简介">Time Machine 简介</h2>
+<p>Time Machine 是 Mac 的内置备份功能。可以使用 Time Machine 对所有文件进行自动备份，包括应用、音乐、照片、电子邮件、文稿和系统文件。通过备份，当原始文件从 Mac 永久性删除或者 Mac 中的硬盘（或 SSD）被抹掉或更换时，可以从备份恢复文件。</p>
+<p>[TOC]</p>
+<h3 id="备份机制">备份机制</h3>
+<p>增量备份，macOS 可以通过 FSEvents 监视文件系统变化，这点类似 Linux 的 inotify 机制。Time Machine 通过 <a href="https://en.wikipedia.org/wiki/FSEvents">FSEvents</a> 对系统的所有变化进行持续的追踪，当发现过去一小时的系统发生变化以后，Time Machine 只对那些变化的文件进行备份。
+「Time Machine 进行的第一次备份，备份文件可能会很大，因此可能需要一段比较长的时间才能完成。但是当第一次备份完成后，后来的每个后续备份应该都比较小（备份也会更快），因为后面的备份只是增量备份。」</p>
+<ul>
+<li>本地快照「只要本地磁盘空间允许」</li>
+<li>过去 24 小时的每小时备份</li>
+<li>过去一个月的每日备份</li>
+<li>过去所有月份的每周备份</li>
+</ul>
+<p>本地快照「本地快照占用的空间标记为 可清除」</p>
+<blockquote>
+<p>如果可用储存空间小于总储存空间的 20%，则 TM 会移除本地快照，从最旧的快照开始，直到可用储存空间超过总储存空间的 20%。
+如果可用储存空间小于总储存空间的 10% 或不到 5GB，则 TM 会快速移除本地快照。如果只剩下一个快照，TM 会停止创建新快照。随着可用空间不断变大，TM 首先会使用新的快照替换以前的快照，最终会照常创建快照。</p>
+</blockquote>
+<h3 id="备份介质">备份介质</h3>
+<p>详细可见参考资料：
+<a href="https://support.apple.com/zh-cn/HT202784">https://support.apple.com/zh-cn/HT202784</a></p>
+<ul>
+<li>连接到 Mac 的外置 USB 驱动器、雷雳驱动器或 FireWire 驱动器</li>
+<li>USB 连接的移动硬盘</li>
+<li>支持通过 SMB 进行&quot;时间机器&quot;备份的联网储存 (NAS) 设备</li>
+<li>Windows 共享或者 NAS 设备上的 SMB 共享</li>
+<li>共享为&quot;时间机器&quot;备份目标位置的 Mac</li>
+<li>把其他的 Mac 作为备份磁盘</li>
+<li>Mac 电脑 &gt;「设置」&gt;「共享」&gt;「共享文件」&gt;「添加共享文件夹后右键文件夹高级选项」</li>
+<li>连接到 AirPort Extreme 基站 (802.11ac) 或 AirPort 时间返回舱的外置驱动器</li>
+<li>AirPort Extreme 设备</li>
+<li>AirPort 时间返回舱</li>
+<li>AirPort 设备</li>
+</ul>
+<h2 id="开启-time-machine">开启 Time Machine</h2>
+<p>Mac 电脑 &gt;「设置」&gt;「Time Machine」打开即可</p>
+<p>同时需要满足如下几个要求</p>
+<ul>
+<li>Time Machine 备份留下足够的空间。建议容量是 Mac 磁盘空间的 2～4 倍</li>
+<li>移动硬盘的磁盘文件系统格式需要为 HFS+ 或 APFS「如果不是则会在设置 Time Machine 的时候提示抹掉磁盘」</li>
+</ul>
+<h3 id="是否加密">是否加密</h3>
+<ol>
+<li>看个人需求</li>
+<li>加密耗时很久，酌情考虑「加密过程可以不用一次性完成，在正常退出外置硬盘并关机之后，下次再接入时磁盘会继续加密进程。」</li>
+<li>磁盘每次接入挂载时会提示输入密码</li>
+</ol>
+<h2 id="其他选项">其他选项</h2>
+<ul>
+<li>如果您备份到多个磁盘，可以按住 Option 键，然后从&quot;时间机器&quot;菜单中选取&quot;浏览其他备份磁盘&quot;。</li>
+<li>要从备份中排除某些项目，请打开&quot;时间机器&quot;偏好设置，点按&quot;选项&quot;，然后点按&quot;添加&quot;(+) 按钮以添加要排除的项目。要停止排除某个项目（例如，外置硬盘驱动器），请选择相应的项目并点按&quot;移除&quot;(–) 按钮。</li>
+<li>如果您使用&quot;时间机器&quot;备份至 <strong>某一网络磁盘</strong>，可以验证这些备份以确保它们处于良好状态。按住 Option 键，然后从&quot;时间机器&quot;菜单中选取&quot;验证备份&quot;。 「验证备份只有网络磁盘作为备份介质才可用」</li>
+</ul>
+<h2 id="从备份恢复">从备份恢复</h2>
+<p>从 Time Machine 菜单中选择 &ldquo;进入 Time Machine&rdquo;</p>
+<blockquote>
+<p>时间线
+<strong>亮红色</strong> 刻度标记是可立即从本地快照或备份驱动器恢复的备份。在备份驱动器不可用时，只有本地快照是亮红色的。
+<strong>暗红色</strong> 刻度标记是在备份驱动器可用后，可从该驱动器恢复的备份。在这之前，屏幕上的窗口堆栈会为该备份显示一个空白窗口。</p>
+<p>本地副本均为可用状态而显示成 亮红色，不在本地的副本一律都显示成 暗红色。如果您接入之前执行备份使用的硬盘，TM 会识别到所有可用副本并显示为 亮红色。</p>
+</blockquote>
+<p>选择需要恢复的文件即可</p>
+<h2 id="手动删除备份">手动删除备份</h2>
+<p>默认的，Time Machine 遇到磁盘空间不够下次备份时，会自动清理以往的备份。
+对于手动删除备份，一般来说由于备份文件体积巨大，删除也需要耗费极大时间。手动删除备份有如下两种方式</p>
+<h3 id="通过-time-machine-内建右键删除备份">通过 Time Machine 内建右键删除备份</h3>
+<p>此方式可以删除「特定备份文件（夹）」或「Time Machine 的老旧备份」</p>
+<ul>
+<li>删除「特定备份文件（夹）」
+第一步：将你的 Time Machine 磁盘连接到 Mac 电脑。
+第二步：从 Time Machine 菜单栏图标处进入 Time Machine。
+第三步：找到需要删除的特定文件（夹）所在的路径位置。
+第四步：点击齿轮图标呼出下拉菜单，然后选择「删除XXX的所有备份」项并确认即可。</li>
+</ul>
+<p>简而言之就是 <strong>进入 Time Machine 找到要删除的特定备份文件（夹）</strong> 然后右键选择**「删除XXX的所有备份」**</p>
+<ul>
+<li>删除「Time Machine 的老旧备份」
+第一步：进入 Time Machine。
+第二步：在 Time Machine 右下角选择大概的时间，然后可以使用窗口右侧的滚轮来精细调节直至找到需要删除的那一个备份。</li>
+</ul>
+<p>简而言之与上操作大致相同，就是右键选择**「删除所有备份」**</p>
+<h3 id="进入-time-machine-备份文件夹删除文件">进入 Time Machine 备份文件夹删除文件</h3>
+<p>此操作仅针对 删除磁盘上的所有备份数据「需要用到 terminal 命令行」</p>
+<ol>
+<li>进入 Time Machine 的备份磁盘</li>
+</ol>
+<pre><code>cd /Volumes/Seagate\ Backup\ Plus\ Drive/
+</code></pre>
+<ol start="2">
+<li>找到备份文件 「Backups.backupdb」</li>
+<li>删除「Backups.backupdb」文件夹</li>
+</ol>
+<pre><code>sudo rm -rf Backups.backupdb
+# 此命令会耗费较长时间
+</code></pre>
+<p>注意如果手动删除了 <code>Backups.backupdb</code>，那么 <code>Backups.backupdb</code> 会进入 回收站，那么</p>
+<ul>
+<li>清空回收站会提示文件正在使用 选择 <strong>跳过</strong></li>
+<li>删不掉的文件 需要通过 terminal 命令行删除</li>
+</ul>
+<pre><code>cd /Volumes/Seagate\ Backup\ Plus\ Drive/
+sudo cd .Trashes
+sudo cd 501
+
+sudo rm -rf Backups.backupdb
+</code></pre>
+<h2 id="关于验证备份">关于验证备份</h2>
+<p>验证备份用于验证备份是否可用。此操作会对比 电脑和备份 的文件校验值，若不一致则会发出通知「验证备份只有网络磁盘作为备份介质才可用」</p>
+<h3 id="验证网络磁盘备份">验证网络磁盘备份</h3>
+<p>可以用使用系统自带的 验证备份 功能来校验备份</p>
+<h3 id="验证移动硬盘备份">验证移动硬盘备份</h3>
+<p>可进入终端使用如下命令进行对比</p>
+<pre><code>tmutil compare -s
+
+! 之前的文件意味着给定的文件已更改。
++ 之前的文件意味着给定的文件是新的。
+- 在文件之前意味着给定的文件被删除。
+</code></pre>
+<h2 id="参考资料">参考资料</h2>
+<p><a href="http://www.howtoip.com/how-to-verify-that-your-macs-time-machine-backups-are-working-properly/">http://www.howtoip.com/how-to-verify-that-your-macs-time-machine-backups-are-working-properly/</a>
+<a href="https://zhcn.eyewated.com/%E9%AA%8C%E8%AF%81%E6%97%B6%E9%97%B4%E6%9C%BA%E5%99%A8%E5%92%8C%E6%97%B6%E9%97%B4%E8%83%B6%E5%9B%8A%E5%A4%87%E4%BB%BD/">https://zhcn.eyewated.com/%E9%AA%8C%E8%AF%81%E6%97%B6%E9%97%B4%E6%9C%BA%E5%99%A8%E5%92%8C%E6%97%B6%E9%97%B4%E8%83%B6%E5%9B%8A%E5%A4%87%E4%BB%BD/</a>
+<a href="https://www.jianshu.com/p/0f5a309cac92">https://www.jianshu.com/p/0f5a309cac92</a></p>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://blog.standuke.top/2021/02/2021-02-25-mac-with-time-machine-%E6%97%B6%E9%97%B4%E6%9C%BA%E5%99%A8%E5%A4%87%E4%BB%BD/" title="Mac With Time Machine 时间机器备份" target="_blank" rel="external">https://blog.standuke.top/2021/02/2021-02-25-mac-with-time-machine-%E6%97%B6%E9%97%B4%E6%9C%BA%E5%99%A8%E5%A4%87%E4%BB%BD/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://www.standuke.top" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://blog.standuke.top/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://www.standuke.top" target="_blank"><span class="text-dark">Standuke</span><small class="ml-1x">Yunshen Technology Co., Ltd. - SRE Engineer</small></a></h3>
+        <div>Focus on Linux Openstack Kubernetes vSphere Photograph Coding</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+<section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://blog.standuke.top/2020/12/2020-12-20-kvm-%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%80%9A%E8%BF%87-bridge-%E6%A1%A5%E5%AE%9E%E7%8E%B0%E4%B8%BB%E6%9C%BA%E4%BA%92%E9%80%9A/" title="KVM 虚拟机通过 Bridge 桥实现主机互通"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            <li class="next">
+                <a href="https://blog.standuke.top/2021/04/2021-04-11-frp-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"
+                    title="frp 内网穿透"><span>上一篇&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter,google,linkedin"
+                data-mobile-sites="wechat,qq,facebook,twitter"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/idoker" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://blog.standuke.top/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2016  -
+    2022
+    <div class="publishby">
+        Theme by <a href="https://github.com/xiaoheiAh" target="_blank"> xiaoheiAh </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/shell.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://blog.standuke.top/js/application.min.a94ab19cb63a95c8d7fbd7b85cab3ddeea8c369bdf75b9cab6708787ead123af.js"></script>
+<script src="https://blog.standuke.top/js/plugin.min.19c5bcb2fb0789ab4f2b7834e5ceb5e92635645605bab902c1024b25f1502364.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/blog.standuke.top\/',
+            CONTENT_URL: 'https:\/\/blog.standuke.top\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://blog.standuke.top/js/insight.min.4a2d52de4bfff73e0c688404fe3d17c9a3ae12d9888e1e1ac9c690e4890de2ded50fe55f2b819c2ba55435a76f396f3ea6805765f0b0af5635cdf74ea459eab0.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https:\/\/blog.standuke.top\/2021\/02\/2021-02-25-mac-with-time-machine-%E6%97%B6%E9%97%B4%E6%9C%BA%E5%99%A8%E5%A4%87%E4%BB%BD\/';
+        <!-- this.page.identifier = 'nuo'; -->
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'nuo' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-180157250-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  </body>
+</html>

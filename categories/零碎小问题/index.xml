@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>零碎小问题 on Stan&#39;s blog - Explore the world</title>
+    <link>https://blog.standuke.top/categories/%E9%9B%B6%E7%A2%8E%E5%B0%8F%E9%97%AE%E9%A2%98/</link>
+    <description>Recent content in 零碎小问题 on Stan&#39;s blog - Explore the world</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>CC BY 4.0 CN</copyright>
+    <lastBuildDate>Wed, 19 May 2021 21:08:48 +0800</lastBuildDate>
+    
+        <atom:link href="https://blog.standuke.top/categories/%E9%9B%B6%E7%A2%8E%E5%B0%8F%E9%97%AE%E9%A2%98/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux 定时单次及周期任务</title>
+      <link>https://blog.standuke.top/2021/07/2021-07-06-linux-%E5%AE%9A%E6%97%B6%E5%8D%95%E6%AC%A1%E5%8F%8A%E5%91%A8%E6%9C%9F%E4%BB%BB%E5%8A%A1/</link>
+      <pubDate>Tue, 06 Jul 2021 17:20:34 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2021/07/2021-07-06-linux-%E5%AE%9A%E6%97%B6%E5%8D%95%E6%AC%A1%E5%8F%8A%E5%91%A8%E6%9C%9F%E4%BB%BB%E5%8A%A1/</guid>
+      <description>👌 2021-07-06 Linux 定时单次及周期任务 FileInfo Filename - Linux 定时单次及周期任务 Version - v1.0.2107（2021/07/06 ~ 2021/07/08） Author - nuo standuke Email - shadowdoker@gmail.com DescriptionKey - Linux single</description>
+    </item>
+    
+    <item>
+      <title>Linux 时间全解</title>
+      <link>https://blog.standuke.top/2021/06/2021-06-26-linux-%E6%97%B6%E9%97%B4%E5%85%A8%E8%A7%A3/</link>
+      <pubDate>Sat, 26 Jun 2021 11:11:31 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2021/06/2021-06-26-linux-%E6%97%B6%E9%97%B4%E5%85%A8%E8%A7%A3/</guid>
+      <description>👌 2021-06-26 Linux 时间全解 FileInfo Filename - Linux 时间全解 Version - v1.1.2107（2021/06/26 ~ 2021/07/01） Author - nuo standuke Email - shadowdoker@gmail.com DescriptionKey - Linux time solution 版本修订记录： v1</description>
+    </item>
+    
+    <item>
+      <title>阿里云主机 EIP 致使 FTP 无法连接</title>
+      <link>https://blog.standuke.top/2021/05/2021-05-19-%E9%98%BF%E9%87%8C%E4%BA%91%E4%B8%BB%E6%9C%BA-eip-%E8%87%B4%E4%BD%BF-ftp-%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5/</link>
+      <pubDate>Wed, 19 May 2021 21:08:48 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2021/05/2021-05-19-%E9%98%BF%E9%87%8C%E4%BA%91%E4%B8%BB%E6%9C%BA-eip-%E8%87%B4%E4%BD%BF-ftp-%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5/</guid>
+      <description>👌 2021-05-19 阿里云主机 EIP 致使 FTP 无法连接 上午收到了个协助工单，期间交手了两位同事都没解决掉的 ftp 奇特现象，就转到我这边了。 文中涉及到的相关 公网 IP 地址均特</description>
+    </item>
+    
+    <item>
+      <title>OpenStack Wallaby 部署4 安置服务 Placement</title>
+      <link>https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B24-%E5%AE%89%E7%BD%AE%E6%9C%8D%E5%8A%A1-placement/</link>
+      <pubDate>Sat, 08 May 2021 17:01:11 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B24-%E5%AE%89%E7%BD%AE%E6%9C%8D%E5%8A%A1-placement/</guid>
+      <description>👌 2021-05-08 OpenStack Wallaby 部署4 安置服务-placement FileInfo Filename - OpenStack Wallaby 部署简介 Version - v1.0.2105（2021/05/08 ~ 2021/05/10） Author - standuke Email - shadowdoker@gmail.com</description>
+    </item>
+    
+    <item>
+      <title>OpenStack Wallaby 部署3 镜像服务 Glance</title>
+      <link>https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B23-%E9%95%9C%E5%83%8F%E6%9C%8D%E5%8A%A1-glance/</link>
+      <pubDate>Sat, 08 May 2021 16:54:55 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B23-%E9%95%9C%E5%83%8F%E6%9C%8D%E5%8A%A1-glance/</guid>
+      <description>👌 2021-05-08 OpenStack Wallaby 部署3 镜像服务-glance FileInfo Filename - OpenStack Wallaby 部署简介 Version - v1.0.2105（2021/05/08 ~ 2021/05/10） Author - standuke Email - shadowdoker@gmail.com DescriptionKey - Glance</description>
+    </item>
+    
+    <item>
+      <title>OpenStack Wallaby 部署2 身份认证 Keystone</title>
+      <link>https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B22-%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81-keystone/</link>
+      <pubDate>Sat, 08 May 2021 09:40:56 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B22-%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81-keystone/</guid>
+      <description>👌 2021-05-08 OpenStack Wallaby 部署2 身份认证-keystone FileInfo Filename - OpenStack Wallaby 部署简介 Version - v1.0.2105（2021/05/07 ~ 2021/05/10） Author - standuke Email - shadowdoker@gmail.com DescriptionKey</description>
+    </item>
+    
+    <item>
+      <title>OpenStack Wallaby 部署1 操作系统及基础环境</title>
+      <link>https://blog.standuke.top/2021/05/2021-05-07-openstack-wallaby-%E9%83%A8%E7%BD%B21-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Fri, 07 May 2021 22:14:43 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2021/05/2021-05-07-openstack-wallaby-%E9%83%A8%E7%BD%B21-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83/</guid>
+      <description>👌 2021-05-07 OpenStack Wallaby 部署1 操作系统及基础环境 FileInfo Filename - OpenStack Wallaby 部署简介 Version - v1.0.2105（2021/05/07 ~ 2021/05/09） Author - standuke Email - shadowdoker@gmail.com DescriptionKey - Operating system and</description>
+    </item>
+    
+    <item>
+      <title>OpenStack Wallaby 部署0 选型及整体介绍</title>
+      <link>https://blog.standuke.top/2021/05/2021-05-06-openstack-wallaby-%E9%83%A8%E7%BD%B20-%E9%80%89%E5%9E%8B%E5%8F%8A%E6%95%B4%E4%BD%93%E4%BB%8B%E7%BB%8D/</link>
+      <pubDate>Thu, 06 May 2021 14:34:51 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2021/05/2021-05-06-openstack-wallaby-%E9%83%A8%E7%BD%B20-%E9%80%89%E5%9E%8B%E5%8F%8A%E6%95%B4%E4%BD%93%E4%BB%8B%E7%BB%8D/</guid>
+      <description>👌 2021-05-06 OpenStack Wallaby 部署0 选型及整体介绍 FileInfo Filename - OpenStack Wallaby 部署简介 Version - v1.1.2105（2021/05/06 ~ 2021/05/11） Author - standuke Email - shadowdoker@gmail.com DescriptionKey - Introduction to OpenStack Wallaby deployment</description>
+    </item>
+    
+    <item>
+      <title>电脑状态 休眠 睡眠 关机等区别</title>
+      <link>https://blog.standuke.top/2021/04/2021-04-22-%E7%94%B5%E8%84%91%E7%8A%B6%E6%80%81-%E4%BC%91%E7%9C%A0-%E7%9D%A1%E7%9C%A0-%E5%85%B3%E6%9C%BA%E7%AD%89%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Fri, 30 Apr 2021 21:42:49 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2021/04/2021-04-22-%E7%94%B5%E8%84%91%E7%8A%B6%E6%80%81-%E4%BC%91%E7%9C%A0-%E7%9D%A1%E7%9C%A0-%E5%85%B3%E6%9C%BA%E7%AD%89%E5%8C%BA%E5%88%AB/</guid>
+      <description>👌 2021-04-22 电脑状态 休眠 睡眠 关机等区别 Suspend「待机」 Does not turn off your computer. It puts the computer and all peripherals on a low power consumption mode. If the battery runs out or the computer turns off for some reason, the current session and unsaved changes will be lost. 不关闭</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://blog.standuke.top/about/</link>
+      <pubDate>Fri, 30 Apr 2021 16:22:15 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/about/</guid>
+      <description>Standuke「shortname nuo」 SRE「网站可靠性工程师」 专注于 Linux，Openstack「IAAS」，Kubernetes</description>
+    </item>
+    
+    <item>
+      <title>Linux 文件权限及文件夹权限说明</title>
+      <link>https://blog.standuke.top/2021/04/2021-04-22-linux-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E6%9D%83%E9%99%90%E8%AF%B4%E6%98%8E/</link>
+      <pubDate>Thu, 22 Apr 2021 16:24:50 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2021/04/2021-04-22-linux-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E6%9D%83%E9%99%90%E8%AF%B4%E6%98%8E/</guid>
+      <description>👌 2021-04-22 Linux 文件权限及文件夹说明 在工作中，利用特殊权限，往往可以事半功倍达到很多对于文件以及文件夹权限要求的设置，所以打算总结一下接触过的操作系统</description>
+    </item>
+    
+    <item>
+      <title>frp 内网穿透</title>
+      <link>https://blog.standuke.top/2021/04/2021-04-11-frp-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</link>
+      <pubDate>Sun, 11 Apr 2021 23:46:19 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2021/04/2021-04-11-frp-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</guid>
+      <description>👌 2021-04-11 frp 内网穿透 简介 https://gofrp.org/docs/overview/ frp 是什么？ frp 是一个专注于内网穿透的高性能的反向代理应用，支持 TCP、UDP、HTTP、HTTPS 等多种协议。可以将内网服</description>
+    </item>
+    
+    <item>
+      <title>Mac With Time Machine 时间机器备份</title>
+      <link>https://blog.standuke.top/2021/02/2021-02-25-mac-with-time-machine-%E6%97%B6%E9%97%B4%E6%9C%BA%E5%99%A8%E5%A4%87%E4%BB%BD/</link>
+      <pubDate>Thu, 25 Feb 2021 21:31:46 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2021/02/2021-02-25-mac-with-time-machine-%E6%97%B6%E9%97%B4%E6%9C%BA%E5%99%A8%E5%A4%87%E4%BB%BD/</guid>
+      <description>👌 2021-02-25 Mac with Time Machine FileInfo Filename - Mac with Time Machine Version - v1.1.2102（2021/02/25 ~ 2021/02/26） Author - nuo standuke Email - shadowdoker@gmail.com DescriptionKey - Mac Time Machine 版本修订记录： v1.0</description>
+    </item>
+    
+    <item>
+      <title>KVM 虚拟机通过 Bridge 桥实现主机互通</title>
+      <link>https://blog.standuke.top/2020/12/2020-12-20-kvm-%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%80%9A%E8%BF%87-bridge-%E6%A1%A5%E5%AE%9E%E7%8E%B0%E4%B8%BB%E6%9C%BA%E4%BA%92%E9%80%9A/</link>
+      <pubDate>Sun, 20 Dec 2020 22:07:19 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2020/12/2020-12-20-kvm-%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%80%9A%E8%BF%87-bridge-%E6%A1%A5%E5%AE%9E%E7%8E%B0%E4%B8%BB%E6%9C%BA%E4%BA%92%E9%80%9A/</guid>
+      <description>👌 2020-12-20 kvm 虚拟机通过 bridge 桥实现主机互通 状况 在RedHat7上搭了一台KVM服务器，创建好虚拟机之后发现，外部电脑与KVM服务器、外部机器与VM虚拟</description>
+    </item>
+    
+    <item>
+      <title>vSphere ESXi vCenter 部署安装与关系区别</title>
+      <link>https://blog.standuke.top/2020/10/2020-10-29-vsphere-esxi-vcenter-%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%B3%E7%B3%BB%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Thu, 29 Oct 2020 01:31:19 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2020/10/2020-10-29-vsphere-esxi-vcenter-%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%B3%E7%B3%BB%E5%8C%BA%E5%88%AB/</guid>
+      <description>👌 2020-10-29 vSphere ESXi vCenter 部署安装与关系区别.md 关系与区别 vSphere vSphere 是数据中心产品附带的软件套件。vSphere 就像 Microsoft Office 套件，其中包含许多软件，例如 MS Offic</description>
+    </item>
+    
+    <item>
+      <title>ClickHouse 官方文档摘要与深入</title>
+      <link>https://blog.standuke.top/2020/10/2020-10-13-clickhouse-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E6%91%98%E8%A6%81%E4%B8%8E%E6%B7%B1%E5%85%A5/</link>
+      <pubDate>Tue, 13 Oct 2020 23:49:56 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2020/10/2020-10-13-clickhouse-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E6%91%98%E8%A6%81%E4%B8%8E%E6%B7%B1%E5%85%A5/</guid>
+      <description>👌 2020-10-13 ClickHouse 官方文档摘要与深入 FileInfo Filename - ClickHouse 官方文档摘要与深入 Version - v1.0.2010（2020/10/20 ~ 2020/10/22） Author - NUO standuke Email - shadowdoker@gmail.com DescriptionKey - ClickHouse Official</description>
+    </item>
+    
+    <item>
+      <title>dmidecode 使用脚本</title>
+      <link>https://blog.standuke.top/2020/07/2020-07-01-dmidecode-%E4%BD%BF%E7%94%A8%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Wed, 01 Jul 2020 21:28:59 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2020/07/2020-07-01-dmidecode-%E4%BD%BF%E7%94%A8%E8%84%9A%E6%9C%AC/</guid>
+      <description>👌 2020-07-01 dmidecode 使用脚本 简介 dmidecode命令可以让你在Linux系统下获取有关硬件方面的信息。dmidecode的作用是将DMI数据库中的信息解</description>
+    </item>
+    
+    <item>
+      <title>创建 Windows Server 2012 R2 Qcow2 格式虚拟机模板</title>
+      <link>https://blog.standuke.top/2020/03/2020-03-31-%E5%88%9B%E5%BB%BA-windows-server-2012-r2-qcow2-%E6%A0%BC%E5%BC%8F%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A8%A1%E6%9D%BF/</link>
+      <pubDate>Tue, 31 Mar 2020 21:24:40 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2020/03/2020-03-31-%E5%88%9B%E5%BB%BA-windows-server-2012-r2-qcow2-%E6%A0%BC%E5%BC%8F%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A8%A1%E6%9D%BF/</guid>
+      <description>👌 2020-03-31 创建 Windows Server 2012 R2 qcow2 格式虚拟机模板 FileInfo Filename - 创建 Windows Server 2012 R2 qcow2 格式虚拟机模板 Version - v1.1.2003（2020/03/31 ~ 2020/03/31） Author - standuke</description>
+    </item>
+    
+    <item>
+      <title>docker image 导入导出 保存 Tag 标记</title>
+      <link>https://blog.standuke.top/2020/03/2020-03-28-docker-image-%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA-%E4%BF%9D%E5%AD%98-tag-%E6%A0%87%E8%AE%B0/</link>
+      <pubDate>Sat, 28 Mar 2020 01:37:32 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2020/03/2020-03-28-docker-image-%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA-%E4%BF%9D%E5%AD%98-tag-%E6%A0%87%E8%AE%B0/</guid>
+      <description>👌 2020-03-28 docker image 导入导出 保存 Tag 标记 两者区别 VS docker save 保存的是镜像（image），docker export 保存的是容器（container） 对于 Docker Save 方法，会保存该镜</description>
+    </item>
+    
+    <item>
+      <title>OpenStack Train 快速离线部署「在线类似」</title>
+      <link>https://blog.standuke.top/2020/03/2020-03-17-openstack-train-%E5%BF%AB%E9%80%9F%E7%A6%BB%E7%BA%BF%E9%83%A8%E7%BD%B2%E5%9C%A8%E7%BA%BF%E7%B1%BB%E4%BC%BC/</link>
+      <pubDate>Tue, 17 Mar 2020 16:46:19 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2020/03/2020-03-17-openstack-train-%E5%BF%AB%E9%80%9F%E7%A6%BB%E7%BA%BF%E9%83%A8%E7%BD%B2%E5%9C%A8%E7%BA%BF%E7%B1%BB%E4%BC%BC/</guid>
+      <description>👌 2020-03-17 OpenStack Train 快速离线部署「在线类似」 本文档为 openstack 快速部署文档，只适用于已经熟悉 openstack 各个组件及其部署方式和对应安装节点的维护人员 文档适用于构建 openstack 学习环</description>
+    </item>
+    
+  </channel>
+</rss>

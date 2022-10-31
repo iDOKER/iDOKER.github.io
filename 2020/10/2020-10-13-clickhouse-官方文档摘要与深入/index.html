@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        ClickHouse 官方文档摘要与深入 - Stan&#39;s blog - Explore the world
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="👌 2020-10-13 ClickHouse 官方文档摘要与深入 FileInfo Filename - ClickHouse 官方文档摘要与深入 Version - v1.0.2010（2020/10/20 ~ 2020/10/22） Author - NUO standuke Email - shadowdoker@gmail.com DescriptionKey - ClickHouse Official" />
+    <meta name="generator" content="Hugo 0.82.1 with theme pure" />
+    <title>ClickHouse 官方文档摘要与深入 - Stan&#39;s blog - Explore the world</title>
+    
+    
+    <link rel="stylesheet" href="https://blog.standuke.top/css/style.min.6f90022f237877ae2514ec95f3c9cca9f2314394f20800ca037a497e20053122.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="ClickHouse 官方文档摘要与深入" />
+<meta property="og:description" content="👌 2020-10-13 ClickHouse 官方文档摘要与深入 FileInfo Filename - ClickHouse 官方文档摘要与深入 Version - v1.0.2010（2020/10/20 ~ 2020/10/22） Author - NUO standuke Email - shadowdoker@gmail.com DescriptionKey - ClickHouse Official" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.standuke.top/2020/10/2020-10-13-clickhouse-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E6%91%98%E8%A6%81%E4%B8%8E%E6%B7%B1%E5%85%A5/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-10-13T23:49:56&#43;08:00" />
+<meta property="article:modified_time" content="2020-10-13T23:49:56&#43;08:00" />
+
+<meta itemprop="name" content="ClickHouse 官方文档摘要与深入">
+<meta itemprop="description" content="👌 2020-10-13 ClickHouse 官方文档摘要与深入 FileInfo Filename - ClickHouse 官方文档摘要与深入 Version - v1.0.2010（2020/10/20 ~ 2020/10/22） Author - NUO standuke Email - shadowdoker@gmail.com DescriptionKey - ClickHouse Official"><meta itemprop="datePublished" content="2020-10-13T23:49:56&#43;08:00" />
+<meta itemprop="dateModified" content="2020-10-13T23:49:56&#43;08:00" />
+<meta itemprop="wordCount" content="7590">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ClickHouse 官方文档摘要与深入"/>
+<meta name="twitter:description" content="👌 2020-10-13 ClickHouse 官方文档摘要与深入 FileInfo Filename - ClickHouse 官方文档摘要与深入 Version - v1.0.2010（2020/10/20 ~ 2020/10/22） Author - NUO standuke Email - shadowdoker@gmail.com DescriptionKey - ClickHouse Official"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://www.standuke.top" target="_blank">
+            <img class="img-circle img-rotate" src="https://blog.standuke.top/avatar.png" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">Standuke</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">Yunshen Technology Co., Ltd. - SRE Engineer</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Hangzhou, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-linkedin">
+                <a href="https://linkedin.com/in/doc-s-44435ab2">
+                    <i class="icon icon-linkedin"></i>
+                  <span class="menu-title">Linkedin</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content"><p>站点迁移初期，配置参数调整，同时涉及到的文章较多，页面浏览可能会出现闪断。因为是业余时间迁移博客，从 5 月开始估计要到年底才能把前期的文章整体迁移过来。博客评论采用 Disqus 需要科学才能看到，如果有任何意见建议也可直接联系我 Telegram。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://blog.standuke.top/tags/aliyun/" class="tag-list-link" rel="1">aliyun<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/bigdata/" class="tag-list-link" rel="1">bigdata<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/cdh/" class="tag-list-link" rel="1">cdh<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/centos/" class="tag-list-link" rel="8">centos<span
+               class="tag-list-count">8</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/cloudera/" class="tag-list-link" rel="1">cloudera<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/docker/" class="tag-list-link" rel="1">docker<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/eip/" class="tag-list-link" rel="1">eip<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/esxi/" class="tag-list-link" rel="1">esxi<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/frp/" class="tag-list-link" rel="1">frp<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/kvm/" class="tag-list-link" rel="1">kvm<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/linux/" class="tag-list-link" rel="5">linux<span
+               class="tag-list-count">5</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/linux-bridge/" class="tag-list-link" rel="1">linux-bridge<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/macos/" class="tag-list-link" rel="2">macos<span
+               class="tag-list-count">2</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/markdown/" class="tag-list-link" rel="1">markdown<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/network/" class="tag-list-link" rel="1">network<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/openstack/" class="tag-list-link" rel="6">openstack<span
+               class="tag-list-count">6</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/pxe/" class="tag-list-link" rel="1">pxe<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/qcow2/" class="tag-list-link" rel="1">qcow2<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/system/" class="tag-list-link" rel="1">system<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/time-machine/" class="tag-list-link" rel="1">time-machine<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/tools/" class="tag-list-link" rel="1">tools<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/vcenter/" class="tag-list-link" rel="1">vcenter<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/virtualization/" class="tag-list-link" rel="9">virtualization<span
+               class="tag-list-count">9</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/vsphere/" class="tag-list-link" rel="1">vsphere<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/windows/" class="tag-list-link" rel="4">windows<span
+               class="tag-list-count">4</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="category-list-link">使用教程</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E5%86%85%E9%83%A8%E5%88%86%E4%BA%AB/" class="category-list-link">内部分享</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/" class="category-list-link">技术分析</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-list-link">操作系统</a><span class="category-list-count">7</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/" class="category-list-link">部署教程</a><span class="category-list-count">10</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E9%9B%B6%E7%A2%8E%E5%B0%8F%E9%97%AE%E9%A2%98/" class="category-list-link">零碎小问题</a><span class="category-list-count">4</span></li>
+        </ul>
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/07/2021-07-06-linux-%E5%AE%9A%E6%97%B6%E5%8D%95%E6%AC%A1%E5%8F%8A%E5%91%A8%E6%9C%9F%E4%BB%BB%E5%8A%A1/" class="title">Linux 定时单次及周期任务</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-07-06 17:20:34 &#43;0800 CST" itemprop="datePublished">2021-07-06</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/06/2021-06-26-linux-%E6%97%B6%E9%97%B4%E5%85%A8%E8%A7%A3/" class="title">Linux 时间全解</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-06-26 11:11:31 &#43;0800 CST" itemprop="datePublished">2021-06-26</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-19-%E9%98%BF%E9%87%8C%E4%BA%91%E4%B8%BB%E6%9C%BA-eip-%E8%87%B4%E4%BD%BF-ftp-%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5/" class="title">阿里云主机 EIP 致使 FTP 无法连接</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-19 21:08:48 &#43;0800 CST" itemprop="datePublished">2021-05-19</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B24-%E5%AE%89%E7%BD%AE%E6%9C%8D%E5%8A%A1-placement/" class="title">OpenStack Wallaby 部署4 安置服务 Placement</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-08 17:01:11 &#43;0800 CST" itemprop="datePublished">2021-05-08</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B23-%E9%95%9C%E5%83%8F%E6%9C%8D%E5%8A%A1-glance/" class="title">OpenStack Wallaby 部署3 镜像服务 Glance</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-08 16:54:55 &#43;0800 CST" itemprop="datePublished">2021-05-08</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2020/10/2020-10-13-clickhouse-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E6%91%98%E8%A6%81%E4%B8%8E%E6%B7%B1%E5%85%A5/"
+    >ClickHouse 官方文档摘要与深入</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://blog.standuke.top/2020/10/2020-10-13-clickhouse-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E6%91%98%E8%A6%81%E4%B8%8E%E6%B7%B1%E5%85%A5/" class="article-date">
+  <time datetime="2020-10-13 23:49:56 &#43;0800 CST" itemprop="datePublished">2020-10-13</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/"> 技术分析 </a>
+</span>
+
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2020/10/2020-10-13-clickhouse-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E6%91%98%E8%A6%81%E4%B8%8E%E6%B7%B1%E5%85%A5/#comments"
+            class="article-comment-link">评论</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 7590字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 16分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <h1 id="-2020-10-13-clickhouse-官方文档摘要与深入">👌 2020-10-13 ClickHouse 官方文档摘要与深入</h1>
+<blockquote>
+<p><strong>FileInfo</strong>
+Filename - ClickHouse 官方文档摘要与深入
+Version - v1.0.2010（2020/10/20 ~ 2020/10/22）
+Author - NUO standuke
+Email - <a href="mailto:shadowdoker@gmail.com">shadowdoker@gmail.com</a>
+DescriptionKey - ClickHouse Official Document step in</p>
+</blockquote>
+<h2 id="列式数据库与行式数据库">列式数据库与行式数据库</h2>
+<p>列式与行式数据库的主要区别在于数据的存储方式，对于数据库来说本质是一样的。以下为列式数据库与行式数据库的相关比较。也可以理解为优势劣势。</p>
+<p><strong>查询方面</strong></p>
+<ol>
+<li>行式数据库基本上可以理解为需要扫描所有数据，列式则只扫描需要获取的相关字段的列即可</li>
+<li>对于列存储，可以很方便的建立每一个列的索引信息「实则 每一列就是索引」</li>
+<li>如果我们的需求就是查询所有字段，那个这个时候列式数据库的处理方式就是先把所有列查询出来，然后再拼接起来，速度方面是比不上行式数据库的。「这也就是为什么列式数据库大多用于大数据分析，因为大数据分析每一次查询不需要获取所有的字段信息」</li>
+</ol>
+<p><strong>数据压缩</strong></p>
+<ol>
+<li>行式数据库因为存贮数据是一行行的来存贮，而每一行数据的差异性太大，所以压缩比很小。</li>
+<li>列式数据库则不同，因为是按照一列列来存贮，每一列的数据的相同性极高，这就为压缩埋下了很好的种子，压缩比可以达到很大，可以达到5～20倍以上。</li>
+<li>压缩首先带来的硬盘上存储空间的降低，但是硬盘又不值钱。它的真正意义在于：数据占用的硬盘空间越小，查询引擎花在IO上的时间就越少(不管是从硬盘里面把数据读入内存，还是从内存里面把数据读入CPU)。同时要记住的是数据压缩之后，要进行处理很多时候要需要解压缩(不管是Column-Store还是Row-Store), 因此压缩比不是我们追求的唯一，因为后面解压也需要花时间，因此一般会在压缩比和解压速度之间做一个权衡。</li>
+</ol>
+<p><strong>块遍历 块迭代计算</strong></p>
+<ol>
+<li>块遍历(Block Iteration)是相对于单记录遍历(per-tuple iteration)而言的，其实说白了就是一种批量化的操作。</li>
+<li>这种提高性能的方法在Row-Store里面是case-by-case实现的(不是一种共识), 而对于Column-Store来说已经形成共识，大家都是这么做的。而如果column的值是字节意义上等宽的，比如数字类型，Column-Store可以进一步提高性能，因为查询引擎要从一个Block里取出其中一个值进行处理的时候直接用数组下标就可以获取数据，进一步提升性能。</li>
+</ol>
+<p><strong>延迟物化</strong></p>
+<ol>
+<li>为了能够把底层存储格式(面向Column的), 跟用户查询表达的意思(Row)对应上，在一个查询的生命周期的某个时间点，一定要把数据转换成Row的形式，这在Column-Store里面被称为物化(Materization)。</li>
+<li>我这里把物化理解为对象的实例化。</li>
+<li>一般(Naive)的做法是从文件系统读出三列的数据，马上物化成一行行的person数据，然后应用两个过滤条件: id &gt; 10 和 age &gt; 20 , 过滤完了之后从数据里面抽出 name 字段，作为最后的结果</li>
+<li>延迟物化的做法则会先不拼出行式数据，直接在Column数据上分别应用两个过滤条件，从而得到两个满足过滤条件的bitmap, 然后再把两个bitmap做位与(bitwise AND)的操作得到同时满足两个条件的所有的bitmap，因为最后用户需要的只是 name 字段而已，因此下一步我们拿着这些 position 对 name 字段的数据进行过滤就得到了最终的结果。</li>
+</ol>
+<p><strong>隐式连接 Invisible Join</strong></p>
+<ol>
+<li>Invisible Join 针对的场景是数仓里面的星型模型(Star Schema), 如果用户查询符合下面的模式就可以应用Invisible Join「传统方案一: 按Selectivity依次JOIN、延迟物化」</li>
+<li>以下为 Invisible Join 思维</li>
+<li>把所有过滤条件应用到每个维度表上，得到符合条件的维度表的主键(同时也是事实表的外键)。</li>
+<li>遍历事实表，并且查询第一步得到的所有外键的值，得到符合条件的bitmap(s), 这里会有多个bitmap，因为维度表可能有多个。</li>
+<li>对第二步的多个bitmap做AND操作，得到最终事实表里面符合过滤条件的bitmap。</li>
+<li>根据第三步的事实表的bitmap以及第一步的符合条件的维度表的主键值，组装出最终的返回值。</li>
+</ol>
+<p><a href="https://zhuanlan.zhihu.com/p/54433448">https://zhuanlan.zhihu.com/p/54433448</a>
+<a href="https://zhuanlan.zhihu.com/p/54484592">https://zhuanlan.zhihu.com/p/54484592</a></p>
+<h2 id="oltp-与-olap">OLTP 与 OLAP</h2>
+<p>OLTP（On-Line Transaction Processing，联机事务处理）
+多为对数据库的数据操作，例如「增删改查」，以及业务类系统主要供基层人员使用，进行一线业务操作</p>
+<p>OLAP（On-Line Analytical Processing，联机分析处理）
+多为对数据的查询分析，数据分析的目标则是探索并挖掘数据价值，作为企业高层进行决策的参考，此时需要查询大量数据，分析其中的关联性</p>
+<p>从功能角度来看，OLTP 负责基本业务的正常运转，而业务数据积累时所产生的价值信息则被 OLAP 不断呈现，企业高层通过参考这些信息会不断调整经营方针，也会促进基础业务的不断优化，这是 OLTP 与 OLAP 最根本的区别。</p>
+<h3 id="olap-场景的关键特征官方">OLAP 场景的关键特征「官方」</h3>
+<ol>
+<li>大多数是读请求</li>
+<li>数据总是以相当大的批(&gt; 1000 rows)进行写入</li>
+<li>不修改已添加的数据</li>
+<li>每次查询都从数据库中读取大量的行，但是同时又仅需要少量的列</li>
+<li>宽表，即每个表包含着大量的列</li>
+<li>较少的查询(通常每台服务器每秒数百个查询或更少)</li>
+<li>对于简单查询，允许延迟大约50毫秒</li>
+<li>列中的数据相对较小： 数字和短字符串(例如，每个URL 60个字节)</li>
+<li>处理单个查询时需要高吞吐量（每个服务器每秒高达数十亿行）</li>
+<li>事务不是必须的</li>
+<li>对数据一致性要求低</li>
+<li>每一个查询除了一个大表外都很小</li>
+<li>查询结果明显小于源数据，换句话说，数据被过滤或聚合后能够被盛放在单台服务器的内存中</li>
+</ol>
+<h2 id="存储">存储</h2>
+<p>行式数据库系统：处于同一行中的数据总是被物理的存储在一起
+列式数据库：对于存储而言，列式数据库总是将同一列的数据存储在一起，不同列的数据也总是分开存储。</p>
+<p>数据按列存储并且按列执行</p>
+<h2 id="聚合与非聚合数据">聚合与非聚合数据</h2>
+<blockquote>
+<p>「Aggregated and Non-aggregated Data」
+此处的聚合与非聚合可以近似理解为 oracle 数据库中为了方便查询生成的视图</p>
+</blockquote>
+<p>有一种流行的观点认为，想要有效的计算统计数据，必须要聚合数据，因为聚合将降低数据量。</p>
+<p>但是数据聚合是一个有诸多限制的解决方案，例如：</p>
+<ol>
+<li>你必须提前知道用户定义的报表的字段列表</li>
+<li>用户无法自定义报表</li>
+<li>当聚合条件过多时，可能不会减少数据，聚合是无用的。</li>
+<li>存在大量报表时，有太多的聚合变化（组合爆炸）</li>
+<li>当聚合条件有非常大的基数时（如：url），数据量没有太大减少（少于两倍）</li>
+<li>聚合的数据量可能会增长而不是收缩</li>
+<li>用户不会查看我们为他生成的所有报告，大部分计算将是无用的</li>
+<li>各种聚合可能违背了数据的逻辑完整性</li>
+<li>如果我们直接使用非聚合数据而不进行任何聚合时，我们的计算量可能是减少的。</li>
+</ol>
+<p>然而，相对于聚合中很大一部分工作被离线完成，在线计算需要尽快的完成计算，因为用户在等待结果。</p>
+<p>Yandex.Metrica 有一个专门用于聚合数据的系统，称为Metrage，它可以用作大部分报表。
+从2009年开始，Yandex.Metrica还为非聚合数据使用专门的OLAP数据库，称为OLAPServer，它以前用于报表构建系统。
+OLAPServer可以很好的工作在非聚合数据上，但是它有诸多限制，导致无法根据需要将其用于所有报表中。如，缺少对数据类型的支持（只支持数据），无法实时增量的更新数据（只能通过每天重写数据完成）。OLAPServer不是一个数据库管理系统，它只是一个数据库。</p>
+<p>为了消除OLAPServer的这些局限性，解决所有报表使用非聚合数据的问题，我们开发了ClickHouse数据库管理系统。</p>
+<h2 id="clickhouse-特性及限制">clickhouse 特性及限制</h2>
+<ul>
+<li>
+<p>多服务器分布式处理
+上面提到的列式数据库管理系统中，几乎没有一个支持分布式的查询处理。
+在ClickHouse中，数据可以保存在不同的shard上，每一个shard都由一组用于容错的replica组成，查询可以并行地在所有shard上进行处理。这些对用户来说是透明的</p>
+</li>
+<li>
+<p>向量引擎
+为了高效的使用CPU，数据不仅仅按列存储，同时还按向量(列的一部分)进行处理，这样可以更加高效地使用CPU。</p>
+</li>
+<li>
+<p>支持近似计算
+ClickHouse提供各种各样在允许牺牲数据精度的情况下对查询进行加速的方法：
+用于近似计算的各类聚合函数，如：distinct values, medians, quantiles
+基于数据的部分样本进行近似查询。这时，仅会从磁盘检索少部分比例的数据。
+不使用全部的聚合条件，通过随机选择有限个数据聚合条件进行聚合。这在数据聚合条件满足某些分布条件下，在提供相当准确的聚合结果的同时降低了计算资源的使用。</p>
+</li>
+<li>
+<p>限制
+没有完整的事务支持。
+缺少高频率，低延迟的修改或删除已存在数据的能力。仅能用于批量删除或修改数据，但这符合 GDPR。
+稀疏索引使得ClickHouse不适合通过其键检索单行的点查询。</p>
+</li>
+</ul>
+<h2 id="性能">性能</h2>
+<h3 id="单个大查询的吞吐量">单个大查询的吞吐量</h3>
+<p>吞吐量可以使用每秒处理的行数或每秒处理的字节数来衡量。如果数据被放置在page cache中，则一个不太复杂的查询在单个服务器上大约能够以2-10GB／s（未压缩）的速度进行处理（对于简单的查询，速度可以达到30GB／s）。如果数据没有在page cache中的话，那么速度将取决于你的磁盘系统和数据的压缩率。例如，如果一个磁盘允许以400MB／s的速度读取数据，并且数据压缩率是3，则数据的处理速度为1.2GB/s。这意味着，如果你是在提取一个10字节的列，那么它的处理速度大约是1-2亿行每秒。
+对于分布式处理，处理速度几乎是线性扩展的，但这受限于聚合或排序的结果不是那么大的情况下。</p>
+<h3 id="处理短查询的延迟时间">处理短查询的延迟时间</h3>
+<p>如果一个查询使用主键并且没有太多行(几十万)进行处理，并且没有查询太多的列，那么在数据被page cache缓存的情况下，它的延迟应该小于50毫秒(在最佳的情况下应该小于10毫秒)。 否则，延迟取决于数据的查找次数。如果你当前使用的是HDD，在数据没有加载的情况下，查询所需要的延迟可以通过以下公式计算得知： 查找时间（10 ms） * 查询的列的数量 * 查询的数据块的数量。</p>
+<h3 id="处理大量短查询的吞吐量">处理大量短查询的吞吐量</h3>
+<p>在相同的情况下，ClickHouse可以在单个服务器上每秒处理数百个查询（在最佳的情况下最多可以处理数千个）。但是由于这不适用于分析型场景。==因此我们建议每秒最多查询100次。==</p>
+<h3 id="数据的写入性能">数据的写入性能</h3>
+<p>我们建议每次写入不少于1000行的批量写入，或每秒不超过一个写入请求。当使用tab-separated格式将一份数据写入到MergeTree表中时，写入速度大约为50到200MB/s。如果您写入的数据每行为1Kb，那么写入的速度为50，000到200，000行每秒。如果您的行更小，那么写入速度将更高。==为了提高写入性能，您可以使用多个INSERT进行并行写入，这将带来线性的性能提升。==</p>
+<h2 id="引擎">引擎</h2>
+<p>使用的所有表都是由数据库引擎所提供的
+默认情况下，ClickHouse使用自己的数据库引擎，该引擎提供可配置的表引擎和所有支持的SQL语法.</p>
+<h3 id="数据库引擎">数据库引擎</h3>
+<p>所有表都是由数据库引擎所提供，默认情况下，ClickHouse 使用自己的数据库引擎，该引擎提供可配置的表引擎和所有支持的SQL语法。
+此外，还可以使用如下数据库引擎：MySQL、Lazy</p>
+<h4 id="mysql">MySQL</h4>
+<p>MySQL 引擎用于将远程的 MySQL 服务器中的表映射到 ClickHouse 中，并允许您对表进行 INSERT 和SELECT 查询，以方便您在 ClickHouse 与 MySQL 之间进行数据交换。
+MySQL 数据库引擎会将对其的查询转换为 MySQL 语法并发送到 MySQL 服务器中，因此您可以执行诸如<code>SHOW TABLES</code> 或 <code>SHOW CREATE TABLE</code> 之类的操作。
+但无法对其执行以下操作：<code>RENAME</code>、<code>CREATE TABLE</code>、<code>ALTER</code></p>
+<h4 id="lazy">Lazy</h4>
+<p>在最后一次访问之后，仅在 <code>expiration_time_in_seconds</code> 秒内将表保留在RAM中。 只能与 <code>* Log</code> 表一起使用。
+它经过优化，可以存储许多小的 <code>* Log</code> 表，两次访问之间的时间间隔很长。</p>
+<h3 id="表引擎">表引擎</h3>
+<p>表引擎（即表的类型）决定了：</p>
+<ol>
+<li>数据的存储方式和位置，写到哪里以及从哪里读取数据</li>
+<li>支持哪些查询以及如何支持</li>
+<li>并发数据访问</li>
+<li>是否使用索引（如果存在）</li>
+<li>是否可以执行多线程请求</li>
+<li>数据复制参数</li>
+</ol>
+<h2 id="使用要求--安装建议">使用要求 &amp; 安装建议</h2>
+<h3 id="cpu">CPU</h3>
+<p>CPU ==必须支持SSE4.2指令集==。要使用不支持SSE4.2或具有AArch64或PowerPC64LE体系结构的处理器运行ClickHouse，您应该从源代码构建ClickHouse。
+ClickHouse实现并行数据处理并使用所有可用的硬件资源。 在选择处理器时，考虑到ClickHouse在==具有大量内核但时钟速率较低的配置中的工作效率要高于具有较少内核和较高时钟速率的配置==。 例如，具有2600MHz的16核心优于具有3600MHz的8核心。
+==建议使用 睿频加速 和 超线程 技术==。 它显着提高了典型工作负载的性能。</p>
+<h3 id="cpu-scaling-governorcpu-缩放调控器">CPU Scaling Governor「CPU 缩放调控器」</h3>
+<p>建议始终开启使用性能缩放调节器。按需缩放比例调速器在持续高需求的情况下效果更差。</p>
+<pre><code>echo 'performance' | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+</code></pre>
+<h3 id="cpu-limitationscpu限制">CPU Limitations「CPU限制」</h3>
+<p>处理器可能会过热。 使用 dmesg 看看CPU的时钟速率是否由于过热而受到限制。
+此限制也可以在数据中心级别的外部设置。 您可以使用 turbostat 在负载下监视它。</p>
+<h3 id="swap-file">Swap File</h3>
+<p>禁用生产环境的交换文件</p>
+<h3 id="ram">RAM</h3>
+<p>对于少量数据（高达-200GB压缩），最好使用与数据量一样多的内存。
+对于大量数据和处理交互式（在线）查询时，应使用合理数量的RAM（128GB或更多），以便热数据子集适合页面缓存。
+即使对于每台服务器约50TB的数据量，使用128GB的RAM与64GB相比显着提高了查询性能。</p>
+<p>不要禁用过量使用。<code>cat /proc/sys/vm/overcommit_memory</code> 的值应为 0 或 1。</p>
+<pre><code>$ echo 0 | sudo tee /proc/sys/vm/overcommit_memory
+</code></pre>
+<h3 id="huge-pages">Huge Pages</h3>
+<p>始终禁用透明的大页面。 它会干扰内存分配器，从而导致性能显着下降。</p>
+<pre><code>$ echo 'madvise' | sudo tee /sys/kernel/mm/transparent_hugepage/enabled
+</code></pre>
+<p>使用perf top观察内核在内存管理上花费的时间。永久大页面也不需要分配。</p>
+<h3 id="storage-subsystem">Storage Subsystem</h3>
+<p>如果您的预算允许您使用SSD，请使用SSD。如果没有，请使用 HDD 使用 SATA HDD 7200 RPM 即可。</p>
+<p>优先选择带有大量本地硬盘驱动器的服务器，而不是带有附加磁盘架的小量服务器。
+但是对于要存储很少查询的档案，附加存储可以使用。</p>
+<h3 id="raid">RAID</h3>
+<p>当使用硬盘，你可以结合他们的RAID-10，RAID-5，RAID-6或RAID-50。
+对于Linux，软件RAID更好（与 mdadm). 我们不建议使用LVM。
+当创建RAID-10，选择 far 布局。
+如果您的预算允许，请选择RAID-10。</p>
+<p>如果您有==超过4个磁盘，请使用RAID-6（首选）或RAID-50，而不是RAID-5==。
+当使用RAID-5、RAID-6或RAID-50时，始终增加stripe_cache_size，因为默认值通常不是最佳选择。</p>
+<pre><code>$ echo 4096 | sudo tee /sys/block/md2/md/stripe_cache_size
+</code></pre>
+<p>使用以下公式，从设备数量和块大小计算确切数量: <code>2 * num_devices * chunk_size_in_bytes / 4096.</code></p>
+<p>1025KB的块大小足以满足所有RAID配置。切勿将块大小设置得太小或太大。</p>
+<p>您可以在SSD上使用RAID-0。无论使用何种RAID，始终使用复制来保证数据安全。</p>
+<p>使用长队列启用NCQ。 对于HDD，选择CFQ调度程序，对于SSD，选择noop。 不要减少 &lsquo;readahead&rsquo; 设置。对于HDD，启用写入缓存。</p>
+<h3 id="file-system">File System</h3>
+<p>==Ext4是最可靠的选择==。设置挂载选项 <code>noatime</code>、<code>nobarrier</code>
+XFS也是合适的，但它还没有经过 ClickHouse 的彻底测试。
+大多数其他文件系统也应该正常工作。在具有延迟分配的文件系统工作得更好。</p>
+<h3 id="linux-kernel">Linux Kernel</h3>
+<p>不要使用过时的Linux内核</p>
+<h3 id="network">Network</h3>
+<p>如果您使用的是IPv6，请增加路由缓存的大小。
+3.2之前的Linux内核在IPv6实现方面遇到了许多问题。</p>
+<p>如果可能的话，至少使用一个10GB的网络。 1Gb也可以工作，但对于使用数十tb的数据修补副本或处理具有大量中间数据的分布式查询，情况会更糟。</p>
+<h3 id="zookeeper">ZooKeeper</h3>
+<p>环境中可能已有 ZooKeeper 并且此 Zookeeper 已用于其他目的。只要此 Zookeeper 没有超负荷，可以使用相同的 zookeeper 安装。
+建议==全新安装 Zookeeper – 3.4.9 或更新版本==，Linux 默认发行版提供的版本可能已经过时。</p>
+<p>请勿使用手动编写的脚本在不同的 ZooKeeper 群集之间传输数据，因为对于序列节点来说传输结果将是不正确的。出于相同的原因，切勿使用 <code>zkcopy</code> 实用程序：
+<a href="https://github.com/ksprojects/zkcopy/issues/15">https://github.com/ksprojects/zkcopy/issues/15</a></p>
+<p>如果要将现有ZooKeeper集群分为两个，正确的方法是增加其副本的数量，然后将其重新配置为两个独立的集群。</p>
+<p>不要在与ClickHouse相同的服务器上运行ZooKeeper。 由于ZooKeeper对延迟非常敏感，ClickHouse可能会利用所有可用的系统资源。</p>
+<p>==使用默认设置，ZooKeeper是一个定时炸弹==:
+使用默认配置时，ZooKeeper服务器不会从旧快照和日志中删除文件（请参阅 autopurge），这是操作员的责任。
+必须拆除炸弹
+下面的ZooKeeper（3.5.1）配置在Yandex中使用。梅地卡生产环境截至2017年5月20日:</p>
+<h4 id="cfg">cfg</h4>
+<pre><code># http://hadoop.apache.org/zookeeper/docs/current/zookeeperAdmin.html
+
+# The number of milliseconds of each tick
+tickTime=2000
+# The number of ticks that the initial
+# synchronization phase can take
+# This value is not quite motivated
+initLimit=300
+# The number of ticks that can pass between
+# sending a request and getting an acknowledgement
+syncLimit=10
+
+maxClientCnxns=2000
+
+# It is the maximum value that client may request and the server will accept.
+# It is Ok to have high maxSessionTimeout on server to allow clients to work with high session timeout if they want.
+# But we request session timeout of 30 seconds by default (you can change it with session_timeout_ms in ClickHouse config).
+maxSessionTimeout=60000000
+# the directory where the snapshot is stored.
+dataDir=/opt/zookeeper/{{ cluster['name'] }}/data
+# Place the dataLogDir to a separate physical disc for better performance
+dataLogDir=/opt/zookeeper/{{ cluster['name'] }}/logs
+
+autopurge.snapRetainCount=10
+autopurge.purgeInterval=1
+
+
+# To avoid seeks ZooKeeper allocates space in the transaction log file in
+# blocks of preAllocSize kilobytes. The default block size is 64M. One reason
+# for changing the size of the blocks is to reduce the block size if snapshots
+# are taken more often. (Also, see snapCount).
+preAllocSize=131072
+
+# Clients can submit requests faster than ZooKeeper can process them,
+# especially if there are a lot of clients. To prevent ZooKeeper from running
+# out of memory due to queued requests, ZooKeeper will throttle clients so that
+# there is no more than globalOutstandingLimit outstanding requests in the
+# system. The default limit is 1,000.ZooKeeper logs transactions to a
+# transaction log. After snapCount transactions are written to a log file a
+# snapshot is started and a new transaction log file is started. The default
+# snapCount is 10,000.
+snapCount=3000000
+
+# If this option is defined, requests will be will logged to a trace file named
+# traceFile.year.month.day.
+#traceFile=
+
+# Leader accepts client connections. Default value is &quot;yes&quot;. The leader machine
+# coordinates updates. For higher update throughput at thes slight expense of
+# read throughput the leader can be configured to not accept clients and focus
+# on coordination.
+leaderServes=yes
+
+standaloneEnabled=false
+dynamicConfigFile=/etc/zookeeper-{{ cluster['name'] }}/conf/zoo.cfg.dynamic
+</code></pre>
+<h4 id="java-version">Java version</h4>
+<pre><code>Java(TM) SE Runtime Environment (build 1.8.0_25-b17)
+Java HotSpot(TM) 64-Bit Server VM (build 25.25-b02, mixed mode)
+</code></pre>
+<h4 id="jvm-parameters">JVM parameters</h4>
+<pre><code>NAME=zookeeper-{{ cluster['name'] }}
+ZOOCFGDIR=/etc/$NAME/conf
+
+# TODO this is really ugly
+# How to find out, which jars are needed?
+# seems, that log4j requires the log4j.properties file to be in the classpath
+CLASSPATH=&quot;$ZOOCFGDIR:/usr/build/classes:/usr/build/lib/*.jar:/usr/share/zookeeper/zookeeper-3.5.1-metrika.jar:/usr/share/zookeeper/slf4j-log4j12-1.7.5.jar:/usr/share/zookeeper/slf4j-api-1.7.5.jar:/usr/share/zookeeper/servlet-api-2.5-20081211.jar:/usr/share/zookeeper/netty-3.7.0.Final.jar:/usr/share/zookeeper/log4j-1.2.16.jar:/usr/share/zookeeper/jline-2.11.jar:/usr/share/zookeeper/jetty-util-6.1.26.jar:/usr/share/zookeeper/jetty-6.1.26.jar:/usr/share/zookeeper/javacc.jar:/usr/share/zookeeper/jackson-mapper-asl-1.9.11.jar:/usr/share/zookeeper/jackson-core-asl-1.9.11.jar:/usr/share/zookeeper/commons-cli-1.2.jar:/usr/src/java/lib/*.jar:/usr/etc/zookeeper&quot;
+
+ZOOCFG=&quot;$ZOOCFGDIR/zoo.cfg&quot;
+ZOO_LOG_DIR=/var/log/$NAME
+USER=zookeeper
+GROUP=zookeeper
+PIDDIR=/var/run/$NAME
+PIDFILE=$PIDDIR/$NAME.pid
+SCRIPTNAME=/etc/init.d/$NAME
+JAVA=/usr/bin/java
+ZOOMAIN=&quot;org.apache.zookeeper.server.quorum.QuorumPeerMain&quot;
+ZOO_LOG4J_PROP=&quot;INFO,ROLLINGFILE&quot;
+JMXLOCALONLY=false
+JAVA_OPTS=&quot;-Xms{{ cluster.get('xms','128M') }} \
+    -Xmx{{ cluster.get('xmx','1G') }} \
+    -Xloggc:/var/log/$NAME/zookeeper-gc.log \
+    -XX:+UseGCLogFileRotation \
+    -XX:NumberOfGCLogFiles=16 \
+    -XX:GCLogFileSize=16M \
+    -verbose:gc \
+    -XX:+PrintGCTimeStamps \
+    -XX:+PrintGCDateStamps \
+    -XX:+PrintGCDetails
+    -XX:+PrintTenuringDistribution \
+    -XX:+PrintGCApplicationStoppedTime \
+    -XX:+PrintGCApplicationConcurrentTime \
+    -XX:+PrintSafepointStatistics \
+    -XX:+UseParNewGC \
+    -XX:+UseConcMarkSweepGC \
+-XX:+CMSParallelRemarkEnabled&quot;
+</code></pre>
+<h4 id="salt-init">Salt init</h4>
+<pre><code>description &quot;zookeeper-{{ cluster['name'] }} centralized coordination service&quot;
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+respawn
+
+limit nofile 8192 8192
+
+pre-start script
+    [ -r &quot;/etc/zookeeper-{{ cluster['name'] }}/conf/environment&quot; ] || exit 0
+    . /etc/zookeeper-{{ cluster['name'] }}/conf/environment
+    [ -d $ZOO_LOG_DIR ] || mkdir -p $ZOO_LOG_DIR
+    chown $USER:$GROUP $ZOO_LOG_DIR
+end script
+
+script
+    . /etc/zookeeper-{{ cluster['name'] }}/conf/environment
+    [ -r /etc/default/zookeeper ] &amp;&amp; . /etc/default/zookeeper
+    if [ -z &quot;$JMXDISABLE&quot; ]; then
+        JAVA_OPTS=&quot;$JAVA_OPTS -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.local.only=$JMXLOCALONLY&quot;
+    fi
+    exec start-stop-daemon --start -c $USER --exec $JAVA --name zookeeper-{{ cluster['name'] }} \
+        -- -cp $CLASSPATH $JAVA_OPTS -Dzookeeper.log.dir=${ZOO_LOG_DIR} \
+        -Dzookeeper.root.logger=${ZOO_LOG4J_PROP} $ZOOMAIN $ZOOCFG
+end script
+</code></pre>
+<h2 id="同构集群-异构集群">同构集群 异构集群</h2>
+<p>区别在于：组成集群系统的计算机之间的体系结构是否相同。</p>
+<p>一句话概括：异构集群&ndash;计算归计算，存储归存储；同构集群（瑶池方案）&ndash;计算存储一体化。</p>
+<h2 id="分片--副本备份--节点">分片 &amp; 副本备份 &amp; 节点</h2>
+<table>
+<thead>
+<tr>
+<th>分片/副本</th>
+<th>分片1</th>
+<th>分片2</th>
+<th>分片3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>副本1</td>
+<td>Node1</td>
+<td>Node2</td>
+<td>Node3</td>
+</tr>
+<tr>
+<td>副本2</td>
+<td>Node4</td>
+<td>Node5</td>
+<td>Node6</td>
+</tr>
+<tr>
+<td>副本3</td>
+<td>Node7</td>
+<td>Node8</td>
+<td>Node9</td>
+</tr>
+</tbody>
+</table>
+<p>分片（shard）：一个分片代表一组机器，分片内部各机器存储相同的数据（分布式文件系统），所有分片中的任一个想加起来等于完整的数据。集群的性能取决于分片的数量。各个分片可以具有不同的权重（比如说有的机器性能好存储空间大，那么可以权重设置高一点）。如上图，共3个分片，其中147属于一个分片，258属于一个分片，369属于一个分片。实际运行中，各分片各取一台机器共3台机器来计算，其它的机器只作为备份之用，并不参与实际计算。</p>
+<p>备份（replica）：同一个分片内，各个节点互为备份，记住是互为备份，没有主次之分，因为他们是完全一模一样的，相互补位。任何时候，只要不发生故障，他们都是一模一样的，这叫同一性。上图中147互为备份。</p>
+<p>节点（node）：一个节点就是一台机器，如上就是一个3x3的有9个节点的分布式集群。</p>
+<h2 id="公司现有环境规划">公司现有环境规划</h2>
+<p>无副本，多分片，RAID5</p>
+<h2 id="参数配置文件详解">参数配置文件详解</h2>
+<p>ClickHouse 核心的配置文件：</p>
+<ul>
+<li>config.xml 端口配置、本地机器名配置、内存设置等</li>
+<li>metrika.xml 集群配置、ZK 配置、分片配置等</li>
+<li>users.xml 权限、配额设置</li>
+</ul>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://blog.standuke.top/2020/10/2020-10-13-clickhouse-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E6%91%98%E8%A6%81%E4%B8%8E%E6%B7%B1%E5%85%A5/" title="ClickHouse 官方文档摘要与深入" target="_blank" rel="external">https://blog.standuke.top/2020/10/2020-10-13-clickhouse-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E6%91%98%E8%A6%81%E4%B8%8E%E6%B7%B1%E5%85%A5/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://www.standuke.top" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://blog.standuke.top/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://www.standuke.top" target="_blank"><span class="text-dark">Standuke</span><small class="ml-1x">Yunshen Technology Co., Ltd. - SRE Engineer</small></a></h3>
+        <div>Focus on Linux Openstack Kubernetes vSphere Photograph Coding</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+<section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://blog.standuke.top/2020/07/2020-07-01-dmidecode-%E4%BD%BF%E7%94%A8%E8%84%9A%E6%9C%AC/" title="dmidecode 使用脚本"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            <li class="next">
+                <a href="https://blog.standuke.top/2020/10/2020-10-29-vsphere-esxi-vcenter-%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%B3%E7%B3%BB%E5%8C%BA%E5%88%AB/"
+                    title="vSphere ESXi vCenter 部署安装与关系区别"><span>上一篇&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter,google,linkedin"
+                data-mobile-sites="wechat,qq,facebook,twitter"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/idoker" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://blog.standuke.top/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2016  -
+    2022
+    <div class="publishby">
+        Theme by <a href="https://github.com/xiaoheiAh" target="_blank"> xiaoheiAh </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/shell.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://blog.standuke.top/js/application.min.a94ab19cb63a95c8d7fbd7b85cab3ddeea8c369bdf75b9cab6708787ead123af.js"></script>
+<script src="https://blog.standuke.top/js/plugin.min.19c5bcb2fb0789ab4f2b7834e5ceb5e92635645605bab902c1024b25f1502364.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/blog.standuke.top\/',
+            CONTENT_URL: 'https:\/\/blog.standuke.top\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://blog.standuke.top/js/insight.min.4a2d52de4bfff73e0c688404fe3d17c9a3ae12d9888e1e1ac9c690e4890de2ded50fe55f2b819c2ba55435a76f396f3ea6805765f0b0af5635cdf74ea459eab0.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https:\/\/blog.standuke.top\/2020\/10\/2020-10-13-clickhouse-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E6%91%98%E8%A6%81%E4%B8%8E%E6%B7%B1%E5%85%A5\/';
+        <!-- this.page.identifier = 'nuo'; -->
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'nuo' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-180157250-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  </body>
+</html>

@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        OpenStack Train 快速离线部署「在线类似」 - Stan&#39;s blog - Explore the world
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="👌 2020-03-17 OpenStack Train 快速离线部署「在线类似」 本文档为 openstack 快速部署文档，只适用于已经熟悉 openstack 各个组件及其部署方式和对应安装节点的维护人员 文档适用于构建 openstack 学习环" />
+    <meta name="generator" content="Hugo 0.82.1 with theme pure" />
+    <title>OpenStack Train 快速离线部署「在线类似」 - Stan&#39;s blog - Explore the world</title>
+    
+    
+    <link rel="stylesheet" href="https://blog.standuke.top/css/style.min.6f90022f237877ae2514ec95f3c9cca9f2314394f20800ca037a497e20053122.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="OpenStack Train 快速离线部署「在线类似」" />
+<meta property="og:description" content="👌 2020-03-17 OpenStack Train 快速离线部署「在线类似」 本文档为 openstack 快速部署文档，只适用于已经熟悉 openstack 各个组件及其部署方式和对应安装节点的维护人员 文档适用于构建 openstack 学习环" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.standuke.top/2020/03/2020-03-17-openstack-train-%E5%BF%AB%E9%80%9F%E7%A6%BB%E7%BA%BF%E9%83%A8%E7%BD%B2%E5%9C%A8%E7%BA%BF%E7%B1%BB%E4%BC%BC/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-03-17T16:46:19&#43;08:00" />
+<meta property="article:modified_time" content="2020-03-17T16:46:19&#43;08:00" />
+
+<meta itemprop="name" content="OpenStack Train 快速离线部署「在线类似」">
+<meta itemprop="description" content="👌 2020-03-17 OpenStack Train 快速离线部署「在线类似」 本文档为 openstack 快速部署文档，只适用于已经熟悉 openstack 各个组件及其部署方式和对应安装节点的维护人员 文档适用于构建 openstack 学习环"><meta itemprop="datePublished" content="2020-03-17T16:46:19&#43;08:00" />
+<meta itemprop="dateModified" content="2020-03-17T16:46:19&#43;08:00" />
+<meta itemprop="wordCount" content="2449">
+<meta itemprop="keywords" content="OpenStack,Virtualization," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="OpenStack Train 快速离线部署「在线类似」"/>
+<meta name="twitter:description" content="👌 2020-03-17 OpenStack Train 快速离线部署「在线类似」 本文档为 openstack 快速部署文档，只适用于已经熟悉 openstack 各个组件及其部署方式和对应安装节点的维护人员 文档适用于构建 openstack 学习环"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://www.standuke.top" target="_blank">
+            <img class="img-circle img-rotate" src="https://blog.standuke.top/avatar.png" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">Standuke</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">Yunshen Technology Co., Ltd. - SRE Engineer</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Hangzhou, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-linkedin">
+                <a href="https://linkedin.com/in/doc-s-44435ab2">
+                    <i class="icon icon-linkedin"></i>
+                  <span class="menu-title">Linkedin</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content"><p>站点迁移初期，配置参数调整，同时涉及到的文章较多，页面浏览可能会出现闪断。因为是业余时间迁移博客，从 5 月开始估计要到年底才能把前期的文章整体迁移过来。博客评论采用 Disqus 需要科学才能看到，如果有任何意见建议也可直接联系我 Telegram。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://blog.standuke.top/tags/aliyun/" class="tag-list-link" rel="1">aliyun<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/bigdata/" class="tag-list-link" rel="1">bigdata<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/cdh/" class="tag-list-link" rel="1">cdh<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/centos/" class="tag-list-link" rel="8">centos<span
+               class="tag-list-count">8</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/cloudera/" class="tag-list-link" rel="1">cloudera<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/docker/" class="tag-list-link" rel="1">docker<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/eip/" class="tag-list-link" rel="1">eip<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/esxi/" class="tag-list-link" rel="1">esxi<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/frp/" class="tag-list-link" rel="1">frp<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/kvm/" class="tag-list-link" rel="1">kvm<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/linux/" class="tag-list-link" rel="5">linux<span
+               class="tag-list-count">5</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/linux-bridge/" class="tag-list-link" rel="1">linux-bridge<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/macos/" class="tag-list-link" rel="2">macos<span
+               class="tag-list-count">2</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/markdown/" class="tag-list-link" rel="1">markdown<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/network/" class="tag-list-link" rel="1">network<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/openstack/" class="tag-list-link" rel="6">openstack<span
+               class="tag-list-count">6</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/pxe/" class="tag-list-link" rel="1">pxe<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/qcow2/" class="tag-list-link" rel="1">qcow2<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/system/" class="tag-list-link" rel="1">system<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/time-machine/" class="tag-list-link" rel="1">time-machine<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/tools/" class="tag-list-link" rel="1">tools<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/vcenter/" class="tag-list-link" rel="1">vcenter<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/virtualization/" class="tag-list-link" rel="9">virtualization<span
+               class="tag-list-count">9</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/vsphere/" class="tag-list-link" rel="1">vsphere<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/windows/" class="tag-list-link" rel="4">windows<span
+               class="tag-list-count">4</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="category-list-link">使用教程</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E5%86%85%E9%83%A8%E5%88%86%E4%BA%AB/" class="category-list-link">内部分享</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/" class="category-list-link">技术分析</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-list-link">操作系统</a><span class="category-list-count">7</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/" class="category-list-link">部署教程</a><span class="category-list-count">10</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E9%9B%B6%E7%A2%8E%E5%B0%8F%E9%97%AE%E9%A2%98/" class="category-list-link">零碎小问题</a><span class="category-list-count">4</span></li>
+        </ul>
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/07/2021-07-06-linux-%E5%AE%9A%E6%97%B6%E5%8D%95%E6%AC%A1%E5%8F%8A%E5%91%A8%E6%9C%9F%E4%BB%BB%E5%8A%A1/" class="title">Linux 定时单次及周期任务</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-07-06 17:20:34 &#43;0800 CST" itemprop="datePublished">2021-07-06</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/06/2021-06-26-linux-%E6%97%B6%E9%97%B4%E5%85%A8%E8%A7%A3/" class="title">Linux 时间全解</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-06-26 11:11:31 &#43;0800 CST" itemprop="datePublished">2021-06-26</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-19-%E9%98%BF%E9%87%8C%E4%BA%91%E4%B8%BB%E6%9C%BA-eip-%E8%87%B4%E4%BD%BF-ftp-%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5/" class="title">阿里云主机 EIP 致使 FTP 无法连接</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-19 21:08:48 &#43;0800 CST" itemprop="datePublished">2021-05-19</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B24-%E5%AE%89%E7%BD%AE%E6%9C%8D%E5%8A%A1-placement/" class="title">OpenStack Wallaby 部署4 安置服务 Placement</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-08 17:01:11 &#43;0800 CST" itemprop="datePublished">2021-05-08</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B23-%E9%95%9C%E5%83%8F%E6%9C%8D%E5%8A%A1-glance/" class="title">OpenStack Wallaby 部署3 镜像服务 Glance</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-08 16:54:55 &#43;0800 CST" itemprop="datePublished">2021-05-08</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2020/03/2020-03-17-openstack-train-%E5%BF%AB%E9%80%9F%E7%A6%BB%E7%BA%BF%E9%83%A8%E7%BD%B2%E5%9C%A8%E7%BA%BF%E7%B1%BB%E4%BC%BC/"
+    >OpenStack Train 快速离线部署「在线类似」</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://blog.standuke.top/2020/03/2020-03-17-openstack-train-%E5%BF%AB%E9%80%9F%E7%A6%BB%E7%BA%BF%E9%83%A8%E7%BD%B2%E5%9C%A8%E7%BA%BF%E7%B1%BB%E4%BC%BC/" class="article-date">
+  <time datetime="2020-03-17 16:46:19 &#43;0800 CST" itemprop="datePublished">2020-03-17</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/"> 部署教程 </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/openstack/"> OpenStack </a>
+    <a class="article-tag-link" href="/tags/virtualization/"> Virtualization </a>
+  </span>
+
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2020/03/2020-03-17-openstack-train-%E5%BF%AB%E9%80%9F%E7%A6%BB%E7%BA%BF%E9%83%A8%E7%BD%B2%E5%9C%A8%E7%BA%BF%E7%B1%BB%E4%BC%BC/#comments"
+            class="article-comment-link">评论</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2449字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 5分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <h1 id="-2020-03-17--openstack-train-快速离线部署在线类似">👌 2020-03-17  OpenStack Train 快速离线部署「在线类似」</h1>
+<blockquote>
+<p>本文档为 openstack 快速部署文档，只适用于已经熟悉 openstack 各个组件及其部署方式和对应安装节点的维护人员
+文档适用于构建 openstack 学习环境，文档默认三台节点，一台为 controller
+若采用离线安装，则相关离线 repo 请预先设置，不再赘述</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>FileInfo</strong>
+Filename - 2020-03-05 Openstack Train Version EZ Install Guide
+Version - v1.1.2003（2020/03/15 ~ 2020/03/18）
+Author - nuo standuke
+Email - <a href="mailto:shadowdoker@gmail.com">shadowdoker@gmail.com</a>
+DescriptionKey - Openstack Train Version Offline Install</p>
+</blockquote>
+<h2 id="离线安装环境要求">离线安装环境要求</h2>
+<ul>
+<li>操作系统要求</li>
+<li>软件以及依赖</li>
+<li>环境介绍</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">节点名称</th>
+<th style="text-align:left">IP地址</th>
+<th style="text-align:left">配置</th>
+<th style="text-align:left">泛角色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">train-1</td>
+<td style="text-align:left">192.168.10.10</td>
+<td style="text-align:left">32C64T 8T</td>
+<td style="text-align:left">controller</td>
+</tr>
+<tr>
+<td style="text-align:left">train-2</td>
+<td style="text-align:left">192.168.10.20</td>
+<td style="text-align:left">32C64T 8T</td>
+<td style="text-align:left">node</td>
+</tr>
+<tr>
+<td style="text-align:left">train-3</td>
+<td style="text-align:left">192.168.10.30</td>
+<td style="text-align:left">32C64T 8T</td>
+<td style="text-align:left">node</td>
+</tr>
+</tbody>
+</table>
+<h2 id="各节点初始化">各节点初始化</h2>
+<ol>
+<li>安全设置</li>
+</ol>
+<pre><code class="language-shell">systemctl stop firewalld &amp;&amp; systemctl disable firewalld
+sed -i 's/^SELINUX=.*/SELINUX=disabled/` /etc/selinux/config
+setenforce 0
+</code></pre>
+<ol start="2">
+<li>hosts 文件修改</li>
+</ol>
+<pre><code class="language-shell">vi /etc/hosts
+</code></pre>
+<ol start="3">
+<li>配置 NTP 服务</li>
+</ol>
+<pre><code class="language-shell">yum install -y chrony
+
+# controller
+- server *
++ server 127.127.1.0 iburst
++ allow 192.168.10.0/24
+# node
+- server *
++ server train-1 iburst
+
+systemctl start chronyd &amp;&amp; systemctl enable chronyd
+</code></pre>
+<ol start="4">
+<li>安装基础 openstack 软件包</li>
+</ol>
+<pre><code class="language-shell">yum install -y centos-release-openstack-train python-openstackclient openstack-selinux &amp;&amp; yum upgrade -y
+</code></pre>
+<h2 id="mariadb">Mariadb</h2>
+<ol>
+<li>安装软件</li>
+</ol>
+<pre><code class="language-shell">yum install -y mariadb mariadb-server python2-PyMySQL
+</code></pre>
+<ol start="2">
+<li>修改配置</li>
+</ol>
+<pre><code class="language-shell">vi /etc/my.cnf.d/openstack.cnf
+
+[mysqld]
+bind-address = 192.168.10.10
+
+default-storage-engine = innodb
+innodb_file_per_table = on
+max_connections = 4096
+collation-server = utf8_general_ci
+character-set-server = utf8
+</code></pre>
+<ol start="3">
+<li>设置启动</li>
+</ol>
+<pre><code class="language-shell">systemctl start mariadb.service &amp;&amp; systemctl enable mariadb.service
+</code></pre>
+<ol start="4">
+<li>初始化数据库</li>
+</ol>
+<pre><code class="language-shell">mysql_secure_installation
+</code></pre>
+<ol start="5">
+<li>创建 库 / 赋予权限</li>
+</ol>
+<pre><code class="language-shell">CREATE DATABASE keystone;
+GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'localhost' IDENTIFIED BY 'keystone';
+GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'%' IDENTIFIED BY 'keystone';
+
+CREATE DATABASE glance;
+GRANT ALL PRIVILEGES ON glance.* TO 'glance'@'localhost' IDENTIFIED BY 'glance';
+GRANT ALL PRIVILEGES ON glance.* TO 'glance'@'%' IDENTIFIED BY 'glance';
+
+CREATE DATABASE placement;
+GRANT ALL PRIVILEGES ON placement.* TO 'placement'@'localhost' IDENTIFIED BY 'placement';
+GRANT ALL PRIVILEGES ON placement.* TO 'placement'@'%' IDENTIFIED BY 'placement';
+
+CREATE DATABASE nova;
+CREATE DATABASE nova_api;
+CREATE DATABASE nova_cell0;
+GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'localhost' IDENTIFIED BY 'nova';
+GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'%' IDENTIFIED BY 'nova';
+GRANT ALL PRIVILEGES ON nova_api.* TO 'nova'@'localhost' IDENTIFIED BY 'nova';
+GRANT ALL PRIVILEGES ON nova_api.* TO 'nova'@'%' IDENTIFIED BY 'nova';
+GRANT ALL PRIVILEGES ON nova_cell0.* TO 'nova'@'localhost' IDENTIFIED BY 'nova';
+GRANT ALL PRIVILEGES ON nova_cell0.* TO 'nova'@'%' IDENTIFIED BY 'nova';
+
+CREATE DATABASE neutron;
+GRANT ALL PRIVILEGES ON neutron.* TO 'neutron'@'localhost' IDENTIFIED BY 'neutron';
+GRANT ALL PRIVILEGES ON neutron.* TO 'neutron'@'*' IDENTIFIED BY 'neutron';
+
+flush privileges;
+</code></pre>
+<h2 id="rabbitmq">RabbitMQ</h2>
+<ol>
+<li>安装软件</li>
+</ol>
+<pre><code class="language-shell">yum install -y rabbitmq-server
+</code></pre>
+<ol start="2">
+<li>设置启动</li>
+</ol>
+<pre><code class="language-shell">systemctl start rabbitmq-server.service &amp;&amp; systemctl enable rabbitmq-server.service
+</code></pre>
+<ol start="3">
+<li>创建用户</li>
+</ol>
+<pre><code class="language-shell">rabbitmqctl add_user openstack openstack
+# Creating user &quot;openstack&quot; ...
+</code></pre>
+<ol start="4">
+<li>赋予权限</li>
+</ol>
+<pre><code class="language-shell">rabbitmqctl set_permissions openstack &quot;.*&quot; &quot;.*&quot; &quot;.*&quot;
+# Setting permissions for user &quot;openstack&quot; in vhost &quot;/&quot; ...
+</code></pre>
+<h2 id="memcached">Memcached</h2>
+<ol>
+<li>安装软件</li>
+</ol>
+<pre><code class="language-shell">yum install -y memcached python-memcached
+</code></pre>
+<ol start="2">
+<li>修改配置</li>
+</ol>
+<pre><code class="language-shell">vi /etc/sysconfig/memcached
+
+OPTIONS=&quot;-l 127.0.0.1,::1,train-1&quot;
+</code></pre>
+<ol start="3">
+<li>设置启动</li>
+</ol>
+<pre><code class="language-shell">systemctl start memcached.service &amp;&amp; systemctl enable memcached.service
+</code></pre>
+<h2 id="etcd">etcd</h2>
+<ol>
+<li>安装软件</li>
+</ol>
+<pre><code class="language-shell">yum install -y etcd
+</code></pre>
+<ol start="2">
+<li>修改配置</li>
+</ol>
+<pre><code class="language-shell">vi /etc/etcd/etcd.conf
+
+#[Member]
+ETCD_DATA_DIR=&quot;/var/lib/etcd/default.etcd&quot;
+ETCD_LISTEN_PEER_URLS=&quot;http://192.168.10.10:2380&quot;
+ETCD_LISTEN_CLIENT_URLS=&quot;http://192.168.10.10:2379&quot;
+ETCD_NAME=&quot;train-1&quot;
+#[Clustering]
+ETCD_INITIAL_ADVERTISE_PEER_URLS=&quot;http://192.168.10.10:2380&quot;
+ETCD_ADVERTISE_CLIENT_URLS=&quot;http://192.168.10.10:2379&quot;
+ETCD_INITIAL_CLUSTER=&quot;train-1=http://192.168.10.10:2380&quot;
+ETCD_INITIAL_CLUSTER_TOKEN=&quot;etcd-cluster-01&quot;
+ETCD_INITIAL_CLUSTER_STATE=&quot;new&quot;
+</code></pre>
+<ol start="3">
+<li>设置启动</li>
+</ol>
+<pre><code class="language-shell">systemctl start etcd &amp;&amp; systemctl enable etcd
+</code></pre>
+<hr>
+<h2 id="keystone">keystone</h2>
+<ol>
+<li>安装软件</li>
+</ol>
+<pre><code class="language-shell">yum install -y openstack-keystone httpd mod_wsgi
+</code></pre>
+<ol start="2">
+<li>修改配置</li>
+</ol>
+<pre><code class="language-shell">[database]
+connection = mysql+pymysql://keystone:KEYSTONE_DBPASS@train-1/keystone
+[token]
+provider = fernet
+</code></pre>
+<ol start="3">
+<li>导入数据库</li>
+</ol>
+<pre><code class="language-shell">su -s /bin/sh -c &quot;keystone-manage db_sync&quot; keystone
+</code></pre>
+<ol start="4">
+<li>初始化</li>
+</ol>
+<pre><code class="language-shell">keystone-manage fernet_setup --keystone-user keystone --keystone-group keystone
+keystone-manage credential_setup --keystone-user keystone --keystone-group keystone
+</code></pre>
+<ol start="5">
+<li>创建结点</li>
+</ol>
+<pre><code class="language-shell">keystone-manage bootstrap --bootstrap-password ADMIN_PASS \
+--bootstrap-admin-url http://train-1:5000/v3/ \
+--bootstrap-internal-url http://train-1:5000/v3/ \
+--bootstrap-public-url http://train-1:5000/v3/ \
+--bootstrap-region-id RegionOne
+</code></pre>
+<ol start="6">
+<li>配置 Apache HTTP 服务 \ 修改 <code>/etc/httpd/conf/httpd.conf</code> 中 <code>ServerName</code> 参数</li>
+</ol>
+<pre><code class="language-shell">ServerName train-1
+</code></pre>
+<ol start="7">
+<li>创建 <code>wsgi-keystone.conf</code> 的软连接，生产环境建议使用 https 方式</li>
+</ol>
+<pre><code class="language-shell">ln -s /usr/share/keystone/wsgi-keystone.conf /etc/httpd/conf.d/
+</code></pre>
+<ol start="8">
+<li>启动 keystone \ 设置开机自启</li>
+</ol>
+<pre><code class="language-shell">systemctl enable httpd.service &amp;&amp; systemctl start httpd.service
+</code></pre>
+<ol start="9">
+<li>预设</li>
+</ol>
+<pre><code class="language-shell">openstack user create --domain default --password-prompt glance
+openstack role add --project service --user glance admin
+openstack service create --name glance   --description &quot;OpenStack Image&quot; image
+openstack endpoint create --region RegionOne image public http://train-1:9292
+openstack endpoint create --region RegionOne image internal http://train-1:9292
+openstack endpoint create --region RegionOne image admin http://train-1:9292
+
+openstack user create --domain default --password PLACEMENT_PASS placement
+openstack service create --name placement --description &quot;Placement API&quot; placement
+openstack endpoint create --region RegionOne placement public http://train-1:8778
+openstack endpoint create --region RegionOne placement internal http://train-1:8778
+openstack endpoint create --region RegionOne placement admin http://train-1:8778
+
+openstack user create --domain default --password-prompt nova
+openstack role add --project service --user nova admin
+openstack service create --name nova --description &quot;OpenStack Compute&quot; compute
+openstack endpoint create --region RegionOne compute public http://train-1:8774/v2.1
+openstack endpoint create --region RegionOne compute internal http://train-1:8774/v2.1 
+openstack endpoint create --region RegionOne compute admin http://train-1:8774/v2.1
+
+openstack user create --domain default --password-prompt neutron
+openstack role add --project service --user neutron admin
+openstack service create --name neutron --description &quot;OpenStack Networking&quot; network
+openstack endpoint create --region RegionOne network public http://train-1:9696
+openstack endpoint create --region RegionOne network internal http://train-1:9696
+openstack endpoint create --region RegionOne network admin http://train-1:9696
+
+</code></pre>
+<h2 id="glance">glance</h2>
+<ol start="2">
+<li>⚠️ 使用 admin 环境，来使用管理员权限</li>
+</ol>
+<pre><code class="language-shell">source admin-openrc.sh
+</code></pre>
+<ol start="7">
+<li>安装 glance 软件包</li>
+</ol>
+<pre><code class="language-shell">yum install -y openstack-glance
+
+此处会缺少软件包 tk*
+</code></pre>
+<ol start="8">
+<li>修改 <code>/etc/glance/glance-api.conf</code> 配置文件</li>
+</ol>
+<pre><code class="language-shell">vi /etc/glance/glance-api.conf
+
+# 配置数据库访问
+[database]
+connection = mysql+pymysql://glance:GLANCE_DBPASS@train-1/glance
+
+# 这部分删除多余的
+[keystone_authtoken]
+www_authenticate_uri  = http://train-1:5000
+auth_url = http://train-1:5000
+memcached_servers = train-1:11211
+auth_type = password
+project_domain_name = Default
+user_domain_name = Default
+project_name = service
+username = glance
+password = GLANCE_PASS
+
+# 配置认证方式
+[paste_deploy]
+flavor = keystone
+
+# 配置本地文件系统存储和镜像文件存储位置
+[glance_store]
+stores = file,http
+default_store = file
+filesystem_store_datadir = /var/lib/glance/images/
+</code></pre>
+<ol start="9">
+<li>初始化 glance 数据库</li>
+</ol>
+<pre><code class="language-shell">su -s /bin/sh -c &quot;glance-manage db_sync&quot; glance
+# 可忽略输出，直到提示 Database is synced successfully.
+</code></pre>
+<ol start="10">
+<li>启动 glance 服务 / 设置开机自启</li>
+</ol>
+<pre><code class="language-shell">systemctl start openstack-glance-api.service &amp;&amp; systemctl enable openstack-glance-api.service
+</code></pre>
+<ol start="12">
+<li>上传测试镜像</li>
+</ol>
+<p><a href="http://download.cirros-cloud.net/0.4.0/cirros-0.4.0-x86_64-disk.img">http://download.cirros-cloud.net/0.4.0/cirros-0.4.0-x86_64-disk.img</a></p>
+<pre><code class="language-shell">openstack image create --file /root/cirros-0.4.0-x86_64-disk.img --disk-format qcow2 --container-format bare --public cirros
+openstack image list
+
+  &gt;root ~
+[train-1]# openstack image list
++--------------------------------------+--------+--------+
+| ID                                   | Name   | Status |
++--------------------------------------+--------+--------+
+| deeb4604-620b-4a3c-85ce-9173c4325f26 | cirros | active |
++--------------------------------------+--------+--------+
+
+ls -lah /var/lib/glance/images/
+</code></pre>
+<h2 id="placement">placement</h2>
+<ol start="6">
+<li>安装 placement 软件包</li>
+</ol>
+<pre><code class="language-shell">yum install -y openstack-placement-api
+</code></pre>
+<ol start="7">
+<li>修改 <code>/etc/placement/placement.conf</code> 配置文件</li>
+</ol>
+<pre><code class="language-shell">vi /etc/placement/placement.conf
+
+[placement_database]
+connection = mysql+pymysql://placement:PLACEMENT_DBPASS@train-1/placement
+
+[api]
+auth_strategy = keystone
+
+[keystone_authtoken]
+auth_url = http://train-1:5000/v3
+memcached_servers = train-1:11211
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+project_name = service
+username = placement
+password = PLACEMENT_PASS
+
+</code></pre>
+<ol start="8">
+<li>初始化 placement 数据库 \ 此操作无输出</li>
+</ol>
+<pre><code class="language-shell">su -s /bin/sh -c &quot;placement-manage db sync&quot; placement
+</code></pre>
+<ol start="9">
+<li>重启 httpd 服务</li>
+</ol>
+<pre><code class="language-shell">systemctl restart httpd
+</code></pre>
+<ol start="11">
+<li>坑</li>
+</ol>
+<pre><code class="language-shell">    &lt;Directory /usr/bin&gt;
+       &lt;IfVersion &gt;= 2.4&gt;
+           Require all granted
+       &lt;/IfVersion&gt;
+       &lt;IfVersion &lt; 2.4&gt;
+           Order allow,deny
+           Allow from all
+       &lt;/IfVersion&gt;
+   &lt;/Directory&gt;
+</code></pre>
+<h2 id="nova">nova</h2>
+<ol start="7">
+<li>安装 nova 组件</li>
+</ol>
+<pre><code class="language-shell">yum install -y openstack-nova-api openstack-nova-conductor openstack-nova-novncproxy openstack-nova-scheduler
+</code></pre>
+<ol start="8">
+<li>修改 <code>/etc/nova/nova.conf</code> 配置文件</li>
+</ol>
+<pre><code class="language-shell">[DEFAULT]
+enabled_apis = osapi_compute,metadata
+transport_url = rabbit://openstack:openstack@train-1:5672/
+my_ip = MANAGEMENT_INTERFACE_IP_ADDRESS
+use_neutron = true
+firewall_driver = nova.virt.firewall.NoopFirewallDriver
+
+[api_database]
+connection = mysql+pymysql://nova:NOVA_DBPASS@train-1/nova_api
+
+[database]
+connection = mysql+pymysql://nova:NOVA_DBPASS@train-1/nova
+
+[api]
+auth_strategy = keystone
+
+[keystone_authtoken]
+www_authenticate_uri = http://train-1:5000/
+auth_url = http://train-1:5000/
+memcached_servers = train-1:11211
+auth_type = password
+project_domain_name = Default
+user_domain_name = Default
+project_name = service
+username = nova
+password = NOVA_PASS
+
+[vnc]
+enabled = true
+server_listen = $my_ip
+server_proxyclient_address = $my_ip
+
+[glance]
+api_servers = http://train-1:9292
+
+[oslo_concurrency]
+lock_path = /var/lib/nova/tmp
+
+[placement]
+region_name = RegionOne
+project_domain_name = Default
+project_name = service
+auth_type = password
+user_domain_name = Default
+auth_url = http://train-1:5000/v3
+username = placement
+password = PLACEMENT_PASS
+</code></pre>
+<ol start="9">
+<li>初始化数据库</li>
+</ol>
+<pre><code class="language-shell"># 同步
+su -s /bin/sh -c &quot;nova-manage api_db sync&quot; nova
+su -s /bin/sh -c &quot;nova-manage cell_v2 map_cell0&quot; nova
+su -s /bin/sh -c &quot;nova-manage cell_v2 create_cell --name=cell1 --verbose&quot; nova
+su -s /bin/sh -c &quot;nova-manage db sync&quot; nova
+
+这个会有两个警告，忽视即可
+/usr/lib/python2.7/site-packages/pymysql/cursors.py:170: Warning: (1831, u'Duplicate index `block_device_mapping_instance_uuid_virtual_name_device_name_idx`. This is deprecated and will be disallowed in a future release')
+ result = self._query(query)
+/usr/lib/python2.7/site-packages/pymysql/cursors.py:170: Warning: (1831, u'Duplicate index `uniq_instances0uuid`. This is deprecated and will be disallowed in a future release')
+ result = self._query(query)
+
+su -s /bin/sh -c &quot;nova-manage cell_v2 list_cells&quot; nova
++-------+--------------------------------------+-----------------------------------------------+------------------------------------------------------+----------+
+|  名称 |                 UUID                 |                 Transport URL                 |                      数据库连接                      | Disabled |
++-------+--------------------------------------+-----------------------------------------------+------------------------------------------------------+----------+
+| cell0 | 00000000-0000-0000-0000-000000000000 |                     none:/                    | mysql+pymysql://nova:****@train-1/nova_cell0 |  False   |
+| cell1 | 5360e154-62a1-4232-8bb7-8f4abcf5ad2b | rabbit://openstack:****@train-1:5672/ |    mysql+pymysql://nova:****@train-1/nova    |  False   |
++-------+--------------------------------------+-----------------------------------------------+------------------------------------------------------+----------+
+</code></pre>
+<ol start="10">
+<li>启动 nova 相关服务 \ 设置开机自启</li>
+</ol>
+<pre><code class="language-shell">systemctl start \
+openstack-nova-api.service openstack-nova-scheduler.service \
+openstack-nova-conductor.service openstack-nova-novncproxy.service
+
+systemctl enable \
+openstack-nova-api.service openstack-nova-scheduler.service \
+openstack-nova-conductor.service openstack-nova-novncproxy.service
+</code></pre>
+<hr>
+<ol>
+<li>安装 nova 组件</li>
+</ol>
+<pre><code class="language-shell">yum install -y openstack-nova-compute
+</code></pre>
+<ol start="2">
+<li>修改 <code>/etc/nova/nova.conf</code> 配置文件</li>
+</ol>
+<pre><code class="language-shell">[DEFAULT]
+enabled_apis = osapi_compute,metadata
+transport_url = rabbit://openstack:openstack@train-1
+my_ip = MANAGEMENT_INTERFACE_IP_ADDRESS
+use_neutron = true
+firewall_driver = nova.virt.firewall.NoopFirewallDriver
+
+[api]
+auth_strategy = keystone
+
+[keystone_authtoken]
+www_authenticate_uri = http://train-1:5000/
+auth_url = http://train-1:5000/
+memcached_servers = train-1:11211
+auth_type = password
+project_domain_name = Default
+user_domain_name = Default
+project_name = service
+username = nova
+password = NOVA_PASS
+
+[vnc]
+enabled = true
+server_listen = 0.0.0.0
+server_proxyclient_address = $my_ip
+novncproxy_base_url = http://train-1:6080/vnc_auto.html
+
+[glance]
+api_servers = http://train-1:9292
+
+[oslo_concurrency]
+lock_path = /var/lib/nova/tmp
+
+[placement]
+region_name = RegionOne
+project_domain_name = Default
+project_name = service
+auth_type = password
+user_domain_name = Default
+auth_url = http://train-1:5000/v3
+username = placement
+password = PLACEMENT_PASS
+</code></pre>
+<ol start="3">
+<li>虚拟化方案筛选</li>
+</ol>
+<pre><code class="language-shell">egrep -c '(vmx|svm)' /proc/cpuinfo
+# 如果此命令返回值是 0，则计算节点不支持硬件加速，并且必须配置 libvirt 为 QEMU 而不是 KVM，需要编辑 /etc/nova/nova.conf 文件中的 [libvirt] 部分
+[libvirt]
+virt_type = qemu
+</code></pre>
+<ol start="4">
+<li>启动 nova 服务 \ 设置开机自启</li>
+</ol>
+<pre><code class="language-shell">systemctl start libvirtd.service openstack-nova-compute.service
+systemctl enable libvirtd.service openstack-nova-compute.service
+</code></pre>
+<h2 id="neutron">neutron</h2>
+<ol start="7">
+<li>安装 neutron 软件</li>
+</ol>
+<pre><code class="language-shell">yum install -y openstack-neutron openstack-neutron-ml2 openstack-neutron-linuxbridge ebtables
+</code></pre>
+<ol start="8">
+<li>修改 <code>/etc/neutron/neutron.conf</code> neutron 配置文件</li>
+</ol>
+<pre><code class="language-shell">[database]
+connection = mysql+pymysql://neutron:NEUTRON_DBPASS@train-1/neutron
+
+[DEFAULT]
+core_plugin = ml2
+service_plugins =
+transport_url = rabbit://openstack:openstack@train-1
+auth_strategy = keystone
+notify_nova_on_port_status_changes = true
+notify_nova_on_port_data_changes = true
+
+[keystone_authtoken]
+www_authenticate_uri = http://train-1:5000
+auth_url = http://train-1:5000
+memcached_servers = train-1:11211
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+project_name = service
+username = neutron
+password = NEUTRON_PASS
+
+[nova]
+auth_url = http://train-1:5000
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+region_name = RegionOne
+project_name = service
+username = nova
+password = NOVA_PASS
+
+[oslo_concurrency]
+lock_path = /var/lib/neutron/tmp
+</code></pre>
+<ol start="9">
+<li>修改 <code>/etc/neutron/plugins/ml2/ml2_conf.ini</code> ML2 plugin 配置文件</li>
+</ol>
+<pre><code class="language-shell">[ml2]
+type_drivers = flat,vlan
+tenant_network_types =
+mechanism_drivers = linuxbridge
+extension_drivers = port_security
+
+[ml2_type_flat]
+flat_networks = provider
+
+[securitygroup]
+enable_ipset = true
+</code></pre>
+<ol start="10">
+<li>修改 <code>/etc/neutron/plugins/ml2/linuxbridge_agent.ini</code> 配置文件</li>
+</ol>
+<pre><code class="language-shell">[linux_bridge]
+physical_interface_mappings = provider:PROVIDER_INTERFACE_NAME
+
+[vxlan]
+enable_vxlan = false
+
+[securitygroup]
+enable_security_group = true
+firewall_driver = neutron.agent.linux.iptables_firewall.IptablesFirewallDriver
+</code></pre>
+<ol start="11">
+<li>修改内核参数 <code>/etc/sysctl.conf</code></li>
+</ol>
+<pre><code class="language-shell">vim /etc/sysctl.conf
+
+net.bridge.bridge-nf-call-iptables = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+
+modprobe br_netfilter
+sysctl -p
+</code></pre>
+<ol start="12">
+<li>修改 <code>/etc/neutron/dhcp_agent.ini</code> DHCP 配置文件</li>
+</ol>
+<pre><code class="language-shell">[DEFAULT]
+interface_driver = linuxbridge
+dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
+enable_isolated_metadata = true
+</code></pre>
+<ol start="13">
+<li>配置 <code>/etc/neutron/metadata_agent.ini</code> metadata agent 配置文件</li>
+</ol>
+<pre><code class="language-shell">[DEFAULT]
+nova_metadata_host = train-1
+metadata_proxy_shared_secret = METADATA_SECRET
+</code></pre>
+<ol start="14">
+<li>配置计算服务使用刚才配置的网络服务，修改 <code>/etc/nova/nova.conf</code> nova 配置文件</li>
+</ol>
+<pre><code class="language-shell">[neutron]
+auth_url = http://train-1:5000
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+region_name = RegionOne
+project_name = service
+username = neutron
+password = NEUTRON_PASS
+service_metadata_proxy = true
+metadata_proxy_shared_secret = METADATA_SECRET
+</code></pre>
+<ol start="15">
+<li>最后几步，建立 ml2 软链</li>
+</ol>
+<pre><code class="language-shell">ln -s /etc/neutron/plugins/ml2/ml2_conf.ini /etc/neutron/plugin.ini
+</code></pre>
+<ol start="16">
+<li>填充 neutron 数据库</li>
+</ol>
+<pre><code class="language-shell">su -s /bin/sh -c &quot;neutron-db-manage --config-file /etc/neutron/neutron.conf \
+ --config-file /etc/neutron/plugins/ml2/ml2_conf.ini upgrade head&quot; neutron
+</code></pre>
+<ol start="17">
+<li>重启 计算服务 API</li>
+</ol>
+<pre><code class="language-shell">systemctl restart openstack-nova-api.service
+</code></pre>
+<ol start="18">
+<li>as</li>
+</ol>
+<pre><code class="language-shell">systemctl start \
+neutron-server.service neutron-linuxbridge-agent.service \
+neutron-dhcp-agent.service neutron-metadata-agent.service
+
+systemctl enable \
+neutron-server.service neutron-linuxbridge-agent.service \
+neutron-dhcp-agent.service neutron-metadata-agent.service
+</code></pre>
+<hr>
+<ol>
+<li>安装相关 neutron 服务</li>
+</ol>
+<pre><code class="language-shell">yum install -y openstack-neutron-linuxbridge ebtables ipset
+</code></pre>
+<ol start="2">
+<li>配置通用组件，修改 <code>/etc/neutron/neutron.conf</code> 配置文件</li>
+</ol>
+<pre><code class="language-shell">[DEFAULT]
+transport_url = rabbit://openstack:openstack@train-1
+auth_strategy = keystone
+
+[keystone_authtoken]
+www_authenticate_uri = http://train-1:5000
+auth_url = http://train-1:5000
+memcached_servers = train-1:11211
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+project_name = service
+username = neutron
+password = NEUTRON_PASS
+
+[oslo_concurrency]
+lock_path = /var/lib/neutron/tmp
+</code></pre>
+<ol>
+<li>配置 <code>/etc/neutron/plugins/ml2/linuxbridge_agent.ini</code> Linux bridge agent 代理</li>
+</ol>
+<pre><code class="language-shell">[linux_bridge]
+physical_interface_mappings = provider:PROVIDER_INTERFACE_NAME
+
+[vxlan]
+enable_vxlan = false
+
+[securitygroup]
+enable_security_group = true
+firewall_driver = neutron.agent.linux.iptables_firewall.IptablesFirewallDriver
+</code></pre>
+<ol start="2">
+<li>修改内核参数 <code>/etc/sysctl.conf</code></li>
+</ol>
+<pre><code class="language-shell">vim /etc/sysctl.conf
+
+net.bridge.bridge-nf-call-iptables = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+
+modprobe br_netfilter
+sysctl -p
+</code></pre>
+<ol>
+<li>配置计算服务使用刚才配置的网络服务，修改 <code>/etc/nova/nova.conf</code> 配置文件</li>
+</ol>
+<pre><code class="language-shell">[neutron]
+auth_url = http://train-1:5000
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+region_name = RegionOne
+project_name = service
+username = neutron
+password = NEUTRON_PASS
+</code></pre>
+<ol start="2">
+<li>重启 nova 计算服务</li>
+</ol>
+<pre><code class="language-shell">systemctl restart openstack-nova-compute.service
+</code></pre>
+<ol start="3">
+<li>启动 neutron 相关服务</li>
+</ol>
+<pre><code class="language-shell">systemctl start neutron-linuxbridge-agent.service &amp;&amp; systemctl enable neutron-linuxbridge-agent.service
+</code></pre>
+<h2 id="horizon">horizon</h2>
+<ol>
+<li>安装软件包</li>
+</ol>
+<pre><code class="language-shell">yum install openstack-dashboard
+</code></pre>
+<ol start="2">
+<li>修改 <code>/etc/openstack-dashboard/local_settings</code> 配置文件</li>
+</ol>
+<pre><code class="language-shell">OPENSTACK_HOST = &quot;train-1&quot;
+
+ALLOWED_HOSTS = ['one.example.com', 'two.example.com']
+ALLOWED_HOSTS = ['horizon.example.com', 'localhost','*']
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
+CACHES = {
+   'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': 'train-1:11211',
+   }
+}
+
+OPENSTACK_KEYSTONE_URL = &quot;http://%s:5000/v3&quot; % OPENSTACK_HOST
+
+OPENSTACK_KEYSTONE_MULTIDOMAIN_SUPPORT = True
+
+OPENSTACK_API_VERSIONS = {
+   &quot;identity&quot;: 3,
+   &quot;image&quot;: 2,
+   &quot;volume&quot;: 3,
+}
+
+OPENSTACK_KEYSTONE_DEFAULT_DOMAIN = &quot;Default&quot;
+
+OPENSTACK_KEYSTONE_DEFAULT_ROLE = &quot;user&quot;
+
+OPENSTACK_NEUTRON_NETWORK = {
+   ...
+   'enable_router': False,
+   'enable_quotas': False,
+   'enable_distributed_router': False,
+   'enable_ha_router': False,
+   'enable_lb': False,
+   'enable_firewall': False,
+   'enable_vpn': False,
+   'enable_fip_topology_check': False,
+}
+
+TIME_ZONE = &quot;TIME_ZONE&quot;
+</code></pre>
+<ol start="3">
+<li>Add the following line to /etc/httpd/conf.d/openstack-dashboard.conf if not included.</li>
+</ol>
+<pre><code class="language-shell">WSGIApplicationGroup %{GLOBAL}
+</code></pre>
+<ol start="4">
+<li>启动</li>
+</ol>
+<pre><code class="language-shell">systemctl restart httpd.service memcached.service
+</code></pre>
+<ol start="5">
+<li>生产配置文件**「！！不要做这步」**</li>
+</ol>
+<pre><code class="language-shell">cd /usr/share/openstack-dashboard
+python manage.py make_web_conf --apache &gt; /etc/httpd/conf.d/openstack-dashboard.conf
+</code></pre>
+<ol start="6">
+<li>创建链接</li>
+</ol>
+<pre><code class="language-shell">ln -s /etc/openstack-dashboard /usr/share/openstack-dashboard/openstack_dashboard/conf
+</code></pre>
+<ol start="7">
+<li>坑</li>
+</ol>
+<pre><code class="language-shell">vim /usr/share/openstack-dashboard/openstack_dashboard/defaults.py
+vim /usr/share/openstack-dashboard/openstack_dashboard/test/settings.py
+vim /usr/share/openstack-dashboard/static/dashboard/js/9937cc9f2cae.js
+
+WEBROOT = '/'
+WEBROOT = '/dashboard'
+</code></pre>
+<h2 id="附录">附录</h2>
+<p>略</p>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://blog.standuke.top/2020/03/2020-03-17-openstack-train-%E5%BF%AB%E9%80%9F%E7%A6%BB%E7%BA%BF%E9%83%A8%E7%BD%B2%E5%9C%A8%E7%BA%BF%E7%B1%BB%E4%BC%BC/" title="OpenStack Train 快速离线部署「在线类似」" target="_blank" rel="external">https://blog.standuke.top/2020/03/2020-03-17-openstack-train-%E5%BF%AB%E9%80%9F%E7%A6%BB%E7%BA%BF%E9%83%A8%E7%BD%B2%E5%9C%A8%E7%BA%BF%E7%B1%BB%E4%BC%BC/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://www.standuke.top" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://blog.standuke.top/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://www.standuke.top" target="_blank"><span class="text-dark">Standuke</span><small class="ml-1x">Yunshen Technology Co., Ltd. - SRE Engineer</small></a></h3>
+        <div>Focus on Linux Openstack Kubernetes vSphere Photograph Coding</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+<section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://blog.standuke.top/2020/03/2020-03-02-centos-7-cdh-6.3.1-cloudera-manager-6.3.1-%E4%BC%81%E4%B8%9A%E7%BA%A7%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85-ez-%E7%89%88/" title="CentOS 7 CDH 6.3.1 Cloudera Manager 6.3.1 企业级离线安装简易版"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            <li class="next">
+                <a href="https://blog.standuke.top/2020/03/2020-03-28-docker-image-%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA-%E4%BF%9D%E5%AD%98-tag-%E6%A0%87%E8%AE%B0/"
+                    title="docker image 导入导出 保存 Tag 标记"><span>上一篇&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter,google,linkedin"
+                data-mobile-sites="wechat,qq,facebook,twitter"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/idoker" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://blog.standuke.top/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2016  -
+    2022
+    <div class="publishby">
+        Theme by <a href="https://github.com/xiaoheiAh" target="_blank"> xiaoheiAh </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/shell.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://blog.standuke.top/js/application.min.a94ab19cb63a95c8d7fbd7b85cab3ddeea8c369bdf75b9cab6708787ead123af.js"></script>
+<script src="https://blog.standuke.top/js/plugin.min.19c5bcb2fb0789ab4f2b7834e5ceb5e92635645605bab902c1024b25f1502364.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/blog.standuke.top\/',
+            CONTENT_URL: 'https:\/\/blog.standuke.top\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://blog.standuke.top/js/insight.min.4a2d52de4bfff73e0c688404fe3d17c9a3ae12d9888e1e1ac9c690e4890de2ded50fe55f2b819c2ba55435a76f396f3ea6805765f0b0af5635cdf74ea459eab0.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https:\/\/blog.standuke.top\/2020\/03\/2020-03-17-openstack-train-%E5%BF%AB%E9%80%9F%E7%A6%BB%E7%BA%BF%E9%83%A8%E7%BD%B2%E5%9C%A8%E7%BA%BF%E7%B1%BB%E4%BC%BC\/';
+        <!-- this.page.identifier = 'nuo'; -->
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'nuo' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-180157250-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  </body>
+</html>

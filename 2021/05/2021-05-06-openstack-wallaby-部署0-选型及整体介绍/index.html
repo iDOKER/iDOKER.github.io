@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        OpenStack Wallaby 部署0 选型及整体介绍 - Stan&#39;s blog - Explore the world
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="👌 2021-05-06 OpenStack Wallaby 部署0 选型及整体介绍 FileInfo Filename - OpenStack Wallaby 部署简介 Version - v1.1.2105（2021/05/06 ~ 2021/05/11） Author - standuke Email - shadowdoker@gmail.com DescriptionKey - Introduction to OpenStack Wallaby deployment" />
+    <meta name="generator" content="Hugo 0.82.1 with theme pure" />
+    <title>OpenStack Wallaby 部署0 选型及整体介绍 - Stan&#39;s blog - Explore the world</title>
+    
+    
+    <link rel="stylesheet" href="https://blog.standuke.top/css/style.min.6f90022f237877ae2514ec95f3c9cca9f2314394f20800ca037a497e20053122.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="OpenStack Wallaby 部署0 选型及整体介绍" />
+<meta property="og:description" content="👌 2021-05-06 OpenStack Wallaby 部署0 选型及整体介绍 FileInfo Filename - OpenStack Wallaby 部署简介 Version - v1.1.2105（2021/05/06 ~ 2021/05/11） Author - standuke Email - shadowdoker@gmail.com DescriptionKey - Introduction to OpenStack Wallaby deployment" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.standuke.top/2021/05/2021-05-06-openstack-wallaby-%E9%83%A8%E7%BD%B20-%E9%80%89%E5%9E%8B%E5%8F%8A%E6%95%B4%E4%BD%93%E4%BB%8B%E7%BB%8D/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-05-06T14:34:51&#43;08:00" />
+<meta property="article:modified_time" content="2021-05-06T14:34:51&#43;08:00" />
+
+<meta itemprop="name" content="OpenStack Wallaby 部署0 选型及整体介绍">
+<meta itemprop="description" content="👌 2021-05-06 OpenStack Wallaby 部署0 选型及整体介绍 FileInfo Filename - OpenStack Wallaby 部署简介 Version - v1.1.2105（2021/05/06 ~ 2021/05/11） Author - standuke Email - shadowdoker@gmail.com DescriptionKey - Introduction to OpenStack Wallaby deployment"><meta itemprop="datePublished" content="2021-05-06T14:34:51&#43;08:00" />
+<meta itemprop="dateModified" content="2021-05-06T14:34:51&#43;08:00" />
+<meta itemprop="wordCount" content="4001">
+<meta itemprop="keywords" content="OpenStack,Virtualization," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="OpenStack Wallaby 部署0 选型及整体介绍"/>
+<meta name="twitter:description" content="👌 2021-05-06 OpenStack Wallaby 部署0 选型及整体介绍 FileInfo Filename - OpenStack Wallaby 部署简介 Version - v1.1.2105（2021/05/06 ~ 2021/05/11） Author - standuke Email - shadowdoker@gmail.com DescriptionKey - Introduction to OpenStack Wallaby deployment"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://www.standuke.top" target="_blank">
+            <img class="img-circle img-rotate" src="https://blog.standuke.top/avatar.png" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">Standuke</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">Yunshen Technology Co., Ltd. - SRE Engineer</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Hangzhou, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-linkedin">
+                <a href="https://linkedin.com/in/doc-s-44435ab2">
+                    <i class="icon icon-linkedin"></i>
+                  <span class="menu-title">Linkedin</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content"><p>站点迁移初期，配置参数调整，同时涉及到的文章较多，页面浏览可能会出现闪断。因为是业余时间迁移博客，从 5 月开始估计要到年底才能把前期的文章整体迁移过来。博客评论采用 Disqus 需要科学才能看到，如果有任何意见建议也可直接联系我 Telegram。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://blog.standuke.top/tags/aliyun/" class="tag-list-link" rel="1">aliyun<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/bigdata/" class="tag-list-link" rel="1">bigdata<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/cdh/" class="tag-list-link" rel="1">cdh<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/centos/" class="tag-list-link" rel="8">centos<span
+               class="tag-list-count">8</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/cloudera/" class="tag-list-link" rel="1">cloudera<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/docker/" class="tag-list-link" rel="1">docker<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/eip/" class="tag-list-link" rel="1">eip<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/esxi/" class="tag-list-link" rel="1">esxi<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/frp/" class="tag-list-link" rel="1">frp<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/kvm/" class="tag-list-link" rel="1">kvm<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/linux/" class="tag-list-link" rel="5">linux<span
+               class="tag-list-count">5</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/linux-bridge/" class="tag-list-link" rel="1">linux-bridge<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/macos/" class="tag-list-link" rel="2">macos<span
+               class="tag-list-count">2</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/markdown/" class="tag-list-link" rel="1">markdown<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/network/" class="tag-list-link" rel="1">network<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/openstack/" class="tag-list-link" rel="6">openstack<span
+               class="tag-list-count">6</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/pxe/" class="tag-list-link" rel="1">pxe<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/qcow2/" class="tag-list-link" rel="1">qcow2<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/system/" class="tag-list-link" rel="1">system<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/time-machine/" class="tag-list-link" rel="1">time-machine<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/tools/" class="tag-list-link" rel="1">tools<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/vcenter/" class="tag-list-link" rel="1">vcenter<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/virtualization/" class="tag-list-link" rel="9">virtualization<span
+               class="tag-list-count">9</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/vsphere/" class="tag-list-link" rel="1">vsphere<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/windows/" class="tag-list-link" rel="4">windows<span
+               class="tag-list-count">4</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="category-list-link">使用教程</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E5%86%85%E9%83%A8%E5%88%86%E4%BA%AB/" class="category-list-link">内部分享</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/" class="category-list-link">技术分析</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-list-link">操作系统</a><span class="category-list-count">7</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/" class="category-list-link">部署教程</a><span class="category-list-count">10</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E9%9B%B6%E7%A2%8E%E5%B0%8F%E9%97%AE%E9%A2%98/" class="category-list-link">零碎小问题</a><span class="category-list-count">4</span></li>
+        </ul>
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/07/2021-07-06-linux-%E5%AE%9A%E6%97%B6%E5%8D%95%E6%AC%A1%E5%8F%8A%E5%91%A8%E6%9C%9F%E4%BB%BB%E5%8A%A1/" class="title">Linux 定时单次及周期任务</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-07-06 17:20:34 &#43;0800 CST" itemprop="datePublished">2021-07-06</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/06/2021-06-26-linux-%E6%97%B6%E9%97%B4%E5%85%A8%E8%A7%A3/" class="title">Linux 时间全解</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-06-26 11:11:31 &#43;0800 CST" itemprop="datePublished">2021-06-26</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-19-%E9%98%BF%E9%87%8C%E4%BA%91%E4%B8%BB%E6%9C%BA-eip-%E8%87%B4%E4%BD%BF-ftp-%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5/" class="title">阿里云主机 EIP 致使 FTP 无法连接</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-19 21:08:48 &#43;0800 CST" itemprop="datePublished">2021-05-19</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B24-%E5%AE%89%E7%BD%AE%E6%9C%8D%E5%8A%A1-placement/" class="title">OpenStack Wallaby 部署4 安置服务 Placement</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-08 17:01:11 &#43;0800 CST" itemprop="datePublished">2021-05-08</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B23-%E9%95%9C%E5%83%8F%E6%9C%8D%E5%8A%A1-glance/" class="title">OpenStack Wallaby 部署3 镜像服务 Glance</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-08 16:54:55 &#43;0800 CST" itemprop="datePublished">2021-05-08</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2021/05/2021-05-06-openstack-wallaby-%E9%83%A8%E7%BD%B20-%E9%80%89%E5%9E%8B%E5%8F%8A%E6%95%B4%E4%BD%93%E4%BB%8B%E7%BB%8D/"
+    >OpenStack Wallaby 部署0 选型及整体介绍</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://blog.standuke.top/2021/05/2021-05-06-openstack-wallaby-%E9%83%A8%E7%BD%B20-%E9%80%89%E5%9E%8B%E5%8F%8A%E6%95%B4%E4%BD%93%E4%BB%8B%E7%BB%8D/" class="article-date">
+  <time datetime="2021-05-06 14:34:51 &#43;0800 CST" itemprop="datePublished">2021-05-06</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/"> 部署教程 </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/openstack/"> OpenStack </a>
+    <a class="article-tag-link" href="/tags/virtualization/"> Virtualization </a>
+  </span>
+
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2021/05/2021-05-06-openstack-wallaby-%E9%83%A8%E7%BD%B20-%E9%80%89%E5%9E%8B%E5%8F%8A%E6%95%B4%E4%BD%93%E4%BB%8B%E7%BB%8D/#comments"
+            class="article-comment-link">评论</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 4001字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 8分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <h1 id="-2021-05-06-openstack-wallaby-部署0-选型及整体介绍">👌 2021-05-06 OpenStack Wallaby 部署0 选型及整体介绍</h1>
+<blockquote>
+<p><strong>FileInfo</strong>
+Filename - OpenStack Wallaby 部署简介
+Version - v1.1.2105（2021/05/06 ~ 2021/05/11）
+Author - standuke
+Email - <a href="mailto:shadowdoker@gmail.com">shadowdoker@gmail.com</a>
+DescriptionKey - Introduction to OpenStack Wallaby deployment</p>
+</blockquote>
+<p><strong>版本修订记录：</strong></p>
+<p>v1.0.2105：2021-05-06：建立 OpenStack Wallaby 部署0 选型及整体介绍 文档，修订人：standuke
+v1.1.2105：2021-05-11：新增 OpenStack 简介、官方概念架构及逻辑架构配图、组件密码规划待下一版本修订，修订人：standuke</p>
+<p>[TOC]</p>
+<h2 id="简介">简介</h2>
+<p><a href="https://docs.openstack.org/install-guide/openstack-services.html">https://docs.openstack.org/install-guide/openstack-services.html</a></p>
+<p>OpenStack 是一个由 NASA「美国国家航空航天局」和 Rackspace 合作研发并发起的，以 Apache 许可证授权的自由软件和开放源代码项目。
+OpenStack 是一个开源的云计算管理平台项目，由几个主要的组件组合起来完成具体工作。OpenStack 支持几乎所有类型的云环境，项目目标是提供实施简单、可大规模扩展、丰富、标准统一的云计算管理平台。OpenStack 通过各种互补的服务 - 即组件，提供了基础设施即服务「IaaS」的解决方案，每个服务提供 API 以进行集成。
+OpenStack 是一个旨在为公共及私有云的建设与管理提供软件的开源项目。OpenStack 项目的首要任务是简化云的部署过程并为其带来良好的可扩展性。</p>
+<h3 id="与前期版本差异">与前期版本差异</h3>
+<p>Wallaby，是 OpenStack 的第 23 个发行版，其对基于角色的访问控制「RBAC」进行了改进，并与其他开源项目「包括 Ceph，Kubernetes 和 Prometheus」集成，以增强用于云原生应用程序的开放基础架构。</p>
+<ul>
+<li>基于角色的访问控制策略格式从 JSON 迁移到 YAML，使 OpenStack 与 Kubernetes 更加同步。</li>
+<li>OpenStack 内置了对开源 Ceph 后端驱动程序 Ceph iSCSI 的支持。除了其他新的 Cinder 存储驱动程序外，旧的驱动程序还增加了对新功能的支持，如恢复到快照和后端服务质量。</li>
+<li>Kolla 现在已经添加了对 Prometheus V2 的支持。</li>
+<li>Magnum API 服务已经更新了对 Kubernetes 和 containerd（一个标准的容器运行环境）的支持。</li>
+<li>运营商可通过 Neutron 将网络端口中的固定 IP 地址路由到外部世界，而不受 IPv4 地址范围的限制。</li>
+</ul>
+<p>参考资料：
+<a href="https://www.techrepublic.com/article/in-new-release-openstack-wallaby-reaches-out-to-kubernetes/">https://www.techrepublic.com/article/in-new-release-openstack-wallaby-reaches-out-to-kubernetes/</a></p>
+<h2 id="说明">说明</h2>
+<ol>
+<li>此次部署 各个组件密码 在本文当中使用环境变量替代，具体使用的密码可见 <strong>组件密码规划</strong> 部分</li>
+<li>组件部署完毕之后会有一个 <strong>里程碑</strong> 用于检验组件是否工作正常，组件工作正常后建议在开展之后的部署工作。</li>
+<li>部署采用的是最小化部署 OpenStack，再逐渐扩充组件丰富功能，最终目标是能够实现一套满足生产环境的架构「只是架构，参数等配置优化有时间有心情再写」</li>
+</ol>
+<h2 id="部署方案">部署方案</h2>
+<p>此次部署 OpenStack 版本为 Wallaby，发行「release」日期为 2021 年 4 月 21 日。
+部署方案为，计算与存储分离，计算节点只负责计算，管理节点只负责管理调度、镜像存储，存储将采用 Ceph 作为底层存储平台，为前端计算节点虚拟机提供存储资源池。</p>
+<h2 id="部署资源规划">部署资源规划</h2>
+<p>此次部署共使用 3 台物理服务器，对应的服务器角色如下</p>
+<table>
+<thead>
+<tr>
+<th>服务器名称</th>
+<th>管理段 IP 地址</th>
+<th>服务器配置</th>
+<th>泛角色</th>
+<th>操作系统</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>node1.nuo.com</td>
+<td>192.168.2.11</td>
+<td>64C256G</td>
+<td>Controller </td>
+<td>Ubuntu Server 20.04.2 LTS</td>
+</tr>
+<tr>
+<td>node2.nuo.com</td>
+<td>192.168.2.12</td>
+<td>64C256G</td>
+<td>Compute</td>
+<td>Ubuntu Server 20.04.2 LTS</td>
+</tr>
+<tr>
+<td>node3.nuo.com</td>
+<td>192.168.2.13</td>
+<td>64C256G</td>
+<td>Storage</td>
+<td>Ubuntu Server 20.04.2 LTS</td>
+</tr>
+</tbody>
+</table>
+<p>对于 <strong>在虚拟机环境部署</strong> 建议 3 台虚拟机「每台 4 核 8G 内存 60G 磁盘」或者 1 台虚拟机部署所有核心组件「配置 4 核 12G 内存 80G 磁盘」</p>
+<h3 id="操作系统">操作系统</h3>
+<blockquote>
+<p><strong>对于 Ubuntu LTS</strong>
+于 Ubuntu 官网可见 Ubuntu 服务器的长期支持版本将包含 OpenStack。同样地，安全更新也将支持至 2025 年 4 月，仅限 64 位平台。
+<strong>对于 OpenStack</strong>
+官方文档中使用的 Ubuntu 20.04.2 LTS 作为底层操作系统。
+目前 OpenStack 支持如下操作系统平台
+可见官网 <a href="https://docs.openstack.org/install-guide/preface.html">https://docs.openstack.org/install-guide/preface.html</a>
+OpenStack Wallaby is available for CentOS Stream 8. OpenStack Ussuri and Victoria are available for both CentOS 8 and RHEL 8. OpenStack Train and earlier are available on both CentOS 7 and RHEL 7.
+考虑到 CentOS 后期官方不再维护且支持周期较短，故此次部署不采用 CentOS 操作系统。</p>
+</blockquote>
+<p>如下为 泛角色 内部对应的组件规划「如下组件能保证 OpenStack 能够正常提供基础服务，后期在部署完成后计划逐步添加容器等其他服务组件」</p>
+<ul>
+<li><strong>Controller</strong></li>
+<li>OpenStack 环境依赖「MariaDB、etcd、RocketMQ、Memcached」</li>
+<li>CINDER「后期使用 Ceph 替代」</li>
+<li>NEUTRON</li>
+<li>KEYSTONE</li>
+<li>PLACEMENT</li>
+<li>GLANCE「后期存储于 Ceph 上」</li>
+<li>HORIZON</li>
+<li><strong>Compute</strong></li>
+<li>NOVA</li>
+<li>NEUTRON</li>
+<li><strong>Storage</strong></li>
+<li>Ceph</li>
+</ul>
+<p>如下为官方对于最小化部署 OpenStack 的组件要求</p>
+<pre><code>Minimal deployment for Wallaby
+At a minimum, you need to install the following services. Install the services in the order specified below:
+
+Identity service – keystone installation for Wallaby
+Image service – glance installation for Wallaby
+Placement service – placement installation for Wallaby
+Compute service – nova installation for Wallaby
+Networking service – neutron installation for Wallaby
+
+We advise to also install the following components after you have installed the minimal deployment services:
+
+Dashboard – horizon installation for Wallaby
+Block Storage service – cinder installation for Wallaby
+</code></pre>
+<h3 id="磁盘规划测试环境">磁盘规划「测试环境」</h3>
+<p>node1「Controller」</p>
+<pre><code>root@node1:~# lsblk
+NAME                      MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+loop0                       7:0    0 55.5M  1 loop /snap/core18/1997
+loop1                       7:1    0 67.6M  1 loop /snap/lxd/20326
+loop2                       7:2    0 69.9M  1 loop /snap/lxd/19188
+loop3                       7:3    0 31.1M  1 loop /snap/snapd/10707
+loop4                       7:4    0 55.4M  1 loop /snap/core18/1944
+loop5                       7:5    0 32.3M  1 loop /snap/snapd/11588
+sda                         8:0    0  1.1T  0 disk
+├─sda1                      8:1    0  512M  0 part /boot/efi
+├─sda2                      8:2    0    1G  0 part /boot
+└─sda3                      8:3    0  1.1T  0 part
+  └─ubuntu--vg-ubuntu--lv 253:0    0  200G  0 lvm  /
+sdb                         8:16   0  5.5T  0 disk
+root@node1:~# df -Th
+Filesystem                        Type      Size  Used Avail Use% Mounted on
+udev                              devtmpfs  126G     0  126G   0% /dev
+tmpfs                             tmpfs      26G  2.3M   26G   1% /run
+/dev/mapper/ubuntu--vg-ubuntu--lv ext4      196G   11G  176G   6% /
+tmpfs                             tmpfs     126G     0  126G   0% /dev/shm
+tmpfs                             tmpfs     5.0M     0  5.0M   0% /run/lock
+tmpfs                             tmpfs     126G     0  126G   0% /sys/fs/cgroup
+/dev/sda2                         ext4      976M  200M  710M  22% /boot
+/dev/loop0                        squashfs   56M   56M     0 100% /snap/core18/1997
+/dev/sda1                         vfat      511M  7.9M  504M   2% /boot/efi
+/dev/loop1                        squashfs   68M   68M     0 100% /snap/lxd/20326
+/dev/loop2                        squashfs   70M   70M     0 100% /snap/lxd/19188
+/dev/loop3                        squashfs   32M   32M     0 100% /snap/snapd/10707
+/dev/loop4                        squashfs   56M   56M     0 100% /snap/core18/1944
+/dev/loop5                        squashfs   33M   33M     0 100% /snap/snapd/11588
+tmpfs                             tmpfs      26G     0   26G   0% /run/user/0
+root@node1:~#
+</code></pre>
+<p>node2「Compute」</p>
+<pre><code>root@node2:~# lsblk
+NAME                      MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+loop0                       7:0    0 55.5M  1 loop /snap/core18/1997
+loop1                       7:1    0 55.4M  1 loop /snap/core18/1944
+loop2                       7:2    0 67.6M  1 loop /snap/lxd/20326
+loop3                       7:3    0 69.9M  1 loop /snap/lxd/19188
+loop4                       7:4    0 32.3M  1 loop /snap/snapd/11588
+loop5                       7:5    0 31.1M  1 loop /snap/snapd/10707
+sda                         8:0    0  5.5T  0 disk
+├─sda1                      8:1    0  512M  0 part /boot/efi
+├─sda2                      8:2    0    1G  0 part /boot
+└─sda3                      8:3    0  5.5T  0 part
+  └─ubuntu--vg-ubuntu--lv 253:0    0  5.5T  0 lvm  /
+root@node2:~# df -Th
+Filesystem                        Type      Size  Used Avail Use% Mounted on
+udev                              devtmpfs  126G     0  126G   0% /dev
+tmpfs                             tmpfs      26G  2.3M   26G   1% /run
+/dev/mapper/ubuntu--vg-ubuntu--lv ext4      5.5T   11G  5.2T   1% /
+tmpfs                             tmpfs     126G     0  126G   0% /dev/shm
+tmpfs                             tmpfs     5.0M     0  5.0M   0% /run/lock
+tmpfs                             tmpfs     126G     0  126G   0% /sys/fs/cgroup
+/dev/sda2                         ext4      976M  200M  710M  22% /boot
+/dev/loop0                        squashfs   56M   56M     0 100% /snap/core18/1997
+/dev/sda1                         vfat      511M  7.9M  504M   2% /boot/efi
+/dev/loop1                        squashfs   56M   56M     0 100% /snap/core18/1944
+/dev/loop2                        squashfs   68M   68M     0 100% /snap/lxd/20326
+/dev/loop3                        squashfs   70M   70M     0 100% /snap/lxd/19188
+/dev/loop5                        squashfs   32M   32M     0 100% /snap/snapd/10707
+/dev/loop4                        squashfs   33M   33M     0 100% /snap/snapd/11588
+tmpfs                             tmpfs      26G     0   26G   0% /run/user/0
+root@node2:~#
+</code></pre>
+<p>node3「Storage」</p>
+<pre><code>root@node3:~# lsblk
+NAME                      MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+loop0                       7:0    0 55.4M  1 loop /snap/core18/1944
+loop1                       7:1    0 55.5M  1 loop /snap/core18/1997
+loop2                       7:2    0 69.9M  1 loop /snap/lxd/19188
+loop3                       7:3    0 31.1M  1 loop /snap/snapd/10707
+loop4                       7:4    0 67.6M  1 loop /snap/lxd/20326
+loop5                       7:5    0 32.3M  1 loop /snap/snapd/11588
+sda                         8:0    0  1.1T  0 disk
+├─sda1                      8:1    0  512M  0 part /boot/efi
+├─sda2                      8:2    0    1G  0 part /boot
+└─sda3                      8:3    0  1.1T  0 part
+  └─ubuntu--vg-ubuntu--lv 253:0    0  1.1T  0 lvm  /
+sdb                         8:16   0  1.1T  0 disk
+sdc                         8:32   0  1.1T  0 disk
+sdd                         8:48   0  1.1T  0 disk
+root@node3:~# df -Th
+Filesystem                        Type      Size  Used Avail Use% Mounted on
+udev                              devtmpfs  126G     0  126G   0% /dev
+tmpfs                             tmpfs      26G  2.6M   26G   1% /run
+/dev/mapper/ubuntu--vg-ubuntu--lv ext4      1.1T   11G  1.1T   2% /
+tmpfs                             tmpfs     126G     0  126G   0% /dev/shm
+tmpfs                             tmpfs     5.0M     0  5.0M   0% /run/lock
+tmpfs                             tmpfs     126G     0  126G   0% /sys/fs/cgroup
+/dev/sda2                         ext4      976M  200M  710M  22% /boot
+/dev/sda1                         vfat      511M  7.9M  504M   2% /boot/efi
+/dev/loop0                        squashfs   56M   56M     0 100% /snap/core18/1944
+/dev/loop1                        squashfs   56M   56M     0 100% /snap/core18/1997
+/dev/loop2                        squashfs   70M   70M     0 100% /snap/lxd/19188
+/dev/loop3                        squashfs   32M   32M     0 100% /snap/snapd/10707
+/dev/loop5                        squashfs   33M   33M     0 100% /snap/snapd/11588
+/dev/loop4                        squashfs   68M   68M     0 100% /snap/lxd/20326
+tmpfs                             tmpfs      26G     0   26G   0% /run/user/0
+root@node3:~#
+</code></pre>
+<h2 id="部署网络规划">部署网络规划</h2>
+<h3 id="网段规划">网段规划</h3>
+<p>此次采用官方「Networking Option 2: Self-service networks」自主管理网络</p>
+<ul>
+<li>管理段 192.168.2.0/24</li>
+</ul>
+<p>即相对于云服务商的内网环境，此次环境管理段与公网相通，用于部署安装调试，同时管理段与服务器 BMC 相通，便于调试</p>
+<ul>
+<li>业务段 192.168.10.0/24</li>
+</ul>
+<p>即相对于云服务商的外网环境，用户客户访问云服务</p>
+<h3 id="网络架构">网络架构</h3>
+<p>此次部署采用「Self-service networks」网络架构</p>
+<ul>
+<li>下图来自官方对于 Provider networks 的组件部署架构</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/iDOKER/SupportProj@main/MarkdownPic/2021/2021-05-11_14-29-37_network1-services.png" alt="2021-05-11_14-29-37_network1-services"></p>
+<ul>
+<li>下图来自官方对于 Self-service networks 的组件部署架构</li>
+</ul>
+<p>可见对于 Option 1 来说 <code>Self-service networks</code> 网络架构多了 <code>L3 Agent</code> 也就是多了，三层网络的路由功能，通过路由协议将虚拟网络与外界打通。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/iDOKER/SupportProj@main/MarkdownPic/2021/2021-05-11_14-29-43_network2-services.png" alt="2021-05-11_14-29-43_network2-services"></p>
+<h2 id="组件密码规划">组件密码规划</h2>
+<table>
+<thead>
+<tr>
+<th>组件名称</th>
+<th>用户名</th>
+<th>密码</th>
+<th>环境变量名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MariaDB「MySQL」</td>
+<td>root</td>
+<td>1212</td>
+<td>MARIADB_PASS</td>
+</tr>
+<tr>
+<td>RabbitMQ</td>
+<td>openstack</td>
+<td>OPENSTACK</td>
+<td>RABBIT_PASS</td>
+</tr>
+<tr>
+<td>keystone</td>
+<td>keystone</td>
+<td>KEYSTONE</td>
+<td>KEYSTONE_DBPASS</td>
+</tr>
+<tr>
+<td>glance</td>
+<td>glance</td>
+<td>GLANCE</td>
+<td>GLANCE_DBPASS</td>
+</tr>
+<tr>
+<td>keystone</td>
+<td>keystone</td>
+<td>KEYSTONE</td>
+<td>KEYSTONE_DBPASS</td>
+</tr>
+<tr>
+<td>keystone</td>
+<td>keystone</td>
+<td>KEYSTONE</td>
+<td>KEYSTONE_DBPASS</td>
+</tr>
+<tr>
+<td>keystone</td>
+<td>keystone</td>
+<td>KEYSTONE</td>
+<td>KEYSTONE_DBPASS</td>
+</tr>
+<tr>
+<td>keystone</td>
+<td>keystone</td>
+<td>KEYSTONE</td>
+<td>KEYSTONE_DBPASS</td>
+</tr>
+<tr>
+<td>keystone</td>
+<td>keystone</td>
+<td>KEYSTONE</td>
+<td>KEYSTONE_DBPASS</td>
+</tr>
+</tbody>
+</table>
+<h2 id="附录">附录</h2>
+<h3 id="架构">架构</h3>
+<ul>
+<li>如下为 OpenStack 各个组件之间的关系「概念架构」</li>
+</ul>
+<p><a href="https://docs.openstack.org/install-guide/get-started-conceptual-architecture.html">https://docs.openstack.org/install-guide/get-started-conceptual-architecture.html</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/iDOKER/SupportProj@main/MarkdownPic/2021/2021-05-11_14-30-00_openstack_kilo_conceptual_arch.png" alt="2021-05-11_14-30-00_openstack_kilo_conceptual_arch"></p>
+<ul>
+<li>如下为一种云的组织架构图「逻辑架构」</li>
+</ul>
+<p><a href="https://docs.openstack.org/install-guide/get-started-logical-architecture.html">https://docs.openstack.org/install-guide/get-started-logical-architecture.html</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/iDOKER/SupportProj@main/MarkdownPic/2021/2021-05-11_14-29-50_openstack-arch-kilo-logical-v1.png" alt="2021-05-11_14-29-50_openstack-arch-kilo-logical-v1"></p>
+<h3 id="组件介绍">组件介绍</h3>
+<h4 id="openstack-servicesopenstack-服务">==OpenStack Services「OpenStack 服务」==</h4>
+<p>OpenStack 部署包含许多组件，这些组件提供用于访问基础结构资源的 API。如下列出了可以部署以向云最终用户提供此类资源的各种服务。</p>
+<h5 id="compute计算资源">Compute「计算资源」</h5>
+<p>NOVA - Compute Service「计算服务」
+ZUN - Containers Service「容器服务」</p>
+<h5 id="hardware-lifecycle硬件生命周期">Hardware Lifecycle「硬件生命周期」</h5>
+<p>IRONIC - Bare Metal Provisioning Service「裸机配置服务」
+CYBORG - Lifecycle management of accelerators「加速器的生命周期管理」</p>
+<h5 id="storage存储">Storage「存储」</h5>
+<p>SWIFT - Object store「对象存储」
+CINDER - Block Storage「块存储」
+MANILA - Shared filesystems「共享文件系统」</p>
+<h5 id="networking网络">Networking「网络」</h5>
+<p>NEUTRON - Networking「网络」
+OCTAVIA - Load balancer「负载均衡」
+DESIGNATE - DNS service「DNS 服务」</p>
+<h5 id="shared-services共享服务">Shared Services「共享服务」</h5>
+<p>KEYSTONE - Identity service「身份认证服务」
+PLACEMENT - Placement service「服务安置服务」
+GLANCE - Image service「镜像服务」
+BARBICAN - Key management「密钥管理服务」</p>
+<h5 id="orchestration">Orchestration</h5>
+<p>HEAT - Orchestration「编排」
+SENLIN - Clustering service「集群服务」
+MISTRAL - Workflow service「工作流服务」
+ZAQAR - Messaging Service「消息服务」
+BLAZAR - Resource reservation service「资源预约服务」
+AODH - Alarming Service「报警服务」</p>
+<h5 id="workload-provisioning">Workload Provisioning</h5>
+<p>MAGNUM - Container Orchestration Engine Provisioning「容器编排配置引擎」
+SAHARA - Big Data Processing Framework Provisioning「大数据处理框架配置」
+TROVE - Database as a Service「数据库即服务」</p>
+<h5 id="application-lifecycle">Application Lifecycle</h5>
+<p>MASAKARI - Instances High Availability Service「实例高可用性服务」
+MURANO - Application Catalog「应用目录」
+SOLUM - Software Development Lifecycle Automation「软件开发生命周期自动化」
+FREEZER - Backup, Restore, and Disaster Recovery「备份，还原和灾难恢复」</p>
+<h5 id="api-proxies">API Proxies</h5>
+<p>EC2API - EC2 API proxy「EC2 API代理」</p>
+<h5 id="web-frontend">Web Frontend</h5>
+<p>HORIZON - Dashboard「仪表盘」</p>
+<h4 id="operations-tooling运维工具">==Operations tooling「运维工具」==</h4>
+<p>这些服务提供主要针对云管理员和部署者的API，以帮助进行云操作。</p>
+<h5 id="monitoring-services监控服务">Monitoring services「监控服务」</h5>
+<p>CEILOMETER - Metering &amp; Data Collection Service「计量和数据收集服务」
+PANKO - Event, Metadata Indexing Service「事件，元数据索引服务」
+MONASCA - Monitoring「监控」</p>
+<h5 id="resource-optimization资源优化">Resource optimization「资源优化」</h5>
+<p>WATCHER - Optimization Service「优化服务」
+VITRAGE - Root Cause Analysis service「根本原因分析服务」</p>
+<h5 id="billing--business-logic计费--业务逻辑">Billing / Business Logic「计费 / 业务逻辑」</h5>
+<p>ADJUTANT - Operations processes automation「运营流程自动化」
+CLOUDKITTY - Billing and chargebacks「帐单和退款」</p>
+<h5 id="testing--benchmark">Testing / Benchmark</h5>
+<p>RALLY - Benchmarking tool「跑分工具标杆管理工具」
+TEMPEST - The OpenStack Integration Test Suite「OpenStack集成测试套件」
+PATROLE - The OpenStack RBAC Integration Test Suite「OpenStack RBAC集成测试套件」</p>
+<h4 id="add-ons-to-services附加服务">==Add-Ons to Services「附加服务」==</h4>
+<p>该软件可以作为其他 OpenStack 服务的附件或插件运行。</p>
+<h5 id="swift-附加组件">Swift 附加组件</h5>
+<p>STOR - Computable object storage「可计算对象存储」</p>
+<h4 id="integration-enablers其他系统整合">==Integration enablers「其他系统整合」==</h4>
+<p>本节中的软件有助于将 OpenStack 组件集成到相邻的开放基础架构堆栈中。</p>
+<h5 id="containers容器">Containers「容器」</h5>
+<p>KURYR - OpenStack Networking integration for containers「容器的OpenStack网络集成」</p>
+<h5 id="nfv">NFV</h5>
+<p>TACKER - NFV Orchestration「NFV编排」</p>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://blog.standuke.top/2021/05/2021-05-06-openstack-wallaby-%E9%83%A8%E7%BD%B20-%E9%80%89%E5%9E%8B%E5%8F%8A%E6%95%B4%E4%BD%93%E4%BB%8B%E7%BB%8D/" title="OpenStack Wallaby 部署0 选型及整体介绍" target="_blank" rel="external">https://blog.standuke.top/2021/05/2021-05-06-openstack-wallaby-%E9%83%A8%E7%BD%B20-%E9%80%89%E5%9E%8B%E5%8F%8A%E6%95%B4%E4%BD%93%E4%BB%8B%E7%BB%8D/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://www.standuke.top" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://blog.standuke.top/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://www.standuke.top" target="_blank"><span class="text-dark">Standuke</span><small class="ml-1x">Yunshen Technology Co., Ltd. - SRE Engineer</small></a></h3>
+        <div>Focus on Linux Openstack Kubernetes vSphere Photograph Coding</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+<section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://blog.standuke.top/2021/04/2021-04-22-%E7%94%B5%E8%84%91%E7%8A%B6%E6%80%81-%E4%BC%91%E7%9C%A0-%E7%9D%A1%E7%9C%A0-%E5%85%B3%E6%9C%BA%E7%AD%89%E5%8C%BA%E5%88%AB/" title="电脑状态 休眠 睡眠 关机等区别"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            <li class="next">
+                <a href="https://blog.standuke.top/2021/05/2021-05-07-openstack-wallaby-%E9%83%A8%E7%BD%B21-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83/"
+                    title="OpenStack Wallaby 部署1 操作系统及基础环境"><span>上一篇&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter,google,linkedin"
+                data-mobile-sites="wechat,qq,facebook,twitter"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/idoker" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://blog.standuke.top/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2016  -
+    2022
+    <div class="publishby">
+        Theme by <a href="https://github.com/xiaoheiAh" target="_blank"> xiaoheiAh </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/shell.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://blog.standuke.top/js/application.min.a94ab19cb63a95c8d7fbd7b85cab3ddeea8c369bdf75b9cab6708787ead123af.js"></script>
+<script src="https://blog.standuke.top/js/plugin.min.19c5bcb2fb0789ab4f2b7834e5ceb5e92635645605bab902c1024b25f1502364.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/blog.standuke.top\/',
+            CONTENT_URL: 'https:\/\/blog.standuke.top\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://blog.standuke.top/js/insight.min.4a2d52de4bfff73e0c688404fe3d17c9a3ae12d9888e1e1ac9c690e4890de2ded50fe55f2b819c2ba55435a76f396f3ea6805765f0b0af5635cdf74ea459eab0.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https:\/\/blog.standuke.top\/2021\/05\/2021-05-06-openstack-wallaby-%E9%83%A8%E7%BD%B20-%E9%80%89%E5%9E%8B%E5%8F%8A%E6%95%B4%E4%BD%93%E4%BB%8B%E7%BB%8D\/';
+        <!-- this.page.identifier = 'nuo'; -->
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'nuo' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-180157250-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  </body>
+</html>

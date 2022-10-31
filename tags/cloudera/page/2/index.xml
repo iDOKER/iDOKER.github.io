@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cloudera on Stan&#39;s blog - Explore the world</title>
+    <link>https://blog.standuke.top/tags/cloudera/</link>
+    <description>Recent content in Cloudera on Stan&#39;s blog - Explore the world</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>CC BY 4.0 CN</copyright>
+    <lastBuildDate>Mon, 02 Mar 2020 21:17:46 +0800</lastBuildDate>
+    
+        <atom:link href="https://blog.standuke.top/tags/cloudera/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>CentOS 7 CDH 6.3.1 Cloudera Manager 6.3.1 企业级离线安装简易版</title>
+      <link>https://blog.standuke.top/2020/03/2020-03-02-centos-7-cdh-6.3.1-cloudera-manager-6.3.1-%E4%BC%81%E4%B8%9A%E7%BA%A7%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85-ez-%E7%89%88/</link>
+      <pubDate>Mon, 02 Mar 2020 21:17:46 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2020/03/2020-03-02-centos-7-cdh-6.3.1-cloudera-manager-6.3.1-%E4%BC%81%E4%B8%9A%E7%BA%A7%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85-ez-%E7%89%88/</guid>
+      <description>👌 2020-03-02 CentOS 7 CDH 6.3.1 Cloudera Manager 6.3.1 企业级离线安装简易版 FileInfo Filename - 2020-03-02 CentOS 7 CDH 6.3.1 Cloudera Manager 6.3.1 企业级离线安装简易版 Version - v1.1.2003（2020/03/02 ~ 2020/03</description>
+    </item>
+    
+    <item>
+      <title>Linux 系统 Systemd 服务简介及编写</title>
+      <link>https://blog.standuke.top/2020/02/2020-02-17-linux-%E7%B3%BB%E7%BB%9F-systemd-%E6%9C%8D%E5%8A%A1%E7%AE%80%E4%BB%8B%E5%8F%8A%E7%BC%96%E5%86%99/</link>
+      <pubDate>Mon, 17 Feb 2020 21:18:49 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2020/02/2020-02-17-linux-%E7%B3%BB%E7%BB%9F-systemd-%E6%9C%8D%E5%8A%A1%E7%AE%80%E4%BB%8B%E5%8F%8A%E7%BC%96%E5%86%99/</guid>
+      <description>👌 2020-02-17 Linux 系统 systemd 服务简介及编写 FileInfo Filename - Linux 编写系统 systemd 服务.md Version - v1.1.2002（2020/02/18 ~ 2020/02/19） Author - standuke Email - shadowdoker@gmail.com DescriptionKey - Linux</description>
+    </item>
+    
+    <item>
+      <title>PXE 预启动环境安装 - Legacy 传统引导环境</title>
+      <link>https://blog.standuke.top/2020/01/2020-01-15-pxe-%E9%A2%84%E5%90%AF%E5%8A%A8%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85-legacy-%E4%BC%A0%E7%BB%9F%E5%BC%95%E5%AF%BC%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Wed, 15 Jan 2020 17:48:47 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2020/01/2020-01-15-pxe-%E9%A2%84%E5%90%AF%E5%8A%A8%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85-legacy-%E4%BC%A0%E7%BB%9F%E5%BC%95%E5%AF%BC%E7%8E%AF%E5%A2%83/</guid>
+      <description>👌 2020-01-15 PXE 预启动环境安装 - Legacy 传统引导环境 FileInfo Filename - PXE Legacy Boot Configure Guide.md Version - v1.3.2001（2020/01/13 ~ 2020/01/28） Author - standuke Email - shadowdoker@gmail.com DescriptionKey - PXE Boot</description>
+    </item>
+    
+    <item>
+      <title>Markdown 文档编写语法指北</title>
+      <link>https://blog.standuke.top/2020/01/2020-01-14-markdown-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95%E6%8C%87%E5%8C%97/</link>
+      <pubDate>Tue, 14 Jan 2020 16:32:45 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2020/01/2020-01-14-markdown-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95%E6%8C%87%E5%8C%97/</guid>
+      <description>👌 2020-01-14 Markdown 文档编写语法指北 FileInfo Filename - Markdown Syntax And Writing Specifications Guide.md Version - v1.2.2001（2020/01/14 ~ 2020/01/15） Author - standuke Email - shadowdoker@gmail.com DescriptionKey - Markdown Syntax And Writing Specifications &amp;amp; Chinese and</description>
+    </item>
+    
+    <item>
+      <title>CentOS 7 重置 Root 用户密码</title>
+      <link>https://blog.standuke.top/2019/12/2019-12-23-centos-7-%E9%87%8D%E7%BD%AE-root-%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81/</link>
+      <pubDate>Mon, 23 Dec 2019 16:21:53 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2019/12/2019-12-23-centos-7-%E9%87%8D%E7%BD%AE-root-%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81/</guid>
+      <description>👌 2019-12-23 CentOS 7 重置 root 用户密码 rd.break方法：推荐 启动的时候，在 GRUB2 启动界面，相应启动项，内核名称上按&amp;quot;e&amp;quot;修改启动参数； 进</description>
+    </item>
+    
+    <item>
+      <title>CentOS 登陆出现 Module Is Unknown 不能登陆</title>
+      <link>https://blog.standuke.top/2019/10/2019-10-03-centos-%E7%99%BB%E9%99%86%E5%87%BA%E7%8E%B0-module-is-unknown-%E4%B8%8D%E8%83%BD%E7%99%BB%E9%99%86/</link>
+      <pubDate>Thu, 03 Oct 2019 16:16:46 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2019/10/2019-10-03-centos-%E7%99%BB%E9%99%86%E5%87%BA%E7%8E%B0-module-is-unknown-%E4%B8%8D%E8%83%BD%E7%99%BB%E9%99%86/</guid>
+      <description>👌 2019-10-03 CentOS 登陆出现 module is unknown 不能登陆 由于 CentOS 更改了某些配置之后，导致系统无法登陆，出现 module is unknown 提示，一直循环在登陆系统界面。 由于在配置oracle的安装</description>
+    </item>
+    
+    <item>
+      <title>Windows Server 2008 R2 已经激活但每隔一段时间自动关机 VMware 环境</title>
+      <link>https://blog.standuke.top/2019/09/2019-09-12-windows-server-2008-r2-%E5%B7%B2%E7%BB%8F%E6%BF%80%E6%B4%BB%E4%BD%86%E6%AF%8F%E9%9A%94%E4%B8%80%E6%AE%B5%E6%97%B6%E9%97%B4%E8%87%AA%E5%8A%A8%E5%85%B3%E6%9C%BA-vmware-%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Thu, 12 Sep 2019 16:12:18 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2019/09/2019-09-12-windows-server-2008-r2-%E5%B7%B2%E7%BB%8F%E6%BF%80%E6%B4%BB%E4%BD%86%E6%AF%8F%E9%9A%94%E4%B8%80%E6%AE%B5%E6%97%B6%E9%97%B4%E8%87%AA%E5%8A%A8%E5%85%B3%E6%9C%BA-vmware-%E7%8E%AF%E5%A2%83/</guid>
+      <description>👌 2019-09-12 Windows Server 2008 R2 已经激活但每隔一段时间自动关机 VMware 环境 原因： C:\Windows\system32\wlms\wlms.exe程序关闭的系统 处理方</description>
+    </item>
+    
+    <item>
+      <title>macOS or Windows 压缩文件中文件夹中文编码原因导致无法解压</title>
+      <link>https://blog.standuke.top/2019/08/2019-08-07-macos-or-windows-%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6%E4%B8%AD%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E6%96%87%E7%BC%96%E7%A0%81%E5%8E%9F%E5%9B%A0%E5%AF%BC%E8%87%B4%E6%97%A0%E6%B3%95%E8%A7%A3%E5%8E%8B/</link>
+      <pubDate>Wed, 07 Aug 2019 15:45:40 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2019/08/2019-08-07-macos-or-windows-%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6%E4%B8%AD%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E6%96%87%E7%BC%96%E7%A0%81%E5%8E%9F%E5%9B%A0%E5%AF%BC%E8%87%B4%E6%97%A0%E6%B3%95%E8%A7%A3%E5%8E%8B/</guid>
+      <description>👌 2019-08-07 macOS or Windows 压缩文件中文件夹中文编码原因导致无法解压 Unzip fail when zip contains chinese char on macOS 报错信息： unzip checkdir error cannot create illegal byte sequence 处理方案： 用 ditto 代替 unzip ditto -V -x -k --sequesterRsrc --rsrc FILENAME.ZIP DESTINATIONDIRECTORY 参考资料：</description>
+    </item>
+    
+    <item>
+      <title>文件一致性 MD5 校验</title>
+      <link>https://blog.standuke.top/2016/06/2016-06-17-%E6%96%87%E4%BB%B6%E4%B8%80%E8%87%B4%E6%80%A7-md5-%E6%A0%A1%E9%AA%8C/</link>
+      <pubDate>Fri, 17 Jun 2016 10:32:24 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2016/06/2016-06-17-%E6%96%87%E4%BB%B6%E4%B8%80%E8%87%B4%E6%80%A7-md5-%E6%A0%A1%E9%AA%8C/</guid>
+      <description>👌 2016-06-17 文件一致性 md5 校验 FileInfo Filename - 文件一致性 md5 校验 Version - v1.1.2105（2016/06/17 ~ 2021/05/14） Author - standuke Email - shadowdoker@gmail.com DescriptionKey - File consistency md5 check 版本修</description>
+    </item>
+    
+  </channel>
+</rss>

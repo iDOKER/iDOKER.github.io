@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        Markdown 文档编写语法指北 - Stan&#39;s blog - Explore the world
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="👌 2020-01-14 Markdown 文档编写语法指北 FileInfo Filename - Markdown Syntax And Writing Specifications Guide.md Version - v1.2.2001（2020/01/14 ~ 2020/01/15） Author - standuke Email - shadowdoker@gmail.com DescriptionKey - Markdown Syntax And Writing Specifications &amp;amp; Chinese and" />
+    <meta name="generator" content="Hugo 0.82.1 with theme pure" />
+    <title>Markdown 文档编写语法指北 - Stan&#39;s blog - Explore the world</title>
+    
+    
+    <link rel="stylesheet" href="https://blog.standuke.top/css/style.min.6f90022f237877ae2514ec95f3c9cca9f2314394f20800ca037a497e20053122.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="Markdown 文档编写语法指北" />
+<meta property="og:description" content="👌 2020-01-14 Markdown 文档编写语法指北 FileInfo Filename - Markdown Syntax And Writing Specifications Guide.md Version - v1.2.2001（2020/01/14 ~ 2020/01/15） Author - standuke Email - shadowdoker@gmail.com DescriptionKey - Markdown Syntax And Writing Specifications &amp; Chinese and" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.standuke.top/2020/01/2020-01-14-markdown-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95%E6%8C%87%E5%8C%97/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-01-14T16:32:45&#43;08:00" />
+<meta property="article:modified_time" content="2020-01-14T16:32:45&#43;08:00" />
+
+<meta itemprop="name" content="Markdown 文档编写语法指北">
+<meta itemprop="description" content="👌 2020-01-14 Markdown 文档编写语法指北 FileInfo Filename - Markdown Syntax And Writing Specifications Guide.md Version - v1.2.2001（2020/01/14 ~ 2020/01/15） Author - standuke Email - shadowdoker@gmail.com DescriptionKey - Markdown Syntax And Writing Specifications &amp; Chinese and"><meta itemprop="datePublished" content="2020-01-14T16:32:45&#43;08:00" />
+<meta itemprop="dateModified" content="2020-01-14T16:32:45&#43;08:00" />
+<meta itemprop="wordCount" content="4532">
+<meta itemprop="keywords" content="Markdown," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Markdown 文档编写语法指北"/>
+<meta name="twitter:description" content="👌 2020-01-14 Markdown 文档编写语法指北 FileInfo Filename - Markdown Syntax And Writing Specifications Guide.md Version - v1.2.2001（2020/01/14 ~ 2020/01/15） Author - standuke Email - shadowdoker@gmail.com DescriptionKey - Markdown Syntax And Writing Specifications &amp; Chinese and"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://www.standuke.top" target="_blank">
+            <img class="img-circle img-rotate" src="https://blog.standuke.top/avatar.png" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">Standuke</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">Yunshen Technology Co., Ltd. - SRE Engineer</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Hangzhou, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-linkedin">
+                <a href="https://linkedin.com/in/doc-s-44435ab2">
+                    <i class="icon icon-linkedin"></i>
+                  <span class="menu-title">Linkedin</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content"><p>站点迁移初期，配置参数调整，同时涉及到的文章较多，页面浏览可能会出现闪断。因为是业余时间迁移博客，从 5 月开始估计要到年底才能把前期的文章整体迁移过来。博客评论采用 Disqus 需要科学才能看到，如果有任何意见建议也可直接联系我 Telegram。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://blog.standuke.top/tags/aliyun/" class="tag-list-link" rel="1">aliyun<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/bigdata/" class="tag-list-link" rel="1">bigdata<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/cdh/" class="tag-list-link" rel="1">cdh<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/centos/" class="tag-list-link" rel="8">centos<span
+               class="tag-list-count">8</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/cloudera/" class="tag-list-link" rel="1">cloudera<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/docker/" class="tag-list-link" rel="1">docker<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/eip/" class="tag-list-link" rel="1">eip<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/esxi/" class="tag-list-link" rel="1">esxi<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/frp/" class="tag-list-link" rel="1">frp<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/kvm/" class="tag-list-link" rel="1">kvm<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/linux/" class="tag-list-link" rel="5">linux<span
+               class="tag-list-count">5</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/linux-bridge/" class="tag-list-link" rel="1">linux-bridge<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/macos/" class="tag-list-link" rel="2">macos<span
+               class="tag-list-count">2</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/markdown/" class="tag-list-link" rel="1">markdown<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/network/" class="tag-list-link" rel="1">network<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/openstack/" class="tag-list-link" rel="6">openstack<span
+               class="tag-list-count">6</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/pxe/" class="tag-list-link" rel="1">pxe<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/qcow2/" class="tag-list-link" rel="1">qcow2<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/system/" class="tag-list-link" rel="1">system<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/time-machine/" class="tag-list-link" rel="1">time-machine<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/tools/" class="tag-list-link" rel="1">tools<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/vcenter/" class="tag-list-link" rel="1">vcenter<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/virtualization/" class="tag-list-link" rel="9">virtualization<span
+               class="tag-list-count">9</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/vsphere/" class="tag-list-link" rel="1">vsphere<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/windows/" class="tag-list-link" rel="4">windows<span
+               class="tag-list-count">4</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="category-list-link">使用教程</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E5%86%85%E9%83%A8%E5%88%86%E4%BA%AB/" class="category-list-link">内部分享</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/" class="category-list-link">技术分析</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-list-link">操作系统</a><span class="category-list-count">7</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/" class="category-list-link">部署教程</a><span class="category-list-count">10</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E9%9B%B6%E7%A2%8E%E5%B0%8F%E9%97%AE%E9%A2%98/" class="category-list-link">零碎小问题</a><span class="category-list-count">4</span></li>
+        </ul>
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/07/2021-07-06-linux-%E5%AE%9A%E6%97%B6%E5%8D%95%E6%AC%A1%E5%8F%8A%E5%91%A8%E6%9C%9F%E4%BB%BB%E5%8A%A1/" class="title">Linux 定时单次及周期任务</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-07-06 17:20:34 &#43;0800 CST" itemprop="datePublished">2021-07-06</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/06/2021-06-26-linux-%E6%97%B6%E9%97%B4%E5%85%A8%E8%A7%A3/" class="title">Linux 时间全解</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-06-26 11:11:31 &#43;0800 CST" itemprop="datePublished">2021-06-26</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-19-%E9%98%BF%E9%87%8C%E4%BA%91%E4%B8%BB%E6%9C%BA-eip-%E8%87%B4%E4%BD%BF-ftp-%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5/" class="title">阿里云主机 EIP 致使 FTP 无法连接</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-19 21:08:48 &#43;0800 CST" itemprop="datePublished">2021-05-19</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B24-%E5%AE%89%E7%BD%AE%E6%9C%8D%E5%8A%A1-placement/" class="title">OpenStack Wallaby 部署4 安置服务 Placement</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-08 17:01:11 &#43;0800 CST" itemprop="datePublished">2021-05-08</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/05/2021-05-08-openstack-wallaby-%E9%83%A8%E7%BD%B23-%E9%95%9C%E5%83%8F%E6%9C%8D%E5%8A%A1-glance/" class="title">OpenStack Wallaby 部署3 镜像服务 Glance</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-05-08 16:54:55 &#43;0800 CST" itemprop="datePublished">2021-05-08</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2020/01/2020-01-14-markdown-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95%E6%8C%87%E5%8C%97/"
+    >Markdown 文档编写语法指北</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://blog.standuke.top/2020/01/2020-01-14-markdown-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95%E6%8C%87%E5%8C%97/" class="article-date">
+  <time datetime="2020-01-14 16:32:45 &#43;0800 CST" itemprop="datePublished">2020-01-14</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/%E5%86%85%E9%83%A8%E5%88%86%E4%BA%AB/"> 内部分享 </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/markdown/"> Markdown </a>
+  </span>
+
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2020/01/2020-01-14-markdown-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95%E6%8C%87%E5%8C%97/#comments"
+            class="article-comment-link">评论</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 4532字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 10分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <h1 id="-2020-01-14-markdown-文档编写语法指北">👌 2020-01-14 Markdown 文档编写语法指北</h1>
+<blockquote>
+<p><strong>FileInfo</strong>
+Filename - Markdown Syntax And Writing Specifications Guide.md
+Version - v1.2.2001（2020/01/14 ~ 2020/01/15）
+Author - standuke
+Email - <a href="mailto:shadowdoker@gmail.com">shadowdoker@gmail.com</a>
+DescriptionKey - Markdown Syntax And Writing Specifications &amp; Chinese and Western typography &amp; Punctuation Specification</p>
+</blockquote>
+<h4 id="文件编写约定">文件编写约定</h4>
+<p>在文件开头将会标注文件的信息，文件信息包括文件名称，用于文件检索。同时会标注文件的版本信息，版本信息格式为<code>v</code> + <code>大版本号</code> + <code>修订版本号</code> + <code>修订年月</code>，例如<code>v1.2.1909</code>所代表的含义为第一个大版本、第二个修订版、修订年月为 2019 年 9 月。之后为作者及联系方式。文档描述和关键字用于搜索软件检索文档。</p>
+<blockquote>
+<p><strong>欢迎效仿</strong></p>
+</blockquote>
+<h3 id="markdown-的设计哲学">Markdown 的设计哲学</h3>
+<p>Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（John Gruber）。它允许人们『使用易读易写的纯文本格式编写文档，然后转换成有效的 XHTML（或者 HTML）文档』。
+故 Markdown 的目标是实现文档的「易读易写」。其中最需要强调的是它的易读性。一份使用 Markdown 格式的文件在纯文字发布的情况下，看起来都不会像是有许多符号所组成的文档。
+由于Markdown的轻量化、易读易写特性，并且对于图片，图表、数学式都有支持，当前许多网站都广泛使用 Markdown 来撰写帮助文档或是用于论坛上发表消息。</p>
+<h3 id="文章结构及阅读指北">文章结构及阅读指北</h3>
+<p>在本篇文档中将会分为三大部分。第一部分是基础的 Markdown 语法以及使用范例；第二部分为书写排版及中西文混排范例（部分来自<a href="https://github.com/fex-team/styleguide/blob/master/markdown.md">百度前端团队</a>、知乎）；第三部分为标点符号使用范例（来自知乎）。相关可查看 <a href="https://help.github.com/en/articles/github-flavored-markdown">Github 规范</a> 以及 <a href="https://www.zhihu.com/question/20414919">知乎修改规范</a> 、<a href="https://github.com/sparanoid/chinese-copywriting-guidelines">中文文案排版指北</a></p>
+<p>[TOC]</p>
+<hr>
+<p>⚠️ 以上为文档简介，正文及规范从下文开始，因为考虑到三大部分的独立性，故各个部分均相互独立，且均以 <strong>一级标题</strong> 开始</p>
+<hr>
+<h1 id="markdown-语法">Markdown 语法</h1>
+<h2 id="1-标题">1. 标题</h2>
+<p>Markdown 语法：</p>
+<pre><code># 第一级标题 `&lt;h1&gt;` 
+## 第二级标题 `&lt;h2&gt;` 
+###### 第六级标题 `&lt;h6&gt;` 
+</code></pre>
+<p>效果如下：</p>
+<h1 id="第一级标题-h1">第一级标题 <code>&lt;h1&gt;</code></h1>
+<h2 id="第二级标题-h2">第二级标题 <code>&lt;h2&gt;</code></h2>
+<h6 id="第六级标题-h6">第六级标题 <code>&lt;h6&gt;</code></h6>
+<h2 id="2-强调">2. 强调</h2>
+<p>Markdown 语法：</p>
+<pre><code>*这些文字会生成`&lt;em&gt;`*
+_这些文字会生成`&lt;u&gt;`_
+
+**这些文字会生成`&lt;strong&gt;`**
+__这些文字会生成`&lt;strong&gt;`__
+</code></pre>
+<p>效果如下：</p>
+<p><em>这些文字会生成<code>&lt;em&gt;</code></em>
+<em>这些文字会生成<code>&lt;u&gt;</code></em></p>
+<p><strong>这些文字会生成<code>&lt;strong&gt;</code></strong>
+<strong>这些文字会生成<code>&lt;strong&gt;</code></strong></p>
+<h2 id="3-换行">3. 换行</h2>
+<p>四个及以上空格加回车。</p>
+<h2 id="4-列表">4. 列表</h2>
+<h3 id="无序列表">无序列表</h3>
+<p>Markdown 语法：</p>
+<pre><code>* 项目一 无序列表 `* + 空格键`
+* 项目二
+	* 项目二的子项目一 无序列表 `TAB + * + 空格键`
+	* 项目二的子项目二
+</code></pre>
+<p>效果如下：</p>
+<ul>
+<li>项目一 无序列表 <code>* + 空格键</code></li>
+<li>项目二
+<ul>
+<li>项目二的子项目一 无序列表 <code>TAB + * + 空格键</code></li>
+<li>项目二的子项目二</li>
+</ul>
+</li>
+</ul>
+<h3 id="有序列表">有序列表</h3>
+<p>Markdown 语法：</p>
+<pre><code>1. 项目一 有序列表 `数字 + . + 空格键`
+2. 项目二 
+3. 项目三
+	1. 项目三的子项目一 有序列表 `TAB + 数字 + . + 空格键`
+	2. 项目三的子项目二
+</code></pre>
+<p>效果如下：</p>
+<ol>
+<li>项目一 有序列表 <code>数字 + . + 空格键</code></li>
+<li>项目二</li>
+<li>项目三
+<ol>
+<li>项目三的子项目一 有序列表 <code>TAB + 数字 + . + 空格键</code></li>
+<li>项目三的子项目二</li>
+</ol>
+</li>
+</ol>
+<h3 id="列表中嵌入代码块语法">列表中嵌入代码块语法</h3>
+<pre><code>1. 项目一 有序列表 `数字 + . + 空格键`
+    
+    列表中嵌入代码块必须前后空一行，如这个写法
+       
+    ```js
+    function fancyAlert(arg) {
+      if(arg) {
+        $.facebox({div:'#foo'})
+      }
+    }
+    ```
+    
+    其他文本。
+    
+2. 项目二
+</code></pre>
+<h3 id="任务列表task-lists">任务列表（Task lists）</h3>
+<p>Markdown 语法：</p>
+<pre><code>- [ ] 任务一 未做任务 `- + 空格 + [ ]`
+- [x] 任务二 已做任务 `- + 空格 + [x]`
+</code></pre>
+<p>效果如下：</p>
+<ul>
+<li><input disabled="" type="checkbox"> 任务一 未做任务 <code>- + 空格 + [ ]</code></li>
+<li><input checked="" disabled="" type="checkbox"> 任务二 已做任务 <code>- + 空格 + [x]</code></li>
+</ul>
+<h2 id="5-图片">5. 图片</h2>
+<p>Markdown 语法：</p>
+<pre><code>![GitHub set up](http://URL/set-up-git.gif)
+格式: ![Alt Text](url)
+</code></pre>
+<p>效果如下：</p>
+<p><img src="http://zh.mweb.im/asset/img/set-up-git.gif" alt="GitHub set up"></p>
+<h2 id="6-链接">6. 链接</h2>
+<p>Markdown 语法：</p>
+<pre><code>email &lt;example@example.com&gt;
+[GitHub](http://github.com)
+自动生成连接  &lt;http://www.github.com/&gt;
+</code></pre>
+<p>效果如下：</p>
+<p>Email 连接： <a href="mailto:example@example.com">example@example.com</a>
+<a href="http://github.com">连接标题Github网站</a>
+自动生成连接像： <a href="http://www.github.com/">http://www.github.com/</a> 这样</p>
+<h2 id="7-区块引用">7. 区块引用</h2>
+<p>Markdown 语法：</p>
+<pre><code>某某说:
+&gt; 第一行引用
+&gt; 第二行费用文字
+</code></pre>
+<p>效果如下：</p>
+<p>某某说:</p>
+<blockquote>
+<p>第一行引用
+第二行费用文字</p>
+</blockquote>
+<h2 id="8-行内代码">8. 行内代码</h2>
+<p>Markdown 语法：</p>
+<pre><code>像这样即可：`&lt;addr&gt;` `code`
+</code></pre>
+<p>效果如下：</p>
+<p>像这样即可：<code>&lt;addr&gt;</code> <code>code</code></p>
+<h2 id="9-多行或者一段代码">9. 多行或者一段代码</h2>
+<p>Markdown 语法：</p>
+<pre><code>```js
+function fancyAlert(arg) {
+  if(arg) {
+    $.facebox({div:'#foo'})
+  }
+
+}
+```
+</code></pre>
+<p>效果如下：</p>
+<pre><code class="language-js">function fancyAlert(arg) {
+	if(arg) {
+		$.facebox({div:'#foo'})
+	}
+
+}
+</code></pre>
+<h2 id="10-顺序图或流程图">10. 顺序图或流程图</h2>
+<p>Markdown 语法：</p>
+<pre><code>```sequence
+张三-&gt;李四: 嘿，小四儿, 写博客了没?
+Note right of 李四: 李四愣了一下，说：
+李四--&gt;张三: 忙得吐血，哪有时间写。
+```
+
+```flow
+st=&gt;start: 开始
+e=&gt;end: 结束
+op=&gt;operation: 我的操作
+cond=&gt;condition: 确认？
+
+st-&gt;op-&gt;cond
+cond(yes)-&gt;e
+cond(no)-&gt;op
+```
+</code></pre>
+<p>效果如下（「」）：</p>
+<pre><code class="language-sequence">张三-&gt;李四: 嘿，小四儿, 写博客了没?
+Note right of 李四: 李四愣了一下，说：
+李四--&gt;张三: 忙得吐血，哪有时间写。
+</code></pre>
+<pre><code class="language-flow">st=&gt;start: 开始
+e=&gt;end: 结束
+op=&gt;operation: 我的操作
+cond=&gt;condition: 确认？
+
+st-&gt;op-&gt;cond
+cond(yes)-&gt;e
+cond(no)-&gt;op
+</code></pre>
+<p>更多请参考：<a href="http://bramp.github.io/js-sequence-diagrams/">http://bramp.github.io/js-sequence-diagrams/</a>, <a href="http://adrai.github.io/flowchart.js/">http://adrai.github.io/flowchart.js/</a></p>
+<h2 id="11-表格">11. 表格</h2>
+<p>Markdown 语法：</p>
+<pre><code class="language-txt">第一格表头 | 第二格表头
+--------- | -------------
+内容单元格 第一列第一格 | 内容单元格第二列第一格
+内容单元格 第一列第二格 多加文字 | 内容单元格第二列第二格
+</code></pre>
+<p>效果如下：</p>
+<table>
+<thead>
+<tr>
+<th>第一格表头</th>
+<th>第二格表头</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内容单元格 第一列第一格</td>
+<td>内容单元格第二列第一格</td>
+</tr>
+<tr>
+<td>内容单元格 第一列第二格 多加文字</td>
+<td>内容单元格第二列第二格</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-删除线">12. 删除线</h2>
+<p>Markdown 语法：</p>
+<pre><code>加删除线像这样用： ~~删除这些~~
+</code></pre>
+<p>效果如下：</p>
+<p>加删除线像这样用： <del>删除这些</del></p>
+<h2 id="13-分隔线">13. 分隔线</h2>
+<p>以下三种方式都可以生成分隔线：</p>
+<pre><code>***
+
+*****
+
+- - -
+</code></pre>
+<p>效果如下：</p>
+<hr>
+<hr>
+<hr>
+<h2 id="14-mathjax">14. MathJax</h2>
+<p>Markdown 语法：</p>
+<pre><code>块级公式：
+$$	x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
+
+\\[ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} =
+1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+{1+\frac{e^{-8\pi}} {1+\ldots} } } } \\]
+
+行内公式： $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$
+</code></pre>
+<p>效果如下（「」）：</p>
+<p>块级公式：
+$$	x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$</p>
+<p>\[ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} =
+1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+{1+\frac{e^{-8\pi}} {1+\ldots} } } } \]</p>
+<p>行内公式： $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$</p>
+<h2 id="15-脚注footnote">15. 脚注（Footnote）</h2>
+<p>Markdown 语法：</p>
+<pre><code>这是一个脚注：[^sample_footnote]
+</code></pre>
+<p>效果如下：</p>
+<p>这是一个脚注：<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h2 id="16-高亮highlight">16. 高亮（Highlight）</h2>
+<p>Markdown 语法：</p>
+<pre><code>==example==
+</code></pre>
+<p>效果如下：
+==example==</p>
+<h2 id="17-注释和阅读更多">17. 注释和阅读更多</h2>
+<p>Markdown 语法：</p>
+<pre><code>&lt;!-- comment --&gt;
+&lt;!-- more --&gt;
+</code></pre>
+<p><strong>注</strong> 阅读更多的功能只用在生成网站或博客时，插入时注意要后空一行。</p>
+<h2 id="18-锚点链接">18. 锚点链接</h2>
+<p>Markdown 语法：</p>
+<p>任意 1-6 个 # 标注的标题都会被添加上同名的锚点链接</p>
+<pre><code>[标题1](#标题1) 
+[标题2](#标题2) 
+[标题3](#标题3) 
+
+# 标题1
+## 标题2
+### 标题3
+</code></pre>
+<p>锚点跳转的标识名称，可使用任意字符，大写字母要转换成小写</p>
+<pre><code>[Github标题1](#github标题1)
+
+### Github标题1
+</code></pre>
+<p>多单词锚点的空格用 - 代替</p>
+<pre><code>[Github 标题2 Test](#github-标题2-test)
+
+### Github 标题2 Test
+</code></pre>
+<p>多级序号需要去除 .</p>
+<pre><code>[2.3. Github 标题](#23-github-标题)
+
+### 2.3. Github 标题
+</code></pre>
+<p><strong>注</strong> Github 并不支持 HTML 形式的锚点链接，它有自己的规则。由于很多渲染器不支持锚点，故尽量少使用锚点。非英文的锚点字符，在单击跳转时，在浏览器的 url 中会按照规则进行 encode 和 decode。
+更多请参考：<a href="https://my.oschina.net/antsky/blog/1475173/">https://my.oschina.net/antsky/blog/1475173/</a></p>
+<h2 id="19-toc">19. TOC</h2>
+<p>Markdown 语法：</p>
+<pre><code>[TOC]
+</code></pre>
+<p>效果如文档开头的目录</p>
+<hr>
+<hr>
+<h1 id="书写排版及中西文混排范例">书写排版及中西文混排范例</h1>
+<h2 id="1-书写排版范例">1. 书写排版范例</h2>
+<p>文档大标题必须以 <code>#</code> 开头
+章节标题必须以 <code>##</code> 开始，而不是 <code>#</code>
+凡是标题，下方正文书写必须空一行</p>
+<p>例如：</p>
+<pre><code>// bad
+##章节1
+
+// bad
+## 章节1 ##
+
+// good
+## 章节1
+
+// bad
+## 章节1
+内容
+## 章节2
+
+// good
+## 章节1
+
+内容
+
+## 章节2
+
+
+</code></pre>
+<p>代码段的必须「MUST」使用 Fenced code blocks 风格，如下所示：</p>
+<pre><code>console.log(&quot;&quot;);
+</code></pre>
+<p>表格的写法应该参考 <a href="https://help.github.com/en/articles/github-flavored-markdown">GFM</a>，如下所示：</p>
+<table>
+<thead>
+<tr>
+<th>First Header</th>
+<th>Second Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Left-Aligned</th>
+<th style="text-align:center">Center Aligned</th>
+<th style="text-align:right">Right Aligned</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">col 3 is</td>
+<td style="text-align:center">some wordy text</td>
+<td style="text-align:right">$1600</td>
+</tr>
+<tr>
+<td style="text-align:left">col 2 is</td>
+<td style="text-align:center">centered</td>
+<td style="text-align:right">$12</td>
+</tr>
+<tr>
+<td style="text-align:left">zebra stripes</td>
+<td style="text-align:center">are neat</td>
+<td style="text-align:right">$1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-中西文混排范例">2. 中西文混排范例</h2>
+<p>中西文混排应该采用如下规则：</p>
+<p>【基本规则】</p>
+<ul>
+<li>英文和数字使用半角字符</li>
+<li>中文文字之间不加空格</li>
+<li>中文文字与英文、阿拉伯数字及 @ # $ % ^ &amp; * . ( ) 等符号之间加空格</li>
+<li>中文标点之间不加空格</li>
+<li>中文标点与前后字符（无论全角或半角）之间不加空格</li>
+<li>如果括号内有中文，则使用中文括号</li>
+<li>如果括号中的内容全部都是英文，则使用半角英文括号</li>
+<li>当半角符号 / 表示「或者」之意时，与前后的字符之间均不加空格</li>
+<li>结尾不改写西文专有名词中的半角标点如 &ldquo;McDonald&rsquo;s&rdquo;</li>
+<li>中西文（和其他西文半角符号）间留一个半角空格</li>
+<li>中文和阿拉伯数字之间同样需留一个半角空格包裹</li>
+<li>中文内容的引号应使用直角引号「」或『』</li>
+<li>包裹西文内容的引号可以使用 &quot;&quot; 或 ''</li>
+<li>包裹西文内容的括号可以使用 () 或（）</li>
+</ul>
+<p>以下示例的情况无需修改：
+为什么 OS X 的市场份额不及 Windows？
+苹果公司 (Apple) 的招聘流程是怎样的？
+1970 年代的美国电影有哪些推荐？
+如何理解 &lsquo;double irish with a dutch sandwich&rsquo; 避税方法？</p>
+<p>【表达方式】</p>
+<ul>
+<li>应当遵循《The Element of Style》</li>
+<li>使段落成为文章的单元</li>
+<li>一个段落只表达一个主题</li>
+<li>通常在每一段落开始要点题，在段落结尾要扣题</li>
+<li>使用主动语态</li>
+<li>陈述句中使用肯定说法</li>
+<li>删除不必要的词</li>
+<li>避免连续使用松散的句子</li>
+<li>使用相同的结构表达并列的意思</li>
+<li>将相关的词放在一起</li>
+<li>在总结中，要用同一种时态（这里指英文中的时态，中文不适用，所以可以不理会）</li>
+<li>将强调的词放在句末</li>
+<li>避免模糊
+误：最近有哪些值得推荐的喜剧电影？
+正：2012 年 7 月 有哪些值得推荐的喜剧电影？</li>
+<li>与内容无关的冗余修辞，需要删除</li>
+</ul>
+<p>需要修改的词语
+网络用语例：「东东」 应为「东西」 ，「神马」应为「什么」
+口头语例：「为啥」应为「为什么」
+不文明用语例：「牛逼」应为「厉害」「强大」等
+错别字：「斯德哥尔摩综合症」应为「斯德哥尔摩综合征」</p>
+<p>扩展阅读
+Google 后来也出了 Markdown 规范，很多和这里是一样的，但也增加了一些约定，可以参考</p>
+<hr>
+<hr>
+<h1 id="标点符号使用">标点符号使用</h1>
+<h4 id="注意事项">注意事项</h4>
+<h6 id="避免重复混乱">避免重复混乱</h6>
+<p>英文问号（?）、重复（？？？）、混乱（？！）
+逗号：英文逗号（,）、重复（，，，）、混乱（，，。）</p>
+<h4 id="问号">问号</h4>
+<p>选择问句中，问号只用在末尾
+误：今后十年内，主流手机的系统谁主沉浮？Android？Windows Phone？MeeGo ？iOS？
+正：今后十年内，主流手机的系统谁主沉浮？Android、Windows Phone、MeeGo、iOS？</p>
+<p>连续提问时，每个-问句的后面都以问号结尾
+误：当前移动互联网的第一大入口是什么，竞争力如何？
+正：当前移动互联网的第一大入口是什么？竞争力如何？</p>
+<h4 id="省略号">省略号</h4>
+<p>使用规范的「……」，禁用各种错误变体「。。」「。。。」「。。。。。。」出于简洁考虑，尽量不在标题中使用省略号
+省略号使用「……」，而「。。。」仅用于表示停顿</p>
+<h4 id="顿号">顿号</h4>
+<p>同类、并列的单字、词语和短语用顿号分隔并列的书名号、引号之间，可用可不用，全文统一即可</p>
+<h4 id="书名号">书名号</h4>
+<p>书名、篇名、报纸名、杂志名、歌曲名、影剧名和图表名，用书名号标识括号用作注明翻译或原文时应置于书名号外
+误：《旺达与巨像（Shadow of the Colossus）》好玩吗？
+正：《旺达与巨像》（Shadow of the Colossus）好玩吗？</p>
+<h4 id="引号">引号</h4>
+<p>包裹对象为中文时使用直角引号「」或『』包裹对象为西文时可以使用 &quot;&quot; 或 '' 且左右留有半角空格间接引用中句末的句号、问号、感叹号等标点符号应去掉
+用直角引号（「」）代替双引号（&quot;&quot;）
+误：鸡蛋被嫌小时母鸡反驳「你下一个试试？」的逻辑或理由是什么？
+正：鸡蛋被嫌小时母鸡反驳「你下一个试试」的逻辑或理由是什么？</p>
+<h4 id="括号">括号</h4>
+<p>使用括号对内容进行补充说明（如增加信息、消除歧义等）括号的使用原则：
+去掉括号的内容句子依然是正确通顺的需要使用外语来详细或准确表述的名词，应当放入括号中
+误：为什么样本方差 sample variance 的分母是 n-1？
+正：为什么样本方差（sample variance）的分母是 n-1？
+或：正：为什么样本方差 (sample variance) 的分母是 n-1？</p>
+<h4 id="纠错更新">纠错更新</h4>
+<p>「使用顿号连接的短语必须是名词性的」这个判断是错误的，是否有其他限制，暂未见可靠出处。（来自葛易）
+「使用括号注明对名称的翻译（或原文）应置于书名号内」这个用法是错误的，Shadow of the Colossus 是对「《旺达与巨像》」进行注释，而非「旺达与巨像」。（来自 Raymond Wang、黄继新）
+不建议在标题等公共区域将『』「」做书名号使用，以保持统一和规范、避免混乱。（来自梁海）
+需要删除的词语「指称」加上「楼主」。个人建议「伟大」应改为「强大」，因为它最接近「牛逼」的本意。（来自郅帅杰）</p>
+<hr>
+<hr>
+<h2 id="修订信息">修订信息</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">版本号</th>
+<th style="text-align:left">修订日期</th>
+<th style="text-align:left">修订人</th>
+<th style="text-align:left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">v1.1.2001</td>
+<td style="text-align:left">2020-01-14</td>
+<td style="text-align:left">NUO</td>
+<td style="text-align:left">建立文档</td>
+</tr>
+<tr>
+<td style="text-align:left">v1.2.2001</td>
+<td style="text-align:left">2020-01-15</td>
+<td style="text-align:left">NUO</td>
+<td style="text-align:left">添加相关出处链接；添加锚点</td>
+</tr>
+</tbody>
+</table>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>这里是脚注信息，在脚注后直接添加即可，渲染器会直接放置在文章末尾 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://blog.standuke.top/2020/01/2020-01-14-markdown-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95%E6%8C%87%E5%8C%97/" title="Markdown 文档编写语法指北" target="_blank" rel="external">https://blog.standuke.top/2020/01/2020-01-14-markdown-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95%E6%8C%87%E5%8C%97/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://www.standuke.top" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://blog.standuke.top/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://www.standuke.top" target="_blank"><span class="text-dark">Standuke</span><small class="ml-1x">Yunshen Technology Co., Ltd. - SRE Engineer</small></a></h3>
+        <div>Focus on Linux Openstack Kubernetes vSphere Photograph Coding</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+<section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://blog.standuke.top/2019/12/2019-12-23-centos-7-%E9%87%8D%E7%BD%AE-root-%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81/" title="CentOS 7 重置 Root 用户密码"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            <li class="next">
+                <a href="https://blog.standuke.top/2020/01/2020-01-15-pxe-%E9%A2%84%E5%90%AF%E5%8A%A8%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85-legacy-%E4%BC%A0%E7%BB%9F%E5%BC%95%E5%AF%BC%E7%8E%AF%E5%A2%83/"
+                    title="PXE 预启动环境安装 - Legacy 传统引导环境"><span>上一篇&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter,google,linkedin"
+                data-mobile-sites="wechat,qq,facebook,twitter"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/idoker" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://blog.standuke.top/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2016  -
+    2022
+    <div class="publishby">
+        Theme by <a href="https://github.com/xiaoheiAh" target="_blank"> xiaoheiAh </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/shell.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://blog.standuke.top/js/application.min.a94ab19cb63a95c8d7fbd7b85cab3ddeea8c369bdf75b9cab6708787ead123af.js"></script>
+<script src="https://blog.standuke.top/js/plugin.min.19c5bcb2fb0789ab4f2b7834e5ceb5e92635645605bab902c1024b25f1502364.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/blog.standuke.top\/',
+            CONTENT_URL: 'https:\/\/blog.standuke.top\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://blog.standuke.top/js/insight.min.4a2d52de4bfff73e0c688404fe3d17c9a3ae12d9888e1e1ac9c690e4890de2ded50fe55f2b819c2ba55435a76f396f3ea6805765f0b0af5635cdf74ea459eab0.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https:\/\/blog.standuke.top\/2020\/01\/2020-01-14-markdown-%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E8%AF%AD%E6%B3%95%E6%8C%87%E5%8C%97\/';
+        <!-- this.page.identifier = 'nuo'; -->
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'nuo' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-180157250-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  </body>
+</html>
