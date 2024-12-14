@@ -6,10 +6,19 @@
     <description>Recent content in Categories on Stan&#39;s blog - Explore the world</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
-    <lastBuildDate>Tue, 06 Jul 2021 17:20:34 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 23 Mar 2022 21:58:34 +0800</lastBuildDate>
     
         <atom:link href="https://blog.standuke.top/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenStack Train 快速离线部署「在线类似」</title>
+      <link>https://blog.standuke.top/2020/03/2020-03-17-openstack-train-%E5%BF%AB%E9%80%9F%E7%A6%BB%E7%BA%BF%E9%83%A8%E7%BD%B2%E5%9C%A8%E7%BA%BF%E7%B1%BB%E4%BC%BC/</link>
+      <pubDate>Tue, 17 Mar 2020 16:46:19 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2020/03/2020-03-17-openstack-train-%E5%BF%AB%E9%80%9F%E7%A6%BB%E7%BA%BF%E9%83%A8%E7%BD%B2%E5%9C%A8%E7%BA%BF%E7%B1%BB%E4%BC%BC/</guid>
+      <description>👌 2020-03-17 OpenStack Train 快速离线部署「在线类似」 本文档为 openstack 快速部署文档，只适用于已经熟悉 openstack 各个组件及其部署方式和对应安装节点的维护人员 文档适用于构建 openstack 学习环</description>
+    </item>
     
     <item>
       <title>CentOS 7 CDH 6.3.1 Cloudera Manager 6.3.1 企业级离线安装简易版</title>
@@ -90,15 +99,6 @@
       
       <guid>https://blog.standuke.top/2016/06/2016-06-17-%E6%96%87%E4%BB%B6%E4%B8%80%E8%87%B4%E6%80%A7-md5-%E6%A0%A1%E9%AA%8C/</guid>
       <description>👌 2016-06-17 文件一致性 md5 校验 FileInfo Filename - 文件一致性 md5 校验 Version - v1.1.2105（2016/06/17 ~ 2021/05/14） Author - standuke Email - shadowdoker@gmail.com DescriptionKey - File consistency md5 check 版本修</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://blog.standuke.top/1/01/2022-03-23-ldap-%E4%BC%81%E4%B8%9A%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.standuke.top/1/01/2022-03-23-ldap-%E4%BC%81%E4%B8%9A%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98/</guid>
-      <description>👌 2022-03-23 LDAP 企业部署实战 - LDAP 基础服务安装 FileInfo Filename - LDAP 企业部署实战 - LDAP 基础服务安装 Version - v1.0.2203（2022/03/25 ~ 2022/04/06） Author</description>
     </item>
     
   </channel>
