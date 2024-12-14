@@ -6,10 +6,19 @@
     <description>Recent content in 操作系统 on Stan&#39;s blog - Explore the world</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
-    <lastBuildDate>Wed, 23 Mar 2022 21:58:34 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 06 Apr 2022 22:20:17 +0800</lastBuildDate>
     
         <atom:link href="https://blog.standuke.top/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>LDAP over TLS「StartTLS」</title>
+      <link>https://blog.standuke.top/2022/04/2022-04-06-ldap-over-tls/</link>
+      <pubDate>Wed, 06 Apr 2022 22:20:17 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2022/04/2022-04-06-ldap-over-tls/</guid>
+      <description>👌 2022-04-06 LDAP over TLS「StartTLS」 FileInfo Filename - LDAP over TLS Version - v1.0.2204（2022/04/06 ~ 2022/04/07） Author - nuo standuke Email - shadowdoker@gmail.com DescriptionKey - LDAP over TLS with</description>
+    </item>
     
     <item>
       <title>LDAP 企业部署实战 - LDAP 基础服务安装</title>
@@ -180,15 +189,6 @@
       
       <guid>https://blog.standuke.top/2020/03/2020-03-31-%E5%88%9B%E5%BB%BA-windows-server-2012-r2-qcow2-%E6%A0%BC%E5%BC%8F%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A8%A1%E6%9D%BF/</guid>
       <description>👌 2020-03-31 创建 Windows Server 2012 R2 qcow2 格式虚拟机模板 FileInfo Filename - 创建 Windows Server 2012 R2 qcow2 格式虚拟机模板 Version - v1.1.2003（2020/03/31 ~ 2020/03/31） Author - standuke</description>
-    </item>
-    
-    <item>
-      <title>docker image 导入导出 保存 Tag 标记</title>
-      <link>https://blog.standuke.top/2020/03/2020-03-28-docker-image-%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA-%E4%BF%9D%E5%AD%98-tag-%E6%A0%87%E8%AE%B0/</link>
-      <pubDate>Sat, 28 Mar 2020 01:37:32 +0800</pubDate>
-      
-      <guid>https://blog.standuke.top/2020/03/2020-03-28-docker-image-%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA-%E4%BF%9D%E5%AD%98-tag-%E6%A0%87%E8%AE%B0/</guid>
-      <description>👌 2020-03-28 docker image 导入导出 保存 Tag 标记 两者区别 VS docker save 保存的是镜像（image），docker export 保存的是容器（container） 对于 Docker Save 方法，会保存该镜</description>
     </item>
     
   </channel>

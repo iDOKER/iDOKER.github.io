@@ -11,6 +11,15 @@
     
     
     <item>
+      <title>docker image 导入导出 保存 Tag 标记</title>
+      <link>https://blog.standuke.top/2020/03/2020-03-28-docker-image-%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA-%E4%BF%9D%E5%AD%98-tag-%E6%A0%87%E8%AE%B0/</link>
+      <pubDate>Sat, 28 Mar 2020 01:37:32 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2020/03/2020-03-28-docker-image-%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA-%E4%BF%9D%E5%AD%98-tag-%E6%A0%87%E8%AE%B0/</guid>
+      <description>👌 2020-03-28 docker image 导入导出 保存 Tag 标记 两者区别 VS docker save 保存的是镜像（image），docker export 保存的是容器（container） 对于 Docker Save 方法，会保存该镜</description>
+    </item>
+    
+    <item>
       <title>OpenStack Train 快速离线部署「在线类似」</title>
       <link>https://blog.standuke.top/2020/03/2020-03-17-openstack-train-%E5%BF%AB%E9%80%9F%E7%A6%BB%E7%BA%BF%E9%83%A8%E7%BD%B2%E5%9C%A8%E7%BA%BF%E7%B1%BB%E4%BC%BC/</link>
       <pubDate>Tue, 17 Mar 2020 16:46:19 +0800</pubDate>
