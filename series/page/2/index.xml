@@ -11,6 +11,15 @@
     
     
     <item>
+      <title>创建 Windows Server 2012 R2 Qcow2 格式虚拟机模板</title>
+      <link>https://blog.standuke.top/2020/03/2020-03-31-%E5%88%9B%E5%BB%BA-windows-server-2012-r2-qcow2-%E6%A0%BC%E5%BC%8F%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A8%A1%E6%9D%BF/</link>
+      <pubDate>Tue, 31 Mar 2020 21:24:40 +0800</pubDate>
+      
+      <guid>https://blog.standuke.top/2020/03/2020-03-31-%E5%88%9B%E5%BB%BA-windows-server-2012-r2-qcow2-%E6%A0%BC%E5%BC%8F%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A8%A1%E6%9D%BF/</guid>
+      <description>👌 2020-03-31 创建 Windows Server 2012 R2 qcow2 格式虚拟机模板 FileInfo Filename - 创建 Windows Server 2012 R2 qcow2 格式虚拟机模板 Version - v1.1.2003（2020/03/31 ~ 2020/03/31） Author - standuke</description>
+    </item>
+    
+    <item>
       <title>docker image 导入导出 保存 Tag 标记</title>
       <link>https://blog.standuke.top/2020/03/2020-03-28-docker-image-%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA-%E4%BF%9D%E5%AD%98-tag-%E6%A0%87%E8%AE%B0/</link>
       <pubDate>Sat, 28 Mar 2020 01:37:32 +0800</pubDate>

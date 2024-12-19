@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        LDAP 客户端通过 sssd 服务完成接入 - Stan&#39;s blog - Explore the world
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="👌 2022-04-01 LDAP 客户端通过 sssd 服务完成接入 FileInfo Filename - LDAP 客户端通过 sssd 服务完成接入 Version - v1.0.2203（2022/04/01 ~ 2022/04/07） Author - nuo standuke Email" />
+    <meta name="generator" content="Hugo 0.82.1 with theme pure" />
+    <title>LDAP 客户端通过 sssd 服务完成接入 - Stan&#39;s blog - Explore the world</title>
+    
+    
+    <link rel="stylesheet" href="https://blog.standuke.top/css/style.min.6f90022f237877ae2514ec95f3c9cca9f2314394f20800ca037a497e20053122.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="LDAP 客户端通过 sssd 服务完成接入" />
+<meta property="og:description" content="👌 2022-04-01 LDAP 客户端通过 sssd 服务完成接入 FileInfo Filename - LDAP 客户端通过 sssd 服务完成接入 Version - v1.0.2203（2022/04/01 ~ 2022/04/07） Author - nuo standuke Email" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.standuke.top/2022/04/2022-04-01-ldap-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%9A%E8%BF%87-sssd-%E6%9C%8D%E5%8A%A1%E5%AE%8C%E6%88%90%E6%8E%A5%E5%85%A5/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-01T19:20:18&#43;08:00" />
+<meta property="article:modified_time" content="2022-04-01T19:20:18&#43;08:00" />
+
+<meta itemprop="name" content="LDAP 客户端通过 sssd 服务完成接入">
+<meta itemprop="description" content="👌 2022-04-01 LDAP 客户端通过 sssd 服务完成接入 FileInfo Filename - LDAP 客户端通过 sssd 服务完成接入 Version - v1.0.2203（2022/04/01 ~ 2022/04/07） Author - nuo standuke Email"><meta itemprop="datePublished" content="2022-04-01T19:20:18&#43;08:00" />
+<meta itemprop="dateModified" content="2022-04-01T19:20:18&#43;08:00" />
+<meta itemprop="wordCount" content="4148">
+<meta itemprop="keywords" content="CentOS,Linux," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="LDAP 客户端通过 sssd 服务完成接入"/>
+<meta name="twitter:description" content="👌 2022-04-01 LDAP 客户端通过 sssd 服务完成接入 FileInfo Filename - LDAP 客户端通过 sssd 服务完成接入 Version - v1.0.2203（2022/04/01 ~ 2022/04/07） Author - nuo standuke Email"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://www.standuke.top" target="_blank">
+            <img class="img-circle img-rotate" src="https://blog.standuke.top/avatar.png" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">Standuke</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">Yunshen Technology Co., Ltd. - SRE Engineer</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Hangzhou, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-linkedin">
+                <a href="https://linkedin.com/in/doc-s-44435ab2">
+                    <i class="icon icon-linkedin"></i>
+                  <span class="menu-title">Linkedin</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content"><p>站点迁移初期，配置参数调整，同时涉及到的文章较多，页面浏览可能会出现闪断。因为是业余时间迁移博客，从 5 月开始估计要到年底才能把前期的文章整体迁移过来。博客评论采用 Disqus 需要科学才能看到，如果有任何意见建议也可直接联系我 Telegram。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://blog.standuke.top/tags/aliyun/" class="tag-list-link" rel="1">aliyun<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/bigdata/" class="tag-list-link" rel="1">bigdata<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/cdh/" class="tag-list-link" rel="1">cdh<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/centos/" class="tag-list-link" rel="11">centos<span
+               class="tag-list-count">11</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/cloudera/" class="tag-list-link" rel="1">cloudera<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/docker/" class="tag-list-link" rel="1">docker<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/eip/" class="tag-list-link" rel="1">eip<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/esxi/" class="tag-list-link" rel="1">esxi<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/frp/" class="tag-list-link" rel="1">frp<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/kvm/" class="tag-list-link" rel="1">kvm<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/linux/" class="tag-list-link" rel="8">linux<span
+               class="tag-list-count">8</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/linux-bridge/" class="tag-list-link" rel="1">linux-bridge<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/macos/" class="tag-list-link" rel="2">macos<span
+               class="tag-list-count">2</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/markdown/" class="tag-list-link" rel="1">markdown<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/network/" class="tag-list-link" rel="1">network<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/openstack/" class="tag-list-link" rel="6">openstack<span
+               class="tag-list-count">6</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/pxe/" class="tag-list-link" rel="1">pxe<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/qcow2/" class="tag-list-link" rel="1">qcow2<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/system/" class="tag-list-link" rel="1">system<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/time-machine/" class="tag-list-link" rel="1">time-machine<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/tools/" class="tag-list-link" rel="1">tools<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/vcenter/" class="tag-list-link" rel="1">vcenter<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/virtualization/" class="tag-list-link" rel="9">virtualization<span
+               class="tag-list-count">9</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/vsphere/" class="tag-list-link" rel="1">vsphere<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://blog.standuke.top/tags/windows/" class="tag-list-link" rel="4">windows<span
+               class="tag-list-count">4</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="category-list-link">使用教程</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E5%86%85%E9%83%A8%E5%88%86%E4%BA%AB/" class="category-list-link">内部分享</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/" class="category-list-link">技术分析</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-list-link">操作系统</a><span class="category-list-count">10</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/" class="category-list-link">部署教程</a><span class="category-list-count">10</span></li>
+            <li class="category-list-item"><a href="https://blog.standuke.top/categories/%E9%9B%B6%E7%A2%8E%E5%B0%8F%E9%97%AE%E9%A2%98/" class="category-list-link">零碎小问题</a><span class="category-list-count">4</span></li>
+        </ul>
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2022/04/2022-04-06-ldap-over-tls/" class="title">LDAP over TLS「StartTLS」</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-04-06 22:20:17 &#43;0800 CST" itemprop="datePublished">2022-04-06</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2022/04/2022-04-01-ldap-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%9A%E8%BF%87-sssd-%E6%9C%8D%E5%8A%A1%E5%AE%8C%E6%88%90%E6%8E%A5%E5%85%A5/" class="title">LDAP 客户端通过 sssd 服务完成接入</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-04-01 19:20:18 &#43;0800 CST" itemprop="datePublished">2022-04-01</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2022/03/2022-03-23-ldap-%E4%BC%81%E4%B8%9A%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98/" class="title">LDAP 企业部署实战 - LDAP 基础服务安装</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-03-23 21:58:34 &#43;0800 CST" itemprop="datePublished">2022-03-23</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/07/2021-07-06-linux-%E5%AE%9A%E6%97%B6%E5%8D%95%E6%AC%A1%E5%8F%8A%E5%91%A8%E6%9C%9F%E4%BB%BB%E5%8A%A1/" class="title">Linux 定时单次及周期任务</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-07-06 17:20:34 &#43;0800 CST" itemprop="datePublished">2021-07-06</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.standuke.top/2021/06/2021-06-26-linux-%E6%97%B6%E9%97%B4%E5%85%A8%E8%A7%A3/" class="title">Linux 时间全解</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-06-26 11:11:31 &#43;0800 CST" itemprop="datePublished">2021-06-26</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2022/04/2022-04-01-ldap-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%9A%E8%BF%87-sssd-%E6%9C%8D%E5%8A%A1%E5%AE%8C%E6%88%90%E6%8E%A5%E5%85%A5/"
+    >LDAP 客户端通过 sssd 服务完成接入</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://blog.standuke.top/2022/04/2022-04-01-ldap-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%9A%E8%BF%87-sssd-%E6%9C%8D%E5%8A%A1%E5%AE%8C%E6%88%90%E6%8E%A5%E5%85%A5/" class="article-date">
+  <time datetime="2022-04-01 19:20:18 &#43;0800 CST" itemprop="datePublished">2022-04-01</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"> 操作系统 </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/centos/"> CentOS </a>
+    <a class="article-tag-link" href="/tags/linux/"> Linux </a>
+  </span>
+
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2022/04/2022-04-01-ldap-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%9A%E8%BF%87-sssd-%E6%9C%8D%E5%8A%A1%E5%AE%8C%E6%88%90%E6%8E%A5%E5%85%A5/#comments"
+            class="article-comment-link">评论</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 4148字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 9分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <h1 id="-2022-04-01-ldap-客户端通过-sssd-服务完成接入">👌 2022-04-01 LDAP 客户端通过 sssd 服务完成接入</h1>
+<blockquote>
+<p><strong>FileInfo</strong>
+Filename - LDAP 客户端通过 sssd 服务完成接入
+Version - v1.0.2203（2022/04/01 ~ 2022/04/07）
+Author - nuo standuke
+Email - <a href="mailto:shadowdoker@gmail.com">shadowdoker@gmail.com</a>
+DescriptionKey - LDAP client completes access through sssd service「configure LDAP client by using SSSD for authentication on CentOS」</p>
+</blockquote>
+<p><strong>⚠️ 注意：此次接入为基础的 LDAP 与 sssd 服务接入，不 使 用 任 何 加 密 方 式。单纯使用 LDAP 也能完成客户端接入。全程 TLS 加密见另外文章。</strong>
+<strong>这部分主要讲 sssd 的认证以及缓存认证流程，所以不打算和 TLS 放在一起讲</strong></p>
+<p>[TOC]</p>
+<h2 id="简介">简介</h2>
+<blockquote>
+<p>单纯使用 LDAP 也能完成客户端接入，可以理解为 sssd 只是中间认证插件，用于给用户更好的认证体验，同时也保障 LDAP 故障后的紧急用户登陆。
+nscd 与 nslcd 两者千差万别，也将在本文章中说明其作用。</p>
+</blockquote>
+<h3 id="sssd-简介">sssd 简介</h3>
+<p>sssd「System Security Services Daemon」系统安全服务后台程序是一种用于访问远程目录和身份验证机制的系统服务。该进程可以用来访问多种验证服务器，如 LDAP，Kerberos 等，并提供授权。SSSD 是介于本地用户和数据存储之间的进程，本地客户端首先连接SSSD，再由SSSD联系外部资源提供者「一台远程服务器」
+系统安全服务守护进程 (SSSD) 是最初为 Linux 操作系统开发的软件，它提供一组守护进程来管理对远程目录服务和身份验证机制的访问。SSSD 起源于开源软件项目 FreeIPA（身份、政策和审计）。 SSSD 的目的是简化涉及多个不同主机的经过身份验证和授权的用户访问的系统管理。 它旨在为基于类 Unix 操作系统的网络提供单点登录功能，其效果类似于 Microsoft Active Directory 域服务向 Microsoft Windows 网络提供的功能。</p>
+<p><strong>在本案例中，用户认证流程是，操作系统去连接 sssd 服务，sssd 服务再去连接 LDAP 服务器进行认证。</strong></p>
+<ol>
+<li>避免了本地每个客户端程序对认证服务器大量连接。所有本地程序仅联系 SSSD，由 SSSD 连接认证服务器或 SSSD 缓存，有效的降低了后端服务器负载。</li>
+<li>允许离线授权。SSSD 可以缓存远程服务器的用户认证身份，这允许在远程认证服务器宕机时，继续给予成功授权用户访问必要的资源。</li>
+</ol>
+<h3 id="nss-pam-ldapd-模块及其依赖">nss-pam-ldapd 模块及其依赖</h3>
+<p><strong>此服务为 sssd 以及 authconfig-tui 运行需要的，安装完后，nslcd 不启动，nscd 启动，且 nscd 不需要手动启动</strong>
+<strong>nscd / nslcd 是两个完完全全不一样的东西</strong></p>
+<h4 id="nslcd">nslcd</h4>
+<blockquote>
+<p>nslcd.service - Naming services LDAP client daemon.</p>
+</blockquote>
+<p><a href="https://blog.csdn.net/sj349781478/article/details/109851425">https://blog.csdn.net/sj349781478/article/details/109851425</a></p>
+<p>The nslcd service enables you to configure your local system to load users and groups from an LDAP directory, such as Active Directory (AD).</p>
+<p>To enable the nslcd service to load user and group information, you have to set the Unix attributes for users and groups in AD. For details, see Maintaining Unix Attributes in AD using ADUC.</p>
+<p>nslcd「nss-pam-ldapd」本身包括了一个瘦身版本的 PAM 模块「所以 pam-ldap 就在里面了」和一个瘦身版本的 NSS 模块，但依然可以单独构建这三个部分「NSS 模块，PAM 模块和 nslcd server」，这意味着还可以使用 pam_ldap 套件和使用来自 nss-pam-slapd 套件的 NSS 模块，但目前此套件不能与 nss_ldap 套件在同一个系统中同时并行使用。</p>
+<p>nslcd 套件的正式名称是 Daemon for NSS and PAM lookups using LDAP(nss-pam-ldapd)，它最初由PADL软件公司的 Luke Howard 开发，作为 nss_ldap 的分支，名为 nss-ldapd 套件。2006年，West Consulting 的  Arthur de Jong 将这个库分成 NSS 部分和 server 部分并重写了大部分代码。当 OpenLDAP 的 nssov 模块的 Howard Chu 贡献出 PAM 代码时，这个软件被重新命名为 nss-pam-ldapd 套件。</p>
+<p>在 RedHat 和 Debian 中此套件有不同的名称：</p>
+<ul>
+<li>CentOS:  nss-pam-ldapd  - An nsswitch module which uses directory servers</li>
+<li>Ubuntu:  nslcd  - Daemon for NSS and PAM lookups using LDAP</li>
+</ul>
+<p><a href="https://blog.valhalla.solutions/replace-nss-ldap-and-pam-ldap-with-nss-pam-ldapd/">https://blog.valhalla.solutions/replace-nss-ldap-and-pam-ldap-with-nss-pam-ldapd/</a></p>
+<p>长年以来 LDAP 的用法就是安装 nss_ldap 使得系统能够识别帐号，而认证机制交给 pam_ldap 负责，这在绝大多数的系统中是既定的事项，除了 Fedora 的 sssd 比较特别之外，大部分使用 LDAP 的系统管理者仍然在使用 nss_ldap + pam_ldap 的搭配。如果是有点资深的 FreeBSD 系统管理者，相信应该从 FreeBSD 7.x 一路到 10.x 来遇过不少次 nss_ldap + pam_ldap 出过意外的状况，而且每次出事都没什么人在处理，这个组合的原始码迄今也有 6 年时间没有再更新，这实在难以令人接受，不少人也因此选择冒险降级 FreeBSD 的版本。从 2014 年开始，FreeBSD 的官方讨论区里逐渐有人提到 nss-pam-ldapd，看起来只要用了 nss-pam-ldapd，那些疑难杂症全部都不见了，所以相当值得一试。</p>
+<p>nslcd自带pam模块，因此完全不需要配置/etc/pam.d/目录下的服务，它不用ldap.conf配置文件，而使用自己的配置文件/etc/nslcd.conf配置LDAP的访问参数。而且，nslcd.conf 的预设map可以正常使用（即用RFC2307预设标准：ou=people对应用户, ou=Groups对应群组），因此，您无需在/etc/nslcd.conf文档中手工配置nss_base_passwd和nss_base_group等映射，除非您的LDAP数据库本身使用了非RFC2307标准的用户结构。</p>
+<p>因此，要使用 nslcd 服务，还需要针对LDAP服务器进行配置， 使用 authconfig-tui 命令也会自动配置 nslcd 的配置文件(/etc/nslcd.conf)。而 nscd 只有通用的缓存定义的配置，一般情况下无需调整其配置文件（/etc/nscd.conf）。</p>
+<blockquote>
+<p>nslcd 并没有缓存的功能，它是专门为本地处理有关 LDAP 名称服务查询的后台进程，查询结果依然由 nscd 缓存。</p>
+</blockquote>
+<h4 id="nscd">nscd</h4>
+<blockquote>
+<p>nscd.service - Name Service Cache Daemon</p>
+</blockquote>
+<p>nscd 是缓存服务，会缓存三种服务 passwd group hosts，所以它会记录三个库，分别对应源 /etc/passwd, /etc/hosts 和 /etc/resolv.conf 每个库保存两份缓存，一份是找到记录的，一份是没有找到记录的。每一种缓存都保存有生存时间（TTL）。其作用就是在本 当中增加cache ，加快如DNS的解析等的速度。</p>
+<p><strong>所以，要清理 sssd 缓存，还需要清理 nscd 缓存，这样子系统才会重新去走一遍 LDAP 认证流程，不然就是读取的缓存，后面就无法测试 TLS 是否生效。同时，清本地的 DNS 缓存，还需要处理 nscd 的缓存。</strong></p>
+<p>清空各个组件的缓存条目「重启也可以」：</p>
+<pre><code>nscd -i passwd
+nscd -i group
+nscd -i hosts
+</code></pre>
+<ul>
+<li>nscd 与 sssd 的纠缠</li>
+</ul>
+<p>对于 nscd 与 sssd 两者都自带缓存服务，既然如此那么相互之间就会有一些影响。下方为 Redhat 官方说明原文 - <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system-level_authentication_guide/usingnscd-sssd">官方文档</a></p>
+<pre><code>SSSD is not designed to be used with the NSCD daemon. Even though SSSD does not directly conflict with NSCD, using both services can result in unexpected behavior, especially with how long entries are cached.
+
+The most common evidence of a problem is conflicts with NFS. When using Network Manager to manage network connections, it may take several minutes for the network interface to come up. During this time, various services attempt to start. If these services start before the network is up and the DNS servers are available, these services fail to identify the forward or reverse DNS entries they need. These services will read an incorrect or possibly empty resolv.conf file. This file is typically only read once, and so any changes made to this file are not automatically applied. This can cause NFS locking to fail on the machine where the NSCD service is running, unless that service is manually restarted.
+
+To avoid this problem, enable caching only for hosts in the the /etc/nscd.conf file and rely on the SSSD cache for the passwd, group, services, and netgroup entries.
+Change the /etc/nscd.conf file:
+
+enable-cache hosts yes
+enable-cache passwd no
+enable-cache group no
+enable-cache netgroup no
+enable-cache services no
+
+With NSCD answering hosts requests, these entries will be cached by NSCD and returned by NSCD during the boot process. All other entries are handled by SSSD.
+</code></pre>
+<p>大致意思就是，sssd 不是为与 nscd 守护程序一起使用而设计的。sssd 可单独运行，但是 sssd 不与 nscd 冲突，只是两者都打开后会因为两者都有缓存导致一些奇奇怪怪的问题。<strong>这也是网上一部分人清空 sssd 缓存后，发现清理不干净的原因。</strong>
+之后就是一些举例说明，当两者同时运行的时候，NFS 在系统启动时就有可能出现挂载异常，处理方案是只开放主机 hosts 缓存，其余的 passed、group、netgroup、services 缓存均使用 sssd 的缓存服务。
+<strong>当然在没有缓存敏感的运行环境下，可以不修改两者缓存配置。</strong></p>
+<h2 id="安装">安装</h2>
+<h3 id="前置条件">前置条件</h3>
+<ol>
+<li>安装完 LDAP 服务端，并且保证 LDAP 服务正常可访问</li>
+<li>LDAP 服务端有可访问的已配置的用户与用户组设置，可用于配置完后的验证操作</li>
+</ol>
+<h3 id="开始安装">开始安装</h3>
+<h4 id="安装-rpm-包">安装 rpm 包</h4>
+<ul>
+<li>基础包</li>
+</ul>
+<pre><code>yum install -y sssd
+yum install -y nss-pam-ldapd
+</code></pre>
+<ul>
+<li>依赖列表</li>
+</ul>
+<pre><code>=====================================================================
+Package            架构    版本                      源        大小
+=====================================================================
+正在安装:
+sssd               x86_64  1.16.5-10.el7_9.12        updates  150 k
+为依赖而安装:
+GeoIP              x86_64  1.5.0-14.el7              base     1.5 M
+avahi-libs         x86_64  0.6.31-20.el7             base      62 k
+bind-libs          x86_64  32:9.11.4-26.P2.el7_9.9   updates  157 k
+bind-libs-lite     x86_64  32:9.11.4-26.P2.el7_9.9   updates  1.1 M
+bind-license       noarch  32:9.11.4-26.P2.el7_9.9   updates   91 k
+bind-utils         x86_64  32:9.11.4-26.P2.el7_9.9   updates  261 k
+c-ares             x86_64  1.10.0-3.el7              base      78 k
+cups-libs          x86_64  1:1.6.3-51.el7            base     359 k
+cyrus-sasl-gssapi  x86_64  2.1.26-24.el7_9           updates   41 k
+geoipupdate        x86_64  2.5.0-1.el7               base      35 k
+gnutls             x86_64  3.3.29-9.el7_6            base     680 k
+http-parser        x86_64  2.7.1-9.el7               base      29 k
+libbasicobjects    x86_64  0.1.1-32.el7              base      26 k
+libcollection      x86_64  0.7.0-32.el7              base      42 k
+libdhash           x86_64  0.5.0-32.el7              base      29 k
+libini_config      x86_64  1.3.1-32.el7              base      64 k
+libipa_hbac        x86_64  1.16.5-10.el7_9.12        updates  158 k
+libldb             x86_64  1.5.4-2.el7               updates  149 k
+libnfsidmap        x86_64  0.25-19.el7               base      50 k
+libpath_utils      x86_64  0.2.1-32.el7              base      28 k
+libref_array       x86_64  0.1.5-32.el7              base      27 k
+libsmbclient       x86_64  4.10.16-18.el7_9          updates  146 k
+libsss_autofs      x86_64  1.16.5-10.el7_9.12        updates  160 k
+libsss_certmap     x86_64  1.16.5-10.el7_9.12        updates  191 k
+libsss_idmap       x86_64  1.16.5-10.el7_9.12        updates  162 k
+libsss_nss_idmap   x86_64  1.16.5-10.el7_9.12        updates  169 k
+libsss_sudo        x86_64  1.16.5-10.el7_9.12        updates  158 k
+libtalloc          x86_64  2.1.16-1.el7              base      33 k
+libtdb             x86_64  1.3.18-1.el7              base      49 k
+libtevent          x86_64  0.9.39-1.el7              base      41 k
+libwbclient        x86_64  4.10.16-18.el7_9          updates  116 k
+nettle             x86_64  2.7.1-9.el7_9             updates  328 k
+python-sssdconfig  noarch  1.16.5-10.el7_9.12        updates  181 k
+samba-client-libs  x86_64  4.10.16-18.el7_9          updates  5.0 M
+samba-common       noarch  4.10.16-18.el7_9          updates  216 k
+samba-common-libs  x86_64  4.10.16-18.el7_9          updates  182 k
+sssd-ad            x86_64  1.16.5-10.el7_9.12        updates  305 k
+sssd-client        x86_64  1.16.5-10.el7_9.12        updates  229 k
+sssd-common        x86_64  1.16.5-10.el7_9.12        updates  1.5 M
+sssd-common-pac    x86_64  1.16.5-10.el7_9.12        updates  223 k
+sssd-ipa           x86_64  1.16.5-10.el7_9.12        updates  386 k
+sssd-krb5          x86_64  1.16.5-10.el7_9.12        updates  192 k
+sssd-krb5-common   x86_64  1.16.5-10.el7_9.12        updates  225 k
+sssd-ldap          x86_64  1.16.5-10.el7_9.12        updates  285 k
+sssd-proxy         x86_64  1.16.5-10.el7_9.12        updates  185 k
+trousers           x86_64  0.3.14-2.el7              base     289 k
+为依赖而更新:
+cyrus-sasl-lib     x86_64  2.1.26-24.el7_9           updates  156 k
+事务概要
+=====================================================================
+安装  1 软件包 (+46 依赖软件包)
+升级           (  1 依赖软件包)
+=====================================================================
+Package           架构       版本                 源           大小
+=====================================================================
+正在安装:
+nss-pam-ldapd     x86_64     0.8.13-25.el7        base        164 k
+为依赖而安装:
+nscd              x86_64     2.17-325.el7_9       updates     289 k
+为依赖而更新:
+glibc             x86_64     2.17-325.el7_9       updates     3.6 M
+glibc-common      x86_64     2.17-325.el7_9       updates      12 M
+事务概要
+=====================================================================
+安装  1 软件包 (+1 依赖软件包)
+升级           ( 2 依赖软件包)
+</code></pre>
+<ul>
+<li>安装完后的配置文件</li>
+</ul>
+<pre><code>[root@ldap-client1 ~]# rpm -qc sssd-common-1.16.5-10.el7_9.12.x86_64
+/etc/logrotate.d/sssd
+/etc/pam.d/sssd-shadowutils
+/etc/rwtab.d/sssd
+/etc/sssd/sssd.conf # 安装完后默认是没有这个配置文件的，此配置文件生成需要下方步骤进行配置
+
+[root@ldap-client1 ~]# rpm -qc nss-pam-ldapd
+/etc/nslcd.conf # 安装完后默认是没有这个配置文件的，此配置文件生成需要下方步骤进行配置
+/usr/lib/systemd/system/nslcd.service
+/usr/lib/tmpfiles.d/nss-pam-ldapd.conf
+
+[root@ldap-client1 ~]# rpm -qc nscd
+/etc/nscd.conf
+/etc/sysconfig/nscd
+</code></pre>
+<h4 id="配置-etcsssdsssdconf-与-etcnslcdconf">配置 /etc/sssd/sssd.conf 与 /etc/nslcd.conf</h4>
+<p>安装完 sssd 后是没有 sssd.conf 和 nslcd.conf 配置文件的，需要通过 authconfig-tui 配置工具生成。</p>
+<ul>
+<li>使用 authconfig-tui 配置工具进行配置</li>
+</ul>
+<pre><code>authconfig-tui # 按照提示填入参数即可
+</code></pre>
+<ul>
+<li>通过 authconfig-tui 配置工具生成的配置 <code>/etc/sssd/sssd.conf</code></li>
+</ul>
+<pre><code>[domain/default]
+autofs_provider = ldap
+cache_credentials = False
+#krb5_realm = EXAMPLE.COM
+ldap_search_base = dc=expwd,dc=com
+#krb5_server = ipa-server.example.com:88
+id_provider = ldap
+auth_provider = ldap
+chpass_provider = ldap
+ldap_uri = ldap://192.168.2.137/
+ldap_id_use_start_tls = False
+ldap_tls_cacertdir = /etc/openldap/cacerts
+ldap_tls_reqcert = never
+略
+</code></pre>
+<h4 id="配置-etcnsswitchconf">配置 /etc/nsswitch.conf</h4>
+<p>在 CentOS 下会自动完成配置，不需要手动修改</p>
+<h4 id="配置-pam-参数">配置 pam 参数</h4>
+<p>在 pam 内配置上 <code>pam_sss.so</code> 的认证配置即可</p>
+<p><a href="https://wiki.koozali.org/Client_Authentication:Centos_via_sssd/ldap#Configure_pam">https://wiki.koozali.org/Client_Authentication:Centos_via_sssd/ldap#Configure_pam</a>
+<a href="https://support.datafabric.hpe.com/s/article/How-to-configure-LDAP-client-by-using-SSSD-for-authentication-on-CentOS?language=en_US">https://support.datafabric.hpe.com/s/article/How-to-configure-LDAP-client-by-using-SSSD-for-authentication-on-CentOS?language=en_US</a></p>
+<p>password-auth</p>
+<pre><code>#%PAM-1.0
+# This file is auto-generated.
+# User changes will be destroyed the next time authconfig is run.
+auth        required      pam_env.so
+auth        required      pam_faildelay.so delay=2000000
+auth        [default=1 ignore=ignore success=ok] pam_succeed_if.so uid &gt;= 1000 quiet
+auth        [default=1 ignore=ignore success=ok] pam_localuser.so
+auth        sufficient    pam_unix.so nullok try_first_pass
+auth        requisite     pam_succeed_if.so uid &gt;= 1000 quiet_success
+##### auth        sufficient    pam_sss.so forward_pass
+auth        required      pam_deny.so
+
+account     required      pam_unix.so broken_shadow
+account     sufficient    pam_localuser.so
+account     sufficient    pam_succeed_if.so uid &lt; 1000 quiet
+##### account     [default=bad success=ok user_unknown=ignore] pam_sss.so
+account     required      pam_permit.so
+
+password    requisite     pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type=
+password    sufficient    pam_unix.so md5 shadow nullok try_first_pass use_authtok
+##### password    sufficient    pam_sss.so use_authtok
+
+
+password    required      pam_deny.so
+
+session     optional      pam_keyinit.so revoke
+session     required      pam_limits.so
+-session     optional      pam_systemd.so
+session     [success=1 default=ignore] pam_succeed_if.so service in crond quiet use_uid
+session     required      pam_unix.so
+##### session     optional      pam_sss.so
+</code></pre>
+<p>system-auth</p>
+<pre><code>#%PAM-1.0
+# This file is auto-generated.
+# User changes will be destroyed the next time authconfig is run.
+auth        required      pam_env.so
+auth        required      pam_faildelay.so delay=2000000
+auth        [default=1 ignore=ignore success=ok] pam_succeed_if.so uid &gt;= 1000 quiet
+auth        [default=1 ignore=ignore success=ok] pam_localuser.so
+auth        sufficient    pam_unix.so nullok try_first_pass
+auth        requisite     pam_succeed_if.so uid &gt;= 1000 quiet_success
+##### auth        sufficient    pam_sss.so forward_pass
+auth        required      pam_deny.so
+
+account     required      pam_unix.so broken_shadow
+account     sufficient    pam_localuser.so
+account     sufficient    pam_succeed_if.so uid &lt; 1000 quiet
+##### account     [default=bad success=ok user_unknown=ignore] pam_sss.so
+account     required      pam_permit.so
+
+password    requisite     pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type=
+password    sufficient    pam_unix.so md5 shadow nullok try_first_pass use_authtok
+##### password    sufficient    pam_sss.so use_authtok
+password    required      pam_deny.so
+
+session     optional      pam_keyinit.so revoke
+session     required      pam_limits.so
+-session     optional      pam_systemd.so
+session     [success=1 default=ignore] pam_succeed_if.so service in crond quiet use_uid
+session     required      pam_unix.so
+##### session     optional      pam_sss.so
+</code></pre>
+<p>ssh「添加最后一行，session required pam_mkhomedir.so 当家目录不存在时自动创建」</p>
+<pre><code>#%PAM-1.0
+auth       required     pam_sepermit.so
+auth       substack     password-auth
+auth       include      postlogin
+# Used with polkit to reauthorize users in remote sessions
+-auth      optional     pam_reauthorize.so prepare
+account    required     pam_nologin.so
+account    include      password-auth
+password   include      password-auth
+# pam_selinux.so close should be the first session rule
+session    required     pam_selinux.so close
+session    required     pam_loginuid.so
+# pam_selinux.so open should only be followed by sessions to be executed in the user context
+session    required     pam_selinux.so open env_params
+session    required     pam_namespace.so
+session    optional     pam_keyinit.so force revoke
+session    include      password-auth
+session    include      postlogin
+# Used with polkit to reauthorize users in remote sessions
+-session   optional     pam_reauthorize.so prepare
+##### session    required     pam_mkhomedir.so
+</code></pre>
+<h4 id="启动生效">启动生效</h4>
+<pre><code>systemctl restart sshd sssd
+</code></pre>
+<h3 id="验证">验证</h3>
+<h2 id="附录">附录</h2>
+<ul>
+<li>一些尝试
+如果软件包不安装，那么会在 <code>authconfig-tui</code> 配置过程中，出现如下报错</li>
+</ul>
+<ol>
+<li>nscd 未安装</li>
+</ol>
+<p><img src="media/%E6%88%AA%E5%B1%8F2022-04-07%2015.33.10.png" alt="截屏2022-04-07 15.33.10">
+<img src="https://raw.githubusercontent.com/iDOKER/SupportProj/main/MarkdownPic/2024/20241219223640702.png" alt=""></p>
+<ol start="2">
+<li>nss-pam-ldapd 未安装，pam-ldap 组建包含在 nss-pam-ldapd 里了，所以可以一并解决</li>
+</ol>
+<p><img src="media/%E6%88%AA%E5%B1%8F2022-04-07%2015.33.31.png" alt="截屏2022-04-07 15.33.31">
+<img src="https://raw.githubusercontent.com/iDOKER/SupportProj/main/MarkdownPic/2024/20241219223708914.png" alt="">
+<img src="media/%E6%88%AA%E5%B1%8F2022-04-07%2015.33.44.png" alt="截屏2022-04-07 15.33.44">
+<img src="https://raw.githubusercontent.com/iDOKER/SupportProj/main/MarkdownPic/2024/20241219223723512.png" alt=""></p>
+<p>在配置完后还会报错</p>
+<pre><code>[root@localhost ~]# authconfig-tui
+authconfig-tui: Authentication module /usr/lib64/security/pam_ldap.so is missing. Authentication process might not work correctly.
+Failed to start nscd.service: Unit not found.
+</code></pre>
+<ul>
+<li>一些截图</li>
+</ul>
+<ol>
+<li><code>authconfig-tui</code> 配置过程中，会提示 CA 文件放置的位置</li>
+</ol>
+<p><img src="media/%E6%88%AA%E5%B1%8F2022-04-07%2015.34.48.png" alt="截屏2022-04-07 15.34.48">
+<img src="https://raw.githubusercontent.com/iDOKER/SupportProj/main/MarkdownPic/2024/20241219223738689.png" alt=""></p>
+<ol start="2">
+<li>we</li>
+</ol>
+<h2 id="参考资料">参考资料</h2>
+<p>「Openldap安装部署」
+<a href="https://www.cnblogs.com/swordfall/p/12119010.html#auto_id_20">https://www.cnblogs.com/swordfall/p/12119010.html#auto_id_20</a>
+「SSSD连接LDAP配置」👍
+<a href="https://www.jianshu.com/p/8accfdb33725">https://www.jianshu.com/p/8accfdb33725</a>
+「wbwangk/wbwangk.github.io - SSSD」
+<a href="https://github.com/wbwangk/wbwangk.github.io/wiki/SSSD">https://github.com/wbwangk/wbwangk.github.io/wiki/SSSD</a>
+「wbwangk/wbwangk.github.io - NSLCD」
+<a href="https://github.com/wbwangk/wbwangk.github.io/wiki/NSLCD">https://github.com/wbwangk/wbwangk.github.io/wiki/NSLCD</a>
+「13.2.28. MANAGING THE SSSD CACHE」
+<a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/deployment_guide/sssd-cache">https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/deployment_guide/sssd-cache</a>
+「2.7. 使用 SSSD 自动创建用户私有组」
+<a href="https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/windows_integration_guide/gid-for-ad-users">https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/windows_integration_guide/gid-for-ad-users</a>
+「CONFIGURING SYSTEM SERVICES FOR SSSD」👍
+<a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system-level_authentication_guide/configuring_services">https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system-level_authentication_guide/configuring_services</a>
+「Configuring Sudo using SSSD」
+<a href="https://serverfault.com/questions/946500/configuring-sudo-using-sssd">https://serverfault.com/questions/946500/configuring-sudo-using-sssd</a></p>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://blog.standuke.top/2022/04/2022-04-01-ldap-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%9A%E8%BF%87-sssd-%E6%9C%8D%E5%8A%A1%E5%AE%8C%E6%88%90%E6%8E%A5%E5%85%A5/" title="LDAP 客户端通过 sssd 服务完成接入" target="_blank" rel="external">https://blog.standuke.top/2022/04/2022-04-01-ldap-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%9A%E8%BF%87-sssd-%E6%9C%8D%E5%8A%A1%E5%AE%8C%E6%88%90%E6%8E%A5%E5%85%A5/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://www.standuke.top" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://blog.standuke.top/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://www.standuke.top" target="_blank"><span class="text-dark">Standuke</span><small class="ml-1x">Yunshen Technology Co., Ltd. - SRE Engineer</small></a></h3>
+        <div>Focus on Linux Openstack Kubernetes vSphere Photograph Coding</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+<section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://blog.standuke.top/2022/03/2022-03-23-ldap-%E4%BC%81%E4%B8%9A%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98/" title="LDAP 企业部署实战 - LDAP 基础服务安装"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            <li class="next">
+                <a href="https://blog.standuke.top/2022/04/2022-04-06-ldap-over-tls/"
+                    title="LDAP over TLS「StartTLS」"><span>上一篇&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter,google,linkedin"
+                data-mobile-sites="wechat,qq,facebook,twitter"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/idoker" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://blog.standuke.top/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2016  -
+    2024
+    <div class="publishby">
+        Theme by <a href="https://github.com/xiaoheiAh" target="_blank"> xiaoheiAh </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/shell.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://blog.standuke.top/js/application.min.a94ab19cb63a95c8d7fbd7b85cab3ddeea8c369bdf75b9cab6708787ead123af.js"></script>
+<script src="https://blog.standuke.top/js/plugin.min.19c5bcb2fb0789ab4f2b7834e5ceb5e92635645605bab902c1024b25f1502364.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/blog.standuke.top\/',
+            CONTENT_URL: 'https:\/\/blog.standuke.top\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://blog.standuke.top/js/insight.min.4a2d52de4bfff73e0c688404fe3d17c9a3ae12d9888e1e1ac9c690e4890de2ded50fe55f2b819c2ba55435a76f396f3ea6805765f0b0af5635cdf74ea459eab0.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https:\/\/blog.standuke.top\/2022\/04\/2022-04-01-ldap-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%9A%E8%BF%87-sssd-%E6%9C%8D%E5%8A%A1%E5%AE%8C%E6%88%90%E6%8E%A5%E5%85%A5\/';
+        <!-- this.page.identifier = 'nuo'; -->
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'nuo' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-180157250-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  </body>
+</html>
